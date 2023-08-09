@@ -1,4 +1,4 @@
-{% extends 'components/custom-base.html' %}
+{% extends 'components/custom-base-cnt.html' %}
 {% load static %}
 
     {% block styles %}
@@ -8,7 +8,7 @@
         {% block content %}
         
 			<!-- PAGE -->
-			<div class="page">
+			<div class="page bg-info">
 				<div>
 				    <!-- CONTAINER OPEN -->
 					<div class="col col-login mx-auto text-center">
@@ -19,35 +19,44 @@
 					<div class="container-login100">
 						<div class="wrap-login100 p-0">
 							<div class="card-body">
-								<form class="login100-form validate-form">
+								{% for message in messages %}
+			          				<div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+				          				{{message}}
+			          				</div>
+		        				{% endfor %}
+
+								<form class="login100-form validate-form" method='POST' action={% url 'login' %} name='login'>
+									{% csrf_token %}
 									<span class="login100-form-title">
 										Iniciar Sesión
 									</span>
+
+
 									<div class="wrap-input100 validate-input" data-bs-validate = "Valid email is required: ex@abc.xyz">
-										<input class="input100" type="text" name="email" placeholder="Email">
+										<input class="input100" type="text" name="username" placeholder="Usuario">
 										<span class="focus-input100"></span>
 										<span class="symbol-input100">
 											<i class="zmdi zmdi-email" aria-hidden="true"></i>
 										</span>
 									</div>
 									<div class="wrap-input100 validate-input" data-bs-validate = "Password is required">
-										<input class="input100" type="password" name="pass" placeholder="Password">
+										<input class="input100" type="password" name="password" placeholder="Password">
 										<span class="focus-input100"></span>
 										<span class="symbol-input100">
 											<i class="zmdi zmdi-lock" aria-hidden="true"></i>
 										</span>
 									</div>
-									<div class="text-end pt-1">
+									{% comment %} <div class="text-end pt-1">
 										<p class="mb-0"><a href="forgot-password" class="text-primary ms-1">Recuperar Contraseña</a></p>
-									</div>
+									</div> {% endcomment %}
 									<div class="container-login100-form-btn">
-										<a href="index" class="login100-form-btn btn-primary">
+										<button type='submit' class="login100-form-btn btn-info">
 											Iniciar
-										</a>
+										</button>
 									</div>
-									<div class="text-center pt-3">
-										<p class="text-dark mb-0"><a href="register" class="text-primary ms-1">Crear Cuenta</a></p>
-									</div>
+									{% comment %} <div class="text-center pt-3">
+										<p class="text-dark mb-0"><a href="register" class="text-info ms-1">Crear Cuenta</a></p>
+									</div> {% endcomment %}
 								</form>
 							</div>
 							
