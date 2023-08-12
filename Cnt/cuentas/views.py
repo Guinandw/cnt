@@ -32,3 +32,7 @@ def salir(request):
 
 def registro(request):
     return render(request, 'cuentas/register.html')
+
+
+def perfil(request):
+    return render(request, 'cuentas/profile.html')
