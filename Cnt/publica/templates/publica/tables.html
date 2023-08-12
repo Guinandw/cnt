@@ -6,12 +6,12 @@
 								<div>
 									<h1 class="page-title">Horarios</h1>
 								</div>
-								<div class="ms-auto pageheader-btn">
+								{% comment %} <div class="ms-auto pageheader-btn">
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="javascript:void(0);">Tables</a></li>
 										<li class="breadcrumb-item active" aria-current="page">Default Table</li>
 									</ol>
-								</div>
+								</div> {% endcomment %}
 							</div>
 							<!-- PAGE-HEADER END -->
 
@@ -24,22 +24,119 @@
 								<div class="col-lg-12 col-md-12">
 									<div class="card">
 										<div class="card-header border-bottom">
-											<h3 class="card-title">Basic Style Accordion</h3>
+											<h3 class="card-title">CNT</h3>
 										</div>
+
+										
+
 										<div class="card-body">
-											<p class="text-muted ">The default collapse behavior to create an accordion.</p>
+											{% comment %} <p class="text-muted ">The default collapse behavior to create an accordion.</p> {% endcomment %}
+											
+											
 											<div aria-multiselectable="true" class="accordion" id="accordion" role="tablist">
+
 												<div class="card mb-0 border-0">
-													<div class="card-header border-bottom-0" id="headingOne" role="tab">
-														<a aria-controls="collapseOne" aria-expanded="true" data-bs-toggle="collapse" href="#collapseOne" class="accor-basic">ACCESO</a>
+													<div class="card-header border-bottom-0" id="supervisor" role="tab">
+														<a aria-controls="collapseOne" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseOne">Supervisor Guardia</a>
 													</div>
-													<div aria-labelledby="headingOne" class="collapse show" data-bs-parent="#accordion" id="collapseOne" role="tabpanel">
+													<div aria-labelledby="supervisor" class="collapse" data-bs-parent="#accordion" id="collapseOne" role="tabpanel">
+														<div class="card-body br-bottom-radius-5">
+															Gustavo Parrado: 11-2222-2222
+														</div>
+													</div><!-- collapse -->
+												</div>
+
+
+												<div class="card mb-0 mt-2 border-0">
+													<div class="card-header border-bottom-0" id="cnt-acceso" role="tab">
+														<a aria-controls="collapseFour" aria-expanded="false" data-bs-toggle="collapse" href="#collapseFour" class="accordion collapsed accor-basic">Acceso</a>
+													</div>
+													<div aria-labelledby="cnt-acceso" class="collapse" data-bs-parent="#accordion" id="collapseFour" role="tabpanel">
 														<div class="card-body br-bottom-radius-5">
 															<div class="card custom-card">
 																<div class="card-header border-bottom">
 																</div>
 																<div class="card-body">
-																	<p class="text-muted">Supervisor: Leonardo Moya</p>
+
+																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted">Supervisor: Leonardo Moya</p>
+																		</div>
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted">0800-333-6737 Opc 1 Opc 3</p>
+																		</div>
+																		
+																	</div>																	
+																	
+																	<div class="table-responsive">
+																		<table class="table text-wrap text-md-nowrap table-bordered">
+																			<thead>
+																				<tr>
+																					<th>Nombre</th>
+																					<th>Horario</th>
+																					<th>Telefonos</th>
+																					<th>Notas</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr>
+																					<td>Willian Guinand</td>
+																					<td>8 a 15</td>
+																					<td>4333-6227</td>
+																					<td>Disponibilidad</td>
+																				</tr>
+																				<tr>
+																					<td>Roberto Farinaz</td>
+																					<td>23 a 7</td>
+																					<td>4333-6258</td>
+																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
+																				</tr>
+																				<tr>
+																					<td>3</td>
+																					<td>Katy Perry</td>
+																					<td>Data Analyst</td>
+																					<td>$425,500</td>
+																				</tr>
+																				<tr>
+																					<td>4</td>
+																					<td>Pam Podrick</td>
+																					<td>Python Developer</td>
+																					<td>$415,900</td>
+																				</tr>
+																				<tr>
+																					<td>5</td>
+																					<td>Sandy Orell</td>
+																					<td>Backed Developer</td>
+																					<td>$95,900</td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="card mb-0 mt-2 border-0">
+													<div class="card-header border-bottom-0" id="headingTwo" role="tab">
+														<a aria-controls="collapseTwo" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseTwo">Urbano</a>
+													</div>
+													<div aria-labelledby="headingTwo" class="collapse" data-bs-parent="#accordion" id="collapseTwo" role="tabpanel">
+														<div class="card-body br-bottom-radius-5">
+															<div class="card custom-card">
+																<div class="card-header border-bottom">
+																</div>
+																<div class="card-body">
+																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted">Supervisor: Gustavo Parrado</p>
+																		</div>
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted">0800-333-6737 Opc 1 Opc 2</p>
+																		</div>
+																		
+																	</div>		
+
 																	<div class="table-responsive">
 																		<table class="table text-nowrap text-md-nowrap table-bordered">
 																			<thead>
@@ -90,18 +187,29 @@
 													</div>
 												</div>
 												<div class="card mb-0 mt-2 border-0">
-													<div class="card-header border-bottom-0" id="headingTwo" role="tab">
-														<a aria-controls="collapseTwo" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseTwo">URBANO</a>
+													<div class="card-header border-bottom-0" id="headingThree" role="tab">
+														<a aria-controls="collapseThree" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseThree">InterUrbano</a>
 													</div>
-													<div aria-labelledby="headingTwo" class="collapse" data-bs-parent="#accordion" id="collapseTwo" role="tabpanel">
+													<div aria-labelledby="headingThree" class="collapse" data-bs-parent="#accordion" id="collapseThree" role="tabpanel">
 														<div class="card-body br-bottom-radius-5">
+															
 															<div class="card custom-card">
 																<div class="card-header border-bottom">
 																</div>
 																<div class="card-body">
-																	<p class="text-muted">Supervisor: Gustavo Parrado</p>
+
+																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted">Supervisor: Cynthia Veron</p>
+																		</div>
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted">0800-333-6737 Opc 1 Opc 1</p>
+																		</div>
+																		
+																	</div>																	
+																	
 																	<div class="table-responsive">
-																		<table class="table text-nowrap text-md-nowrap table-bordered">
+																		<table class="table text-wrap text-md-nowrap table-bordered">
 																			<thead>
 																				<tr>
 																					<th>Nombre</th>
@@ -118,10 +226,226 @@
 																					<td>Disponibilidad</td>
 																				</tr>
 																				<tr>
-																					<td>2</td>
-																					<td>Mark Ronson</td>
-																					<td>Sales Manager</td>
-																					<td>$45,500</td>
+																					<td>Roberto Farinaz</td>
+																					<td>23 a 7</td>
+																					<td>4333-6258</td>
+																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
+																				</tr>
+																				<tr>
+																					<td>3</td>
+																					<td>Katy Perry</td>
+																					<td>Data Analyst</td>
+																					<td>$425,500</td>
+																				</tr>
+																				<tr>
+																					<td>4</td>
+																					<td>Pam Podrick</td>
+																					<td>Python Developer</td>
+																					<td>$415,900</td>
+																				</tr>
+																				<tr>
+																					<td>5</td>
+																					<td>Sandy Orell</td>
+																					<td>Backed Developer</td>
+																					<td>$95,900</td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div><!-- collapse -->
+												</div>
+
+												<div class="card mb-0 mt-2 border-0">
+													<div class="card-header border-bottom-0" id="headingThree" role="tab">
+														<a aria-controls="collapseFive" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseFive">Tellabs</a>
+													</div>
+													<div aria-labelledby="headingThree" class="collapse" data-bs-parent="#accordion" id="collapseFive" role="tabpanel">
+														<div class="card-body br-bottom-radius-5">
+															<div class="card custom-card">
+																<div class="card-header border-bottom">
+																</div>
+																<div class="card-body">
+
+																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted">Supervisor: Leonardo Moya</p>
+																		</div>
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted">0800-333-6737 Opc 1 Opc 4 o 4333-6350</p>
+																		</div>
+																		
+																	</div>																	
+																	
+																	<div class="table-responsive">
+																		<table class="table text-wrap text-md-nowrap table-bordered">
+																			<thead>
+																				<tr>
+																					<th>Nombre</th>
+																					<th>Horario</th>
+																					<th>Telefonos</th>
+																					<th>Notas</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr>
+																					<td>Willian Guinand</td>
+																					<td>8 a 15</td>
+																					<td>4333-6227</td>
+																					<td>Disponibilidad</td>
+																				</tr>
+																				<tr>
+																					<td>Roberto Farinaz</td>
+																					<td>23 a 7</td>
+																					<td>4333-6258</td>
+																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
+																				</tr>
+																				<tr>
+																					<td>3</td>
+																					<td>Katy Perry</td>
+																					<td>Data Analyst</td>
+																					<td>$425,500</td>
+																				</tr>
+																				<tr>
+																					<td>4</td>
+																					<td>Pam Podrick</td>
+																					<td>Python Developer</td>
+																					<td>$415,900</td>
+																				</tr>
+																				<tr>
+																					<td>5</td>
+																					<td>Sandy Orell</td>
+																					<td>Backed Developer</td>
+																					<td>$95,900</td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+															
+														</div>
+													</div><!-- collapse -->
+												</div>
+
+												<div class="card mb-0 mt-2 border-0">
+													<div class="card-header border-bottom-0" id="headingThree" role="tab">
+														<a aria-controls="collapseSix" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseSix">Radio</a>
+													</div>
+													<div aria-labelledby="headingThree" class="collapse" data-bs-parent="#accordion" id="collapseSix" role="tabpanel">
+														<div class="card-body br-bottom-radius-5">
+															<div class="card custom-card">
+																<div class="card-header border-bottom">
+																</div>
+																<div class="card-body">
+
+																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted">Escalamiento: Ricardo Puertas (1156526768)</p>
+																		</div>
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted">0800-333-6737 Opc 7</p>
+																		</div>
+																		
+																	</div>																	
+																	
+																	<div class="table-responsive">
+																		<table class="table text-wrap text-md-nowrap table-bordered">
+																			<thead>
+																				<tr>
+																					<th>Nombre</th>
+																					<th>Horario</th>
+																					<th>Telefonos</th>
+																					<th>Notas</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr>
+																					<td>Willian Guinand</td>
+																					<td>8 a 15</td>
+																					<td>4333-6227</td>
+																					<td>Disponibilidad</td>
+																				</tr>
+																				<tr>
+																					<td>Roberto Farinaz</td>
+																					<td>23 a 7</td>
+																					<td>4333-6258</td>
+																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
+																				</tr>
+																				<tr>
+																					<td>3</td>
+																					<td>Katy Perry</td>
+																					<td>Data Analyst</td>
+																					<td>$425,500</td>
+																				</tr>
+																				<tr>
+																					<td>4</td>
+																					<td>Pam Podrick</td>
+																					<td>Python Developer</td>
+																					<td>$415,900</td>
+																				</tr>
+																				<tr>
+																					<td>5</td>
+																					<td>Sandy Orell</td>
+																					<td>Backed Developer</td>
+																					<td>$95,900</td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+															
+														</div>
+													</div><!-- collapse -->
+												</div>
+
+												<div class="card mt-2 border-5">
+													<div class="card-header border-bottom-0" id="headingThree" role="tab">
+														<a aria-controls="collapseSeven" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseSeven">Operaciones Sincronismo</a>
+													</div>
+													<div aria-labelledby="headingThree" class="collapse" data-bs-parent="#accordion" id="collapseSeven" role="tabpanel">
+														<div class="card-body br-bottom-radius-5">
+															<div class="card custom-card">
+																<div class="card-header border-bottom">
+																</div>
+																<div class="card-body">
+
+																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted">Escalamiento: Luis Cappelletti (1144925683)</p>
+																		</div>
+																		<div class="p-sm-4 p-2 ">
+																			<p class="text-muted"></p>
+																		</div>
+																		
+																	</div>																	
+																	
+																	<div class="table-responsive">
+																		<table class="table text-wrap text-md-nowrap table-bordered">
+																			<thead>
+																				<tr>
+																					<th>Nombre</th>
+																					<th>Horario</th>
+																					<th>Telefonos</th>
+																					<th>Notas</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr>
+																					<td>Willian Guinand</td>
+																					<td>8 a 15</td>
+																					<td>4333-6227</td>
+																					<td>Disponibilidad</td>
+																				</tr>
+																				<tr>
+																					<td>Roberto Farinaz</td>
+																					<td>23 a 7</td>
+																					<td>4333-6258</td>
+																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
 																				</tr>
 																				<tr>
 																					<td>3</td>
@@ -147,16 +471,6 @@
 																</div>
 															</div>
 														</div>
-													</div>
-												</div>
-												<div class="card mt-2 border-5">
-													<div class="card-header border-bottom-0" id="headingThree" role="tab">
-														<a aria-controls="collapseThree" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseThree">CNT InterUrbano</a>
-													</div>
-													<div aria-labelledby="headingThree" class="collapse" data-bs-parent="#accordion" id="collapseThree" role="tabpanel">
-														<div class="card-body br-bottom-radius-5">
-															Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore.
-														</div>
 													</div><!-- collapse -->
 												</div>
 												
@@ -167,232 +481,6 @@
 								</div>
 							</div>
 
-							<div class="row row-sm">
-								<div class="col-lg-12">
-									<div class="card custom-card">
-										<div class="card-header border-bottom">
-											<h3 class="card-title">CNT ACCESO</h3>
-										</div>
-										<div class="card-body">
-											<p class="text-muted">Supervisor: Leonardo Moya</p>
-											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered">
-													<thead>
-														<tr>
-															<th>Nombre</th>
-															<th>Horario</th>
-															<th>Telefonos</th>
-															<th>Notas</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>Willian Guinand</td>
-															<td>8 a 15</td>
-															<td>4333-6227</td>
-															<td>Disponibilidad</td>
-														</tr>
-														<tr>
-															<td>2</td>
-															<td>Mark Ronson</td>
-															<td>Sales Manager</td>
-															<td>$45,500</td>
-														</tr>
-														<tr>
-															<td>3</td>
-															<td>Katy Perry</td>
-															<td>Data Analyst</td>
-															<td>$425,500</td>
-														</tr>
-														<tr>
-															<td>4</td>
-															<td>Pam Podrick</td>
-															<td>Python Developer</td>
-															<td>$415,900</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td>Sandy Orell</td>
-															<td>Backed Developer</td>
-															<td>$95,900</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Row -->
-							<div class="row row-sm">
-								<div class="col-lg-12">
-									<div class="card custom-card">
-										<div class="card-header border-bottom">
-											<h3 class="card-title">Bordered Table</h3>
-										</div>
-										<div class="card-body">
-											<p class="text-muted">Add borders on all sides of the table and cells.</p>
-											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered">
-													<thead>
-														<tr>
-															<th>ID</th>
-															<th>Name</th>
-															<th>Position</th>
-															<th>Salary</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>1</td>
-															<td>Kevin Powell</td>
-															<td>Business Development Associator</td>
-															<td>$50,300</td>
-														</tr>
-														<tr>
-															<td>2</td>
-															<td>Mark Ronson</td>
-															<td>Sales Manager</td>
-															<td>$45,500</td>
-														</tr>
-														<tr>
-															<td>3</td>
-															<td>Katy Perry</td>
-															<td>Data Analyst</td>
-															<td>$425,500</td>
-														</tr>
-														<tr>
-															<td>4</td>
-															<td>Pam Podrick</td>
-															<td>Python Developer</td>
-															<td>$415,900</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td>Sandy Orell</td>
-															<td>Backed Developer</td>
-															<td>$95,900</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row row-sm">
-								<div class="col-lg-12">
-									<div class="card custom-card">
-										<div class="card-header border-bottom">
-											<h3 class="card-title">Bordered Table</h3>
-										</div>
-										<div class="card-body">
-											<p class="text-muted">Add borders on all sides of the table and cells.</p>
-											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered">
-													<thead>
-														<tr>
-															<th>ID</th>
-															<th>Name</th>
-															<th>Position</th>
-															<th>Salary</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>1</td>
-															<td>Kevin Powell</td>
-															<td>Business Development Associator</td>
-															<td>$50,300</td>
-														</tr>
-														<tr>
-															<td>2</td>
-															<td>Mark Ronson</td>
-															<td>Sales Manager</td>
-															<td>$45,500</td>
-														</tr>
-														<tr>
-															<td>3</td>
-															<td>Katy Perry</td>
-															<td>Data Analyst</td>
-															<td>$425,500</td>
-														</tr>
-														<tr>
-															<td>4</td>
-															<td>Pam Podrick</td>
-															<td>Python Developer</td>
-															<td>$415,900</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td>Sandy Orell</td>
-															<td>Backed Developer</td>
-															<td>$95,900</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="row row-sm">
-								<div class="col-lg-12">
-									<div class="card custom-card">
-										<div class="card-header border-bottom">
-											<h3 class="card-title">Bordered Table</h3>
-										</div>
-										<div class="card-body">
-											<p class="text-muted">Add borders on all sides of the table and cells.</p>
-											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered">
-													<thead>
-														<tr>
-															<th>ID</th>
-															<th>Name</th>
-															<th>Position</th>
-															<th>Salary</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>1</td>
-															<td>Kevin Powell</td>
-															<td>Business Development Associator</td>
-															<td>$50,300</td>
-														</tr>
-														<tr>
-															<td>2</td>
-															<td>Mark Ronson</td>
-															<td>Sales Manager</td>
-															<td>$45,500</td>
-														</tr>
-														<tr>
-															<td>3</td>
-															<td>Katy Perry</td>
-															<td>Data Analyst</td>
-															<td>$425,500</td>
-														</tr>
-														<tr>
-															<td>4</td>
-															<td>Pam Podrick</td>
-															<td>Python Developer</td>
-															<td>$415,900</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td>Sandy Orell</td>
-															<td>Backed Developer</td>
-															<td>$95,900</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
 
 							
 							<!-- End Row -->

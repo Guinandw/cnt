@@ -13,18 +13,18 @@
     <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
     <!-- TITLE -->
-    <title>Noa – Django Bootstrap 5 Admin & Dashboard Template</title>
+    <title>Pagina Oficial CNT TASA Argentina</title>
 
     <!-- STYLES -->
     {% include 'components/layouts/styles.html' %}
-    {% block styles %}{% endblock %}
+    {% block styles %}{% endblock styles %}
 
 </head>
 
-<body class="ltr app sidebar-mini light-mode">
+<body class="ltr app sidebar-mini dark-mode">
 
     <!-- SWITCHER -->
-    {% include 'components/layouts/switcher.html' %}
+    {% include 'components/layouts/switcher-cnt.html' %}
     <!-- SWITCHER END-->
 
     <!-- GLOBAL-LOADER -->
@@ -38,10 +38,10 @@
 		<div class="page-main">
 
             <!-- APP-HEADER -->
-            {% include 'components/layouts/app-header.html' %}
+            {% include 'components/layouts/app-header-cnt.html' %}
 
             <!-- APP-SIDEBAR -->
-            {% include 'components/layouts/app-sidebar.html' %}
+            {% include 'components/layouts/app-sidebar-cnt.html' %}
 
             <!--app-content open-->
 			<div class="app-content main-content mt-0">
@@ -50,7 +50,9 @@
 					 <!-- CONTAINER -->
 					 <div class="main-container container-fluid">
 
-                        {% block content %}{% endblock %}
+                        {% block content %}
+                        
+                        {% endblock content %}
 
                     </div>
                         <!-- MAIN-CONTAINER END -->
@@ -60,20 +62,20 @@
         </div>
             <!-- PAGE-MAIN END -->
 
-        {% block modal %}{% endblock %}
+        {% block modal %}{% endblock modal %}
 
         <!-- MODAL -->
         {% include 'components/layouts/modal.html' %}
 
         <!-- FOOTER -->
-        {% include 'components/layouts/footer.html' %}
+        {% comment %} {% include 'components/layouts/footer.html' %} {% endcomment %}
 
     </div>
     <!-- PAGE END -->
 
     <!-- SCRIPTS -->
     {% include 'components/layouts/scripts.html' %}
-    {% block scripts %}{% endblock %}
+    {% block scripts %}{% endblock scripts %}
 
 </body>
 

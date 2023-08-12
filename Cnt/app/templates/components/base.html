@@ -13,15 +13,15 @@
     <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
     <!-- TITLE -->
-    <title>Pagina Oficial CNT TASA Argentina</title>
+    <title>Noa – Django Bootstrap 5 Admin & Dashboard Template</title>
 
     <!-- STYLES -->
     {% include 'components/layouts/styles.html' %}
-    {% block styles %}{% endblock styles %}
+    {% block styles %}{% endblock %}
 
 </head>
 
-<body class="ltr app sidebar-mini dark-mode">
+<body class="ltr app sidebar-mini light-mode">
 
     <!-- SWITCHER -->
     {% include 'components/layouts/switcher.html' %}
@@ -50,7 +50,7 @@
 					 <!-- CONTAINER -->
 					 <div class="main-container container-fluid">
 
-                        {% block content %}{% endblock content %}
+                        {% block content %}{% endblock %}
 
                     </div>
                         <!-- MAIN-CONTAINER END -->
@@ -60,7 +60,7 @@
         </div>
             <!-- PAGE-MAIN END -->
 
-        {% block modal %}{% endblock modal %}
+        {% block modal %}{% endblock %}
 
         <!-- MODAL -->
         {% include 'components/layouts/modal.html' %}
@@ -73,7 +73,7 @@
 
     <!-- SCRIPTS -->
     {% include 'components/layouts/scripts.html' %}
-    {% block scripts %}{% endblock scripts %}
+    {% block scripts %}{% endblock %}
 
 </body>
 
