@@ -1,0 +1,55 @@
+{% extends 'components/custom-base-cnt.html' %}
+{% load static %}
+
+    {% block styles %}
+
+    {% endblock %}
+    
+        {% block content %}
+        
+			<!-- PAGE -->
+			<div class="page bg-info">
+				<div>
+				    <!-- CONTAINER OPEN -->
+				
+					<div class="container-login100">
+						<div class="wrap-login100 p-0">
+							<div class="card-body">
+
+
+								<form class="login100-form validate-form" method='POST' action='{% url 'registro' %}'>
+									{% csrf_token %}
+									<span class="login100-form-title">
+										Registrarse
+									</span>
+																	
+									
+									
+
+									
+
+
+									<div class="container-login100-form-btn">
+										<a href="index" class="login100-form-btn btn-info">
+											Siguiente
+										</a>
+									</div>
+									<div class="text-center pt-3">
+										<p class="text-dark mb-0">¿Ya estas registrado?<a href="login" class="text-primary ms-1">Acceder</a></p>
+									</div>
+								</form>
+							</div>
+							
+						</div>
+					</div>
+					<!-- CONTAINER CLOSED -->
+				</div>
+			</div>
+			<!-- END PAGE -->
+
+        {% endblock %}
+
+    {% block scripts %}
+
+    {% endblock %}
+

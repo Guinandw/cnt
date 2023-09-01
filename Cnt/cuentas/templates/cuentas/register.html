@@ -15,62 +15,136 @@
 					<div class="container-login100">
 						<div class="wrap-login100 p-0">
 							<div class="card-body">
+								{% for message in messages %}
+								<div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+									{{message}}
+								</div>
+						  		{% endfor %}
 
-
-								<form class="login100-form validate-form" method='POST' action='{% url 'registro' %}' >
+								<form class="login100-form validate-form" method='POST' action='{% url 'registro' %}'>
 									{% csrf_token %}
 									<span class="login100-form-title">
 										Registro
 									</span>
+									
+									
 									<div class="wrap-input100 validate-input" data-bs-validate = "Valid email is required: ex@abc.xyz">
-										<input class="input100" type="text" name="email" placeholder="User name">
+										<input class="input100" type="text" name="username" placeholder="Nombre Usuario">
 										<span class="focus-input100"></span>
 										<span class="symbol-input100">
 											<i class="mdi mdi-account" aria-hidden="true"></i>
 										</span>
 									</div>
-									
 									<div class="wrap-input100 validate-input" data-bs-validate = "Valid email is required: ex@abc.xyz">
-										<input class="input100" type="text" name="email" placeholder="Email">
+										<input class="input100" type="text" name="email" placeholder="Email (solo @telefonica.com)">
 										<span class="focus-input100"></span>
 										<span class="symbol-input100">
 											<i class="zmdi zmdi-email" aria-hidden="true"></i>
 										</span>
+
 									</div>
 									<div class="wrap-input100 validate-input" data-bs-validate = "Password is required">
-										<input class="input100" type="password" name="pass" placeholder="Password">
+										<input class="input100" type="password" name="password1" placeholder="Password">
 										<span class="focus-input100"></span>
 										<span class="symbol-input100">
 											<i class="zmdi zmdi-lock" aria-hidden="true"></i>
 										</span>
 									</div>
-									{% comment %} <label class="custom-control custom-checkbox mt-4">
-										<input type="checkbox" class="custom-control-input">
-										<span class="custom-control-label">Agree the <a href="terms">terms and policy</a></span>
-									</label> {% endcomment %}
+									<div class="wrap-input100 validate-input" data-bs-validate = "Password is required">
+										<input class="input100" type="password" name="password2" placeholder="Password Confirmacion">
+										<span class="focus-input100"></span>
+										<span class="symbol-input100">
+											<i class="zmdi zmdi-lock" aria-hidden="true"></i>
+										</span>
+									</div>
+									<div class="wrap-input100 validate-input" >
+										<input class="input100" type="text" name="first_name" placeholder="Nombre">
+										<span class="focus-input100"></span>
+										<span class="symbol-input100">
+											<i class="mdi mdi-account" aria-hidden="true"></i>
+										</span>
+									</div>
+									<div class="wrap-input100 validate-input" >
+										<input class="input100" type="text" name="last_name" placeholder="Apellido">
+										<span class="focus-input100"></span>
+										<span class="symbol-input100">
+											<i class="mdi mdi-account" aria-hidden="true"></i>
+										</span>
+									</div>
+									<div class="wrap-input100 validate-input" >
+										<input class="input100" type='text' name="telefono" placeholder="Telefono">
+										<span class="focus-input100"></span>
+										<span class="symbol-input100">
+											<i class="mdi mdi-account-card-details" aria-hidden="true"></i>
+										</span>
+									</div>
+									<div class="wrap-input100 validate-input" >
+										<input class="input100" type="text" name="movil" placeholder="Movil">
+										<span class="focus-input100"></span>
+										<span class="symbol-input100">
+											<i class="mdi mdi-account-card-details" aria-hidden="true"></i>
+										</span>
+									</div>
+
+									<div class="wrap-input100 validate-input" >
+										<div class="form-group">
+											<label class="form-label" for='preferenciaHorario'>Preferencia Horario Entrada<span class="text-red">*</span></label>
+											<select class="form-control select2 form-select" name='preferenciaHorario' data-placeholder="Select" required>
+												<option label="Select"></option>
+												<option value=1>07:00</option>
+												<option value="2">08:00</option>
+												<option value="3">09:00</option>
+												<option value="4">10:00</option>
+												<option value="5">11:00</option>
+												<option value="6">12:00</option>
+												<option value="7">13:00</option>
+												<option value="8">14:00</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="wrap-input100 validate-input" >
+										<div class="form-group">
+											<label class="form-label" for='horasXdia'>Horas por Jornada<span class="text-red">*</span></label>
+											<select class="form-control select2 form-select" name='horasXdia' data-placeholder="Select" required>
+												<option label="Select"></option>
+												<option value=1>7hs</option>
+												<option value="2">8hs</option>
+												<option value="3">9hs</option>
+											</select>
+										</div>
+									</div>
+{% comment %} 
+									<div class="wrap-input100 validate-input" >
+										<div class="form-group">
+											<label class="form-label" for='cnt'>CNTs<span class="text-red">*</span></label>
+											<select class="form-control select2 form-select" name='cnts' data-placeholder="Select" required>
+												<option label="Select"></option>
+												<option value="1">Acceso</option>
+												<option value="2">Urbano</option>
+												<option value="3">Interurbano</option>
+												<option value="4">Tellabs</option>
+												<option value="5">Radio</option>
+												<option value="6">Sincronismo</option>
+												<option value="7">Soporte</option>
+											</select>
+										</div>
+									</div> {% endcomment %}
+
+									
+
+
 									<div class="container-login100-form-btn">
-										<a href="index" class="login100-form-btn btn-info">
-											Registrarse
-										</a>
+										<button type='submit' class="login100-form-btn btn-info">
+											Registrar
+										</button>
 									</div>
 									<div class="text-center pt-3">
 										<p class="text-dark mb-0">¿Ya estas registrado?<a href="login" class="text-primary ms-1">Acceder</a></p>
 									</div>
 								</form>
 							</div>
-							{% comment %} <div class="card-footer">
-								<div class="d-flex justify-content-center my-3">
-									<a href="javascript:void(0)" class="social-login  text-center me-4">
-										<i class="fa fa-google"></i>
-									</a>
-									<a href="javascript:void(0)" class="social-login  text-center me-4">
-										<i class="fa fa-facebook"></i>
-									</a>
-									<a href="javascript:void(0)" class="social-login  text-center">
-										<i class="fa fa-twitter"></i>
-									</a>
-								</div>
-							</div> {% endcomment %}
+							
 						</div>
 					</div>
 					<!-- CONTAINER CLOSED -->

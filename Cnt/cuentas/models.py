@@ -1,6 +1,18 @@
 from django.db import models
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
+
+
+NOMBRES = [
+        (1, 'Acceso'),
+        (2, 'Urbano'),
+        (3,'Interurbano'),
+        (4,'Tellabs'),
+        (5, 'Radio'),
+        (6,'Sincronismo'),
+        (7, 'Soporte')
+    ]
 
 class Usuarios(AbstractUser):
     
@@ -36,13 +48,13 @@ class Usuarios(AbstractUser):
     movil = models.CharField(verbose_name='Movil', max_length=10)
     preferenciaHorario = models.IntegerField(verbose_name='Preferencia Horario',choices=PREFERENCIAS, default=2)
     horasXdia = models.IntegerField(verbose_name='Horas diarias',choices=HORASXDIA, default=1)
-    guardia= models.IntegerField(verbose_name='guardia',choices=GUARDIA, default=1)
+    #guardia= models.IntegerField(verbose_name='guardia',choices=GUARDIA, default=1)
     is_supervisor= models.BooleanField(verbose_name='es_supervisor',default=False, blank=True, null=True)
     
     def __str__(self):
         return f'{self.username}'
 
-
+    
 
     class Meta:
         db_table = 'usuarios'
@@ -51,19 +63,12 @@ class Usuarios(AbstractUser):
         verbose_name_plural = 'Usuarios' 
 
 class CNTs(models.Model):
-    NOMBRES = [
-        (1, 'Acceso'),
-        (2, 'Urbano'),
-        (3,'Interurbano'),
-        (4,'Tellabs'),
-        (5, 'Radio'),
-        (6,'Sincronismo'),
-    ]
+    
     
     nombre = models.IntegerField(choices=NOMBRES, default=1)
     
     def __str__(self):
-        return f"{self.NOMBRES[self.nombre-1][1]}" 
+        return f"{NOMBRES[self.nombre-1][1]}" 
     
    
     
@@ -78,6 +83,12 @@ class equiposDeTrabajos(models.Model):
     
     miembro = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     cnt = models.ForeignKey(CNTs, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'{self.cnt} {self.miembro.first_name}'
+    
+    def __equipo__(self):
+        return f'{self.cnt.nombre}'
     
     class Meta:
         db_table: 'equiposDeTrabajos'

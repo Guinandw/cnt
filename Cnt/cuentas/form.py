@@ -9,6 +9,7 @@ def validador_nombres(value):
     print('VALIDADOR NOMBRE')
     for i in value:
         if (i.isdigit()):
+            print('error nombre')
             raise ValidationError(f'{value} no es un nombre valido', code='Invalid', params={'valor':value})
     
         
@@ -17,28 +18,49 @@ def validador_numeros(value):
     for i in value:
         if (i.isdigit()):
             pass
-        else: raise ValidationError(f'No ingrese ni letras ni signos.', code='Invalid', params={'valor':value})
+        else: 
+            print('error numero')
+            raise ValidationError(f'No ingrese ni letras ni signos.', code='Invalid', params={'valor':value})
         
 def validador_email(value):
     print('VALIDADOR EMAIL')
-    email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    email_regex = r'^[a-zA-Z0-9._%+-]+@telefonica.com'
     if not re.match(email_regex, value):
+        print('error correo')
         raise ValidationError('Correo electrónico inválido')
     return value
 
 
-class CrearUsuarioForm(forms.ModelForm):
+PREFERENCIAS = [
+        (1, '7'),
+        (2, '8'),
+        (3, '9'),
+        (4,'10'),
+        (5,'11'),
+        (6,'12'),
+        (7,'13'),
+        (8, '14'),
+        
+    ]
     
-    
-    NOMBRES = [
+NOMBRES = [
         (1, 'Acceso'),
         (2, 'Urbano'),
         (3,'Interurbano'),
         (4,'Tellabs'),
         (5, 'Radio'),
         (6,'Sincronismo'),
+        (7,'Soporte')
     ]
     
+HORASXDIA = [
+        (1,'7'),
+        (2,'8'),
+        (3,'9'),
+    ]
+    
+
+class CrearUsuarioForm(forms.ModelForm):
     
     username = forms.CharField(
         label='Nombre de Usuario',
@@ -89,37 +111,45 @@ class CrearUsuarioForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido...'})
     )
     
-    legajo = forms.TextInput(
+    legajo = forms.CharField(
         label='Legajo',
         max_length=6,
-        validators=(validador_numeros),
+        validators=(validador_numeros,),
+        required=False,
     )
     
-    telefono = forms.TextInput(
+    telefono = forms.CharField(
         label='Telefono',
-        max_length=10,
-        validators=(validador_numeros),
-        
+        max_length=11,
+        validators=(validador_numeros,),
         
     )
     
-    telefono = forms.TextInput(
+    movil = forms.CharField(
         label='Movil',
-        max_length=10,
-        validators=(validador_numeros),
-        
-        
+        max_length=11,
+        validators=(validador_numeros,),
     )
     
-    preferenciaHorario= 
+    preferenciaHorario = forms.ChoiceField(
+        label='Preferencia Inicio Jornada',
+        choices=PREFERENCIAS,
+    )
+
+    horasXdia = forms.ChoiceField(
+        label='Horas por Jornada',
+        choices=HORASXDIA,
+    )
     
-    
-    
+    """ def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
+        if commit:
+            user.save()
+        return user """
     
     class Meta:
         model = Usuarios
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
-    
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'telefono', 'movil', 'preferenciaHorario', 'horasXdia']    
         
-
 

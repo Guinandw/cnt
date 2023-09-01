@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('app.urls')),
     path('', include('publica.urls')),
     path('', include('cuentas.urls')),
+    path('', include('semana.urls')),
 ]

@@ -1,0 +1,154 @@
+{% extends 'components/base-cnt.html' %}
+{% load static %}
+
+    {% block styles %}
+
+    {% endblock %}
+    
+        {% block content %}
+
+                            	<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Cargar Semana de Trabajo</h1>
+								</div>
+								
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+                            <div class="row">
+                                <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header border-bottom">
+                                            <h3 class="card-title">Seleccione el Inicio y el Fin de la semana</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="example">
+                                                <div class="row row-sm">
+                                                    <div class="col-md-12 col-lg-12 col-xl-8 mb-3">
+                                                        {% for message in messages %}
+			          				                        <div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+				          				                    {{message}}
+			          				                        </div>
+		        				                        {% endfor %}
+                                                        <div class="example">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 mb-3">
+                                                                    <label for="fc-datepicker">Fecha Inicio</label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-text bg-primary-transparent text-primary">
+                                                                            <i class="fe fe-calendar text-20"></i>
+                                                                        </div>
+                                                                        <span>{{sem.inicio}}</span>
+                                                                    </div><!-- input-group -->
+                                                                </div><!-- col-6 -->
+                                                                <div class="col-lg-6 mb-3">
+                                                                    <label for="datepickerNoOfMonths">Fecha Fin</label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-text bg-primary-transparent text-primary">
+                                                                            <i class="fe fe-calendar text-20"></i>
+                                                                        </div>
+                                                                            <span>{{sem.fin}}</span>
+                                                                        
+                                                                    </div><!-- input-group -->
+                                                                </div>
+                                                            </div>    
+                                                        </div>
+
+                                                                {% if sem.dias  %}
+                                                                    <div class="col-lg-6 mb-3">
+                                                                        <label for="datepickerNoOfMonths">Dias Feriados</label>
+                                                                        {% for dia in dias  %}
+                                                                                                                                            
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-text bg-primary-transparent text-primary">
+                                                                                    <i class="fe fe-calendar text-20"></i>
+                                                                                </div>
+                                                                                    <span>{{dia}}</span>
+                                                                            
+                                                                            </div><!-- input-group -->
+                                                                    
+                                                                    
+                                                                    {% endfor %}
+                                                                    </div>
+                                                                {% endif %}
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <form action="{% url 'cargarFeriado' sem %}" method='POST' id='formulario'>
+                                                        {% csrf_token %}
+
+                                                        <div class="col-md-12 col-lg-12 col-xl-8 mb-3">
+                                                            <div class="example">
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 mb-3">
+                                                                        <label for="fc-datepicker">Agregar Feriado</label>
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-text bg-primary-transparent text-primary">
+                                                                                <i class="fe fe-calendar text-20"></i>
+                                                                            </div>
+                                                                            <input class="form-control fc-datepicker" id="fc-datepicker" placeholder="DD/MM/YYYY" type="date" name='feriado'>
+                                                                        </div><!-- input-group -->
+                                                                    </div><!-- col-6 -->
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+
+                                                        <div class="col-md-12 col-lg-12 col-xl-8 mb-3">
+                                                            <div class="form-group mt-3">
+                                                                <div>
+                                                                    <button type="submit" class="btn btn-primary">Agregar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <div class="form-group mt-3">
+                                                        <div>
+                                                            <a href={% url 'guardarSemana' sem %} class="btn btn-primary">Guardar</button>
+                                                        </div>
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Row Closed -->
+
+        {% endblock content %}
+
+
+
+
+{% block scripts %}
+
+
+<!-- Bootstrap-Date Range Picker js-->
+<script src=" {% static 'assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js' %} "></script>
+
+<!-- jQuery UI Date Picker js -->
+<script src=" {% static 'assets/plugins/date-picker/jquery-ui.js' %} "></script>
+
+<!--<script src=" {% static 'assets/plugins/date-picker/js/agregarferiado.js' %} "></script> -->
+
+<!-- bootstrap-datepicker js (Date picker Style-01) -->
+<script src=" {% static 'assets/plugins/bootstrap-datepicker/js/datepicker.js' %} "></script>
+
+<!-- Amaze UI Date Picker js-->
+<script src=" {% static 'assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js' %} "></script>
+
+<!-- Simple Date Time Picker js-->
+<script src=" {% static 'assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js' %} "></script>
+
+<!-- FORM ELEMENTS JS -->
+<script src=" {% static 'assets/js/formelementadvnced.js' %} "></script>
+
+<!-- THEMECOLORS JS -->
+<script src="{% static 'assets/js/themeColors.js'%}"></script>
+
+{% endblock scripts %}
