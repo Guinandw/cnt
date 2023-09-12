@@ -77,7 +77,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <form action="{% url 'cargarFeriado' sem %}" method='POST' id='formulario'>
+                                                    <form action="{% url 'cargarFeriado' sem.id %}" method='POST' id='formulario'>
                                                         {% csrf_token %}
 
                                                         <div class="col-md-12 col-lg-12 col-xl-8 mb-3">
@@ -108,7 +108,7 @@
                                                     </form>
                                                     <div class="form-group mt-3">
                                                         <div>
-                                                            <a href={% url 'guardarSemana' sem %} class="btn btn-primary">Guardar</button>
+                                                            <a href={% url 'guardarSemana' %} class="btn btn-primary">Guardar</button>
                                                         </div>
                                                     </div>
                                                 

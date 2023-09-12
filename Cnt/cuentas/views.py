@@ -20,11 +20,9 @@ def login(request):
     if request.method == 'GET':
         return render(request, template_name='cuentas/login.html')
     else:
-        print(str(request.POST['username']).lower())
+        #vease que el username se pasa a minusculas
         usuario = authenticate(request, username=str(request.POST['username']).lower(), password=request.POST['password'])
-        print(request.POST['username'])
-        print(request.POST['password'])
-        print(usuario)
+        
         if usuario is None:
             messages.warning(request, 'Usuario o password Incorrecto')
             return render(request, 'cuentas/login.html')
@@ -48,7 +46,7 @@ def crearCuentas(request):
         
         userForm = CrearUsuarioForm(request.POST)
         
-        userForm.username = str(request.POST['username']).lower
+        userForm.username = str(request.POST['username']).lower()
         userForm.email = request.POST['email']
         userForm.password1 = request.POST['password1']
         userForm.password2 = request.POST['password2']
@@ -80,5 +78,5 @@ def crearCuentas(request):
 def perfil(request):
     usuario = Usuarios.objects.get(pk=request.user.id)
     cnt = equiposDeTrabajos.objects.filter(miembro = usuario)
-    print(cnt)
+    
     return render(request, 'cuentas/profile.html', context={'usuario': usuario, 'cnts':cnt})
