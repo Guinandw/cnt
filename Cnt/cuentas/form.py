@@ -31,17 +31,7 @@ def validador_email(value):
     return value
 
 
-PREFERENCIAS = [
-        (1, '7'),
-        (2, '8'),
-        (3, '9'),
-        (4,'10'),
-        (5,'11'),
-        (6,'12'),
-        (7,'13'),
-        (8, '14'),
-        
-    ]
+PREFERENCIAS = Usuarios.PREFERENCIAS
     
 NOMBRES = [
         (1, 'Acceso'),
@@ -53,11 +43,7 @@ NOMBRES = [
         (7,'Soporte')
     ]
     
-HORASXDIA = [
-        (1,'7'),
-        (2,'8'),
-        (3,'9'),
-    ]
+HORASXDIA = Usuarios.HORASXDIA
     
 
 class CrearUsuarioForm(forms.ModelForm):
@@ -141,12 +127,12 @@ class CrearUsuarioForm(forms.ModelForm):
         choices=HORASXDIA,
     )
     
-    """ def save(self, commit=True):
+    def save_conHoraSalida(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         if commit:
-            user.save()
-        return user """
+            user.save_horaSalida()
+        return user
     
     class Meta:
         model = Usuarios

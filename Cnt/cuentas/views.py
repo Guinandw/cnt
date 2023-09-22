@@ -34,6 +34,7 @@ def login(request):
             else:
                 messages.warning(request, 'Cuenta Desactivada')
             return render(request, 'cuentas/login.html')
+        
 @login_required
 def salir(request): 
     logout(request)
@@ -63,7 +64,8 @@ def crearCuentas(request):
                 
                 usuario = userForm.save(commit=False)
                 usuario.set_password(userForm.password1)
-                usuario.save()
+                usuario.save_horaSalida()
+                
                 messages.success(request, f'Registrado Satisfactoriamente')
             else:
                 messages.warning(request, 'Passwords incorrectos')

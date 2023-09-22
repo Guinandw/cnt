@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser
+from datetime import datetime, timedelta
 # Create your models here.
 
+hoy = datetime.now()
 
 NOMBRES = [
         (1, 'Acceso'),
@@ -17,44 +19,40 @@ NOMBRES = [
 class Usuarios(AbstractUser):
     
     PREFERENCIAS = [
-        (1, '7'),
-        (2, '8'),
-        (3, '9'),
-        (4,'10'),
-        (5,'11'),
-        (6,'12'),
-        (7,'13'),
-        (8, '14'),
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10,'10'),
+        (11,'11'),
+        (12,'12'),
+        (13,'13'),
+        (14, '14'),
         
     ]
     
     HORASXDIA = [
-        (1,'7'),
-        (2,'8'),
-        (3,'9'),
+        (7,'7'),
+        (8,'8'),
+        (9,'9'),
     ]
-    
-    GUARDIA= [
-        (1, 'Normal'),
-        (2, 'Disponibilidad'),
-        (3, 'Guardia Mañana'),
-        (4, 'Guardia Tarde'),
-        (5, 'Guardia Noche'),
-    ]
-    
     
     legajo = models.CharField(verbose_name='Legajo', max_length=6, blank=True, null=True)
     telefono = models.CharField(verbose_name='Telefono', max_length=10)
     movil = models.CharField(verbose_name='Movil', max_length=10)
     preferenciaHorario = models.IntegerField(verbose_name='Preferencia Horario',choices=PREFERENCIAS, default=2)
     horasXdia = models.IntegerField(verbose_name='Horas diarias',choices=HORASXDIA, default=1)
-    #guardia= models.IntegerField(verbose_name='guardia',choices=GUARDIA, default=1)
     is_supervisor= models.BooleanField(verbose_name='es_supervisor',default=False, blank=True, null=True)
-    
+    horaFin = models.IntegerField(verbose_name='Hora Salida', blank=True, null=True)
     def __str__(self):
         return f'{self.username}'
-
     
+    def horaSalida(self):
+            h =  datetime(year=hoy.year,month=hoy.month,day=hoy.day,hour=self.preferenciaHorario) + timedelta(hours=self.horasXdia)
+            return h.hour
+        
+    def save_horaSalida(self):
+        self.horaFin = self.horaSalida()
+        super().save()
 
     class Meta:
         db_table = 'usuarios'

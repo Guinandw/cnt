@@ -12,10 +12,6 @@ class Feriados:
       return str(self.fecha)
     
 
-        
-
-    
-  
   
 class Profesional:
     def __init__(self, nombre, horasXdia:int, preferenciaEntrada:datetime.time):
@@ -34,7 +30,7 @@ class Evento:
       self.tipoEvento = tipoEvento
       self.diaInicio = diaInicio
       self.diaFin = diaFin
-      self.horaInicio = horaInicio
+      self.__horaInicio = horaInicio
       self.duracion = duracion
       
     
@@ -43,16 +39,16 @@ class Evento:
     
     #devuelve un datetime.datetime con el dia y la hora de inicio del evento
     def inicioRealdeEvento(self):
-        comienzoInicioJornada = datetime.datetime(year=self.diaInicio.year, month=self.diaInicio.month, day=self.diaInicio.day, hour=self.horaInicio.hour, minute=self.horaInicio.minute)
+        comienzoInicioJornada = datetime.datetime(year=self.diaInicio.year, month=self.diaInicio.month, day=self.diaInicio.day, hour=self.__horaInicio.hour, minute=self.__horaInicio.minute)
         return comienzoInicioJornada
     
     def finRealdeEvento(self):
-        finUltimaJornada = datetime.datetime(year=self.diaFin.year, month=self.diaFin.month, day=self.diaFin.day, hour=self.horaInicio.hour, minute=self.horaInicio.minute) + datetime.timedelta(hours=self.duracion)
+        finUltimaJornada = datetime.datetime(year=self.diaFin.year, month=self.diaFin.month, day=self.diaFin.day, hour=self.__horaInicio.hour, minute=self.__horaInicio.minute) + datetime.timedelta(hours=self.duracion)
         return finUltimaJornada
     
     def finDeEventoHoy(self):
         if self.diaInicio<= hoy and hoy <= self.diaFin:
-            comienzoJornadaHoy = datetime.datetime(year=hoy.year, month=hoy.month, day=hoy.day, hour=self.horaInicio.hour, minute=self.horaInicio.minute)
+            comienzoJornadaHoy = datetime.datetime(year=hoy.year, month=hoy.month, day=hoy.day, hour=self.__horaInicio.hour, minute=self.__horaInicio.minute)
             finJornadaHoy = comienzoJornadaHoy + datetime.timedelta(hours=self.duracion)
             return finJornadaHoy
         else:
@@ -60,11 +56,12 @@ class Evento:
         
     def inicioDeEventoHoy(self):
         if self.diaInicio<= hoy and hoy <= self.diaFin:
-            comienzoJornadaHoy = datetime.datetime(year=hoy.year, month=hoy.month, day=hoy.day, hour=self.horaInicio.hour, minute=self.horaInicio.minute)
+            comienzoJornadaHoy = datetime.datetime(year=hoy.year, month=hoy.month, day=hoy.day, hour=self.__horaInicio.hour, minute=self.__horaInicio.minute)
             return comienzoJornadaHoy
         else:
             return False
-    
+          
+
     def nombre(self):
         return self.profesional.nombre
     
@@ -125,7 +122,7 @@ class Panel:
         #a la lista de eventos
         lista = []
         for evento in self.eventos:
-            if evento.diaInicio <= datetime.datetime.now().date() and datetime.datetime.now().date() <= evento.diaFin:
+            if evento.inicioRealdeEvento() <= datetime.datetime.now().date() and datetime.datetime.now().date() <= evento.finRealdeEvento():
                 if filtro == None:
                     lista.append(evento)
                 else:

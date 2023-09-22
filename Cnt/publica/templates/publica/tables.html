@@ -6,12 +6,7 @@
 								<div>
 									<h1 class="page-title">Horarios</h1>
 								</div>
-								{% comment %} <div class="ms-auto pageheader-btn">
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="javascript:void(0);">Tables</a></li>
-										<li class="breadcrumb-item active" aria-current="page">Default Table</li>
-									</ol>
-								</div> {% endcomment %}
+							
 							</div>
 							<!-- PAGE-HEADER END -->
 
@@ -47,7 +42,7 @@
 												</div>
 
 
-												<div class="card mb-0 mt-2 border-0">
+											<div class="card mb-0 mt-2 border-0">
 													<div class="card-header border-bottom-0" id="cnt-acceso" role="tab">
 														<a aria-controls="collapseFour" aria-expanded="false" data-bs-toggle="collapse" href="#collapseFour" class="accordion collapsed accor-basic">Acceso</a>
 													</div>
@@ -75,40 +70,24 @@
 																					<th>Nombre</th>
 																					<th>Horario</th>
 																					<th>Telefonos</th>
+																					<th>Movil</th>
 																					<th>Notas</th>
 																				</tr>
 																			</thead>
 																			<tbody>
+																				
+																				{% for a in acceso  %}
+																				
 																				<tr>
-																					<td>Willian Guinand</td>
-																					<td>8 a 15</td>
-																					<td>4333-6227</td>
-																					<td>Disponibilidad</td>
+																					<td>{{a.miembro.first_name}} {{a.miembro.last_name}}</td>
+																					<td>{{a.miembro.preferenciaHorario}} a {{a.miembro.horaFin}}</td>
+																					<td>{{a.miembro.telefono}}</td>
+																					<td>{{a.miembro.movil}}</td>
 																				</tr>
-																				<tr>
-																					<td>Roberto Farinaz</td>
-																					<td>23 a 7</td>
-																					<td>4333-6258</td>
-																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
-																				</tr>
-																				<tr>
-																					<td>3</td>
-																					<td>Katy Perry</td>
-																					<td>Data Analyst</td>
-																					<td>$425,500</td>
-																				</tr>
-																				<tr>
-																					<td>4</td>
-																					<td>Pam Podrick</td>
-																					<td>Python Developer</td>
-																					<td>$415,900</td>
-																				</tr>
-																				<tr>
-																					<td>5</td>
-																					<td>Sandy Orell</td>
-																					<td>Backed Developer</td>
-																					<td>$95,900</td>
-																				</tr>
+																				
+																				
+																				{% endfor %}
+																				
 																			</tbody>
 																		</table>
 																	</div>
@@ -116,8 +95,9 @@
 															</div>
 														</div>
 													</div>
-												</div>
-												<div class="card mb-0 mt-2 border-0">
+											</div>
+
+											<div class="card mb-0 mt-2 border-0">
 													<div class="card-header border-bottom-0" id="headingTwo" role="tab">
 														<a aria-controls="collapseTwo" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseTwo">Urbano</a>
 													</div>
@@ -185,8 +165,9 @@
 															</div>
 														</div>
 													</div>
-												</div>
-												<div class="card mb-0 mt-2 border-0">
+											</div>
+
+											<div class="card mb-0 mt-2 border-0">
 													<div class="card-header border-bottom-0" id="headingThree" role="tab">
 														<a aria-controls="collapseThree" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseThree">InterUrbano</a>
 													</div>
@@ -257,9 +238,9 @@
 
 														</div>
 													</div><!-- collapse -->
-												</div>
+											</div>
 
-												<div class="card mb-0 mt-2 border-0">
+											<div class="card mb-0 mt-2 border-0">
 													<div class="card-header border-bottom-0" id="headingThree" role="tab">
 														<a aria-controls="collapseFive" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseFive">Tellabs</a>
 													</div>
@@ -329,9 +310,9 @@
 															
 														</div>
 													</div><!-- collapse -->
-												</div>
+											</div>
 
-												<div class="card mb-0 mt-2 border-0">
+											<div class="card mb-0 mt-2 border-0">
 													<div class="card-header border-bottom-0" id="headingThree" role="tab">
 														<a aria-controls="collapseSix" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseSix">Radio</a>
 													</div>
@@ -401,9 +382,9 @@
 															
 														</div>
 													</div><!-- collapse -->
-												</div>
+											</div>
 
-												<div class="card mt-2 border-5">
+											<div class="card mt-2 border-5">
 													<div class="card-header border-bottom-0" id="headingThree" role="tab">
 														<a aria-controls="collapseSeven" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseSeven">Operaciones Sincronismo</a>
 													</div>
@@ -472,10 +453,10 @@
 															</div>
 														</div>
 													</div><!-- collapse -->
-												</div>
+											</div>
 												
 												
-											</div><!-- accordion -->
+											{% comment %} </div><!-- accordion --> {% endcomment %}
 										</div>
 									</div>
 								</div>

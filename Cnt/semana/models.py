@@ -1,28 +1,50 @@
 from django.db import models
 import datetime
+from cuentas.models import Usuarios
 # Create your models here.
 
-class Semana(models.Model):
-    primer = models.DateField(verbose_name='Primer')
-    ultimo = models.DateField(verbose_name='Ultimo')
-    detalles = models.JSONField(verbose_name='Detalles')
+class Evento(models.Model):
     
-    def add_detalles(self):
-        dias = []
-        dia = self.primer
-        while dia <= self.ultimo:
-            if dia.weekday() in [5, 6]:
-                valor = 'finDeSemana'
-            else:
-                valor = 'habil'
-        dias.append({'dia': dia, 'valor': valor})
-        dia += datetime.timedelta(days=1)
-        return dias
+    TIPO_EVENTO = [
+        ('GM', 'GUARDIA MAÑANA'),
+        ('GT', 'GUARDIA TARDE'),
+        ('GN', 'GUARDIA NOCHE'),
+        ('DIS', 'DISPONIBILIDAD'),
+        ('FRA', 'FRANCO'),
+        ('VACA', 'VACACIONES'),
+    ]
+    
+    profesional = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+    
+    tipoEvento = models.CharField(
+        verbose_name='Tipo de Evento',
+        choices=TIPO_EVENTO,
+        max_length=4
+    )
+    
+    diaInicio = models.DateField(
+        verbose_name='Dia Inicio del Evento',
         
-    def agregar_feriado(self, d):
-    #agrega un dia feria en la semana, faltaria saber como enviar un error si el feriado esta fuera de la 
-    #semana en curso.
-        for dia in self.detalles:
-            if dia['dia']== d:
-                dia['valor'] = 'feriado'
-        super().save()
+    )
+    diaFin = models.DateField(
+        verbose_name='Dia Final Evento', 
+    )
+    horaInicio = models.TimeField(
+        verbose_name='Hora Inicio'
+    )
+    
+    duracion = models.IntegerField(
+        verbose_name='Duracion',
+        choices=Usuarios.HORASXDIA
+    )
+    
+    
+    
+
+class Feriados(models.Model):
+    
+    fecha = models.DateField(
+        verbose_name='Fecha'
+    )
+    
+        

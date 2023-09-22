@@ -1,53 +1,36 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .semana import Semanas
 import datetime
-from .forms import DateForm
-from .models import Semana
+from .forms import EventoForm
+from cuentas.models import Usuarios
+from .models import Evento
 
 
 
 # Create your views here.
-
-def cargarSemana(request):
-    
+@login_required
+def evento(request):
+    form = EventoForm(request.POST or None)
     if request.method == 'GET':
-        return render(request, template_name='semana/cargar-semana.html')
+        contexto= {'titulo':'Cargar Evento', 'form':form}
+        return render(request, template_name='semana/cargar-evento.html', context=contexto)
     else:
-        form = DateForm(request.POST)
         if form.is_valid():
-            print('cargar semana is valid')
-            sem = Semana()
-            sem.primer = form.cleaned_data['inicio']
-            sem.ultimo = form.cleaned_data['fin']
-            sem.detalles = sem.add_detalles()
-            print(sem.primer)
-            print(sem.detalles)
-            sem.save()
-            return render(request, template_name='semana/cargar-semana.html')
+            
+            usuario = Usuarios.objects.get(pk=form.cleaned_data['profesional'])
+            e = Evento()
+            e.profesional = usuario
+            e.tipoEvento = form.cleaned_data['tipoEvento']
+            e.diaInicio = form.cleaned_data['diaInicio']
+            e.diaFin = form.cleaned_data['diaFin']
+            e.horaInicio = form.cleaned_data['horaInicio']
+            e.duracion = form.cleaned_data['duracion']
+            e.save()
+            messages.info(request, 'Evento creado satisfactoriamente')
+            
+            
         else:
-            messages.warning(request,form.errors)
-            return render(request, template_name='semana/cargar-semana.html')
-    
-def cargarFeriado(request, semId:int):
-    semF = Semana.objects.get(pk=semId)
-    print(semF.detalles)
-    if request.method == 'POST':
-        if request.POST['feriado']:
-            feriado = request.POST['feriado']
-            if feriado >= semF.primer and feriado <= semF.ultimo:
-                semF.agregar_feriado(feriado)
-                messages.info(request, 'Para terminar click en Guardar')
-                return render(request, template_name='semana/cargar-feriado.html', context={'sem':semF})
-            else:
-                messages.warning(request, 'Feriado no esta dentro de la semana que se esta cargando')
-        else:
-            messages.warning(request, 'Completar Datos o Guardar')
-    
-    return render(request, template_name='semana/cargar-feriado.html', context={'sem':semF})
-
-
-def guardarSemana():
-     
-    return redirect('inicio')
-    
+             messages.warning(request, form.errors)
+             
+        return render(request, template_name='semana/cargar-evento.html')

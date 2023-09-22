@@ -3,7 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    path('cargarSemana/', views.cargarSemana, name='cargarSemana'),
-    path('cargarFeriado/<int:sem>', views.cargarFeriado, name='cargarFeriado'),
-    path('guardarSemana/', views.guardarSemana, name='guardarSemana'),
+   path('cargar-evento/', views.evento, name='cargar-evento'),
 ]

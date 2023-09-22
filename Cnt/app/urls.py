@@ -4,8 +4,7 @@ from django.urls import path,  include
 app_name = 'app'
 
 urlpatterns = [
-    path('', include('publica.urls')),
-    path('', views.index, name='index'),
+    path('index', views.index, name='index'),
     path('about', views.about, name='about'),
     path('accordion', views.accordion, name='accordion'),
     path('alerts', views.alerts, name='alerts'),
