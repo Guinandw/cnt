@@ -40,6 +40,7 @@ def salir(request):
     logout(request)
     return render(request, 'publica/inicio.html')
 
+
 def crearCuentas(request):
     if request.method == 'GET':
         return render(request, 'cuentas/register.html')

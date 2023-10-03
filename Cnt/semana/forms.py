@@ -4,8 +4,8 @@ from cuentas.models import Usuarios
 
 class EventoForm(forms.ModelForm):
     
-    D = Usuarios.HORASXDIA 
-    D.append((4,'24'))
+    D = Evento.HORASXDIA
+    
     
     '''el profesional va a ser recibido directamente desde un parametro
     a la vista'''
@@ -37,7 +37,7 @@ class EventoForm(forms.ModelForm):
         exclude = ['profesional']
         widget = {
             'tipoEvento': forms.TextInput(attrs={'class':'form-control'}),
-            'diaInicio': forms.DateInput(attrs={'class':'','type':'date'})
+            'diaInicio': forms.DateInput(attrs={'class':'form-control','type':'date'})
         }
         
         

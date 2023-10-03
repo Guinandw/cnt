@@ -1,0 +1,179 @@
+{% extends 'components/base-cnt.html' %}
+{% load static %}   
+
+{% block styles %}{% endblock styles %}
+
+{% block content %}
+        
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Eventos</h1>
+								</div>
+							
+							</div>
+							<!-- PAGE-HEADER END -->
+							{% if usuario %}
+							<!-- Row -->
+							{% if request.user.is_supervisor or request.user.id == usuario.id %}
+
+							<!-- Row -->
+							<!-- row -->
+							<div class="row">
+								<div class="col-lg-12 col-md-12">
+									<div class="card">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">{{usuario.first_name}} {{usuario.last_name}}</h3>
+										</div>
+										{% for message in messages %}
+											<div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+												{{message}}
+											</div>
+								  		{% endfor %}
+										
+
+										<div class="card-body">
+											{% comment %} <p class="text-muted ">The default collapse behavior to create an accordion.</p> {% endcomment %}
+											
+											<div class="card mb-0 mt-2 border-0">
+												<a href="{% url "cargar-evento" usuario.id %}" class='btn btn-primary'>Cargar</a>
+											</div>
+											<div class="card mb-0 mt-2 border-0">
+													<div class="card-header border-bottom-0" id="cnt-acceso" role="tab">
+														<a aria-controls="collapseFour" aria-expanded="false" data-bs-toggle="collapse" href="#collapseFour" class="accordion collapsed accor-basic">Lista de Eventos</a>
+													</div>
+													<div aria-labelledby="cnt-acceso" class="collapse" data-bs-parent="#accordion" id="collapseFour" role="tabpanel">
+														<div class="card-body br-bottom-radius-5">
+															<div class="card custom-card">
+																<div class="card-header border-bottom">
+																</div>
+																<div class="card-body">
+																
+																	
+																	<div class="table-responsive">
+																		<table class="table text-wrap text-md-nowrap table-bordered">
+																			<thead>
+																				<tr>
+																					<th>Tipo Evento</th>
+																					<th>Inicio</th>
+																					<th>Fin</th>
+																					<th>Hora Entrada</th>
+																					<th>Duracion</th>
+                                                                                    <th>Accion</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				
+																				{% for e in eventos  %}
+																				
+																				<tr>
+																					<td>{{e.tipoEvento}}</td>
+																					<td>{{e.diaInicio}}</td>
+																					<td>{{e.diaFin}}</td>
+																					<td>{{e.horaInicio}}</td>
+                                                                                    <td>{{e.duracion}}</td>
+                                                                                    <td><a class="btn btn-danger" data-bs-target="#modal{{e.id}}" data-bs-toggle="modal" href="javascript:void(0)" >Eliminar</a>
+                                                                                        {% comment %} <a href="http://" target="_blank" rel="noopener noreferrer" class='btn btn-info'>Editar</a></td>  {% endcomment %}
+																				</tr>
+																				
+																				
+																				{% endfor %}
+
+
+																				
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+											</div>
+
+											
+
+											
+											
+
+												
+											{% comment %} </div><!-- accordion --> {% endcomment %}
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							
+							<!-- End Row -->
+
+							{% for e in eventos %}
+						<div class="modal fade"  id="modal{{e.id}}">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content modal-content-demo ">
+									<div class="modal-header">
+										<h6 class="modal-title">Confirmacion</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" ><span aria-hidden="true">&times;</span></button>
+									</div>
+									<div class="modal-body">
+										<h6>Desea eliminar el evento?</h6>
+									</div>
+									<div class="modal-footer">
+										<a href="{% url "eliminar-evento" e.id %}" class="btn btn-danger" >Eliminar</a> <button class="btn btn-light" data-bs-dismiss="modal" >Cancelar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						{% endfor %}
+
+						{% else %}
+
+						{% include "semana/error.html" %}
+
+						{% endif %}
+
+						{% else %}
+						
+						<div class="card">
+							<div class="card-header border-bottom">
+								<h3 class="card-title">  USUARIO NO EXISTE </h3>
+							</div>
+							
+						</div>
+
+						{% endif %}
+
+                        {% endblock content %} 
+						
+						{% block modal %}
+
+						
+
+						{% endblock modal %}
+
+                        {% block scripts %}
+
+                        <!-- APEXCHART JS -->
+                        <script src="{% static 'assets/js/apexcharts.js'%}"></script>
+                    
+                        <!-- INTERNAL SELECT2 JS -->
+                        <script src="{% static 'assets/plugins/select2/select2.full.min.js'%}"></script>
+                    
+                        <!-- CHART-CIRCLE JS-->
+                        <script src="{% static 'assets/js/circle-progress.min.js'%}"></script>
+                    
+                        <!-- INTERNAL Data tables js-->
+                        <script src="{% static 'assets/plugins/datatable/js/jquery.dataTables.min.js'%}"></script>
+                        <script src="{% static 'assets/plugins/datatable/js/dataTables.bootstrap5.js'%}"></script>
+                        <script src="{% static 'assets/plugins/datatable/dataTables.responsive.min.js'%}"></script>
+                    
+                        <!-- INDEX JS -->
+                        <script src="{% static 'assets/js/index1.js'%}"></script>
+                    
+                        <!-- REPLY JS-->
+                        <script src="{% static 'assets/js/reply.js'%}"></script>
+                    
+                        <!-- THEMECOLORS JS -->
+                        <script src="{% static 'assets/js/themeColors.js'%}"></script>
+                    
+                    {% endblock scripts %}
+                           

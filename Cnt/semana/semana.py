@@ -1,4 +1,6 @@
 import datetime
+from cuentas.models import Usuarios as Profesional
+from .models import Evento
 
 hoy = datetime.date.today()
 ahora = datetime.datetime.now()
@@ -13,18 +15,18 @@ class Feriados:
     
 
   
-class Profesional:
+""" class Profesional:
     def __init__(self, nombre, horasXdia:int, preferenciaEntrada:datetime.time):
         self.nombre = nombre
         self.horasXdia = horasXdia
         self.preferneciaEntrada = preferenciaEntrada
 
     def __str__(self):
-        return f'{self.nombre}'
+        return f'{self.nombre}' """
 
     
 
-class Evento:
+""" class Evento:
     def __init__(self, profesional:Profesional, tipoEvento, diaInicio:datetime.date, diaFin: datetime.date = None, horaInicio:datetime.time = None, duracion:int = None):
       self.profesional = profesional
       self.tipoEvento = tipoEvento
@@ -64,7 +66,7 @@ class Evento:
 
     def nombre(self):
         return self.profesional.nombre
-    
+     """
    
 
        
