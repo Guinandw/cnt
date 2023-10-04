@@ -6,6 +6,8 @@ from cuentas.models import Usuarios
 
 class Evento(models.Model):
     
+    HOY = datetime.datetime.now()
+    
     TIPO_EVENTO = [
         ('GUARDIA MAÑANA', 'GUARDIA MAÑANA'),
         ('GUARDIA TARDE', 'GUARDIA TARDE'),
@@ -48,7 +50,7 @@ class Evento(models.Model):
     )
     
     def __str__(self):
-        return f'{self.profesional.nombre} {self.tipoEvento} {self.diaInicio} {self.diaFin}'  
+        return f'{self.profesional.first_name} {self.tipoEvento} {self.diaInicio} {self.diaFin}'  
     
     #devuelve un datetime.datetime con el dia y la hora de inicio del evento
     def inicioRealdeEvento(self):
@@ -60,7 +62,7 @@ class Evento(models.Model):
         return finUltimaJornada
     
     def finDeEventoHoy(self):
-        if self.diaInicio<= hoy and hoy <= self.diaFin:
+        if self.diaInicio<= self.HOY.date() and self.HOY.date() <= self.diaFin:
             comienzoJornadaHoy = datetime.datetime(year=hoy.year, month=hoy.month, day=hoy.day, hour=self.__horaInicio.hour, minute=self.__horaInicio.minute)
             finJornadaHoy = comienzoJornadaHoy + datetime.timedelta(hours=self.duracion)
             return finJornadaHoy
@@ -68,15 +70,15 @@ class Evento(models.Model):
             return False
         
     def inicioDeEventoHoy(self):
-        if self.diaInicio<= hoy and hoy <= self.diaFin:
-            comienzoJornadaHoy = datetime.datetime(year=hoy.year, month=hoy.month, day=hoy.day, hour=self.__horaInicio.hour, minute=self.__horaInicio.minute)
+        if self.diaInicio<= self.HOY.date() and self.HOY.date() <= self.diaFin:
+            comienzoJornadaHoy = datetime.datetime(year=self.HOY.year, month=self.HOY.month, day=self.HOY.day, hour=self.__horaInicio.hour, minute=self.__horaInicio.minute)
             return comienzoJornadaHoy
         else:
             return False
           
 
     def nombre(self):
-        return self.profesional.nombre
+        return self.profesional.first_name
     
 
 class Feriados(models.Model):
@@ -84,5 +86,9 @@ class Feriados(models.Model):
     fecha = models.DateField(
         verbose_name='Fecha'
     )
+    
+    def __str__(self):
+        strFecha = self.fecha.strftime('%d/%m/%Y')
+        return self.fecha.strftime('%d/%m/%Y')
     
         

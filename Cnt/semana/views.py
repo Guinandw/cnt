@@ -3,9 +3,9 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import datetime
-from .forms import EventoForm
+from .forms import EventoForm, FeriadosForm
 from cuentas.models import Usuarios, equiposDeTrabajos
-from .models import Evento
+from .models import Evento, Feriados
 
 from django.core.exceptions import EmptyResultSet
 
@@ -122,3 +122,29 @@ def eliminarEvento(request, id):
     #print(f'se borro evento: {evento.id}' )
     evento.delete()
     return redirect('lista-evento', userId=userid)
+
+@login_required
+def listarFeriados(request):
+    #FALTA ORDENAR LOS FERIADOS DESCENDIENTES
+    feriados = Feriados.objects.all().order_by('fecha')
+    context = {'titulo':'Lista de Feriados', 'feriados':feriados}
+    return render(request, template_name='semana/listarFeriados.html', context=context)
+
+@login_required
+def cargarFeriados(request):
+    feriadosForm = FeriadosForm(request.POST or None)
+    contexto = {'titulo':'Cargar Feriados', 'form':feriadosForm}
+    
+    if request.method == 'GET':
+        return render(request, template_name='semana/cargar-feriado.html', context=contexto)
+    else:
+        if feriadosForm.is_valid():
+            feriadosForm.save()
+            return redirect('listar-feriados')
+        #return render(request, 'semana/cargar-feriado.html', context=contexto)
+
+@login_required
+def eliminarFeriados(request, feriadoId):
+    feriado = Feriados.objects.get(pk=feriadoId)
+    feriado.delete()
+    return redirect('listar-feriados')

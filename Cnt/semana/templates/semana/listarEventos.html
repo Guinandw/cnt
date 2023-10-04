@@ -25,6 +25,7 @@
 										<div class="card-header border-bottom">
 											<h3 class="card-title">{{usuario.first_name}} {{usuario.last_name}}</h3>
 										</div>
+
 										{% for message in messages %}
 											<div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
 												{{message}}
@@ -39,10 +40,7 @@
 												<a href="{% url "cargar-evento" usuario.id %}" class='btn btn-primary'>Cargar</a>
 											</div>
 											<div class="card mb-0 mt-2 border-0">
-													<div class="card-header border-bottom-0" id="cnt-acceso" role="tab">
-														<a aria-controls="collapseFour" aria-expanded="false" data-bs-toggle="collapse" href="#collapseFour" class="accordion collapsed accor-basic">Lista de Eventos</a>
-													</div>
-													<div aria-labelledby="cnt-acceso" class="collapse" data-bs-parent="#accordion" id="collapseFour" role="tabpanel">
+													
 														<div class="card-body br-bottom-radius-5">
 															<div class="card custom-card">
 																<div class="card-header border-bottom">
@@ -86,7 +84,6 @@
 																	</div>
 																</div>
 															</div>
-														</div>
 													</div>
 											</div>
 

@@ -21,9 +21,10 @@
                                 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">
                                     <div class="card">
                                         <div class="card-header border-bottom">
-                                            <h3 class="card-title">Seleccione el Inicio y el Fin del evento</h3>
+                                            <h3 class="card-title">{{titulo}}</h3>
                                         </div>
                                         <div class="card-body">
+                                            {% if messages %}
                                             <div class="example">
                                                 <div class="row row-sm">
                                                     <div class="col-md-12 col-lg-12 col-xl-8 mb-3">
@@ -32,70 +33,29 @@
 				          				                    {{message}}
 			          				                        </div>
 		        				                        {% endfor %}
-                                                        <div class="example">
-                                                            <div class="row">
-                                                                <div class="col-lg-6 mb-3">
-                                                                    <label for="fc-datepicker">Fecha Inicio</label>
-                                                                    <div class="input-group">
-                                                                        <div class="input-group-text bg-primary-transparent text-primary">
-                                                                            <i class="fe fe-calendar text-20"></i>
-                                                                        </div>
-                                                                        <span>{{sem.inicio}}</span>
-                                                                    </div><!-- input-group -->
-                                                                </div><!-- col-6 -->
-                                                                <div class="col-lg-6 mb-3">
-                                                                    <label for="datepickerNoOfMonths">Fecha Fin</label>
-                                                                    <div class="input-group">
-                                                                        <div class="input-group-text bg-primary-transparent text-primary">
-                                                                            <i class="fe fe-calendar text-20"></i>
-                                                                        </div>
-                                                                            <span>{{sem.fin}}</span>
-                                                                        
-                                                                    </div><!-- input-group -->
-                                                                </div>
-                                                            </div>    
+                                                        
                                                         </div>
-
-                                                                {% if sem.dias  %}
-                                                                    <div class="col-lg-6 mb-3">
-                                                                        <label for="datepickerNoOfMonths">Dias Feriados</label>
-                                                                        {% for dia in dias  %}
-                                                                                                                                            
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-text bg-primary-transparent text-primary">
-                                                                                    <i class="fe fe-calendar text-20"></i>
-                                                                                </div>
-                                                                                    <span>{{dia}}</span>
-                                                                            
-                                                                            </div><!-- input-group -->
-                                                                    
-                                                                    
-                                                                    {% endfor %}
-                                                                    </div>
-                                                                {% endif %}
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <form action="{% url 'cargarFeriado' sem.id %}" method='POST' id='formulario'>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                                    <form action="{% url 'cargar-feriados' %}" method='POST' id='formulario'>
                                                         {% csrf_token %}
+                                                        {% for campo in form  %}
 
                                                         <div class="col-md-12 col-lg-12 col-xl-8 mb-3">
                                                             <div class="example">
                                                                 <div class="row">
                                                                     <div class="col-lg-6 mb-3">
-                                                                        <label for="fc-datepicker">Agregar Feriado</label>
-                                                                        <div class="input-group">
-                                                                            <div class="input-group-text bg-primary-transparent text-primary">
-                                                                                <i class="fe fe-calendar text-20"></i>
-                                                                            </div>
-                                                                            <input class="form-control fc-datepicker" id="fc-datepicker" placeholder="DD/MM/YYYY" type="date" name='feriado'>
-                                                                        </div><!-- input-group -->
+                                                                        {{campo.label}}
+                                                                        {{campo}}
+                                                                        {{campo.errors}}
                                                                     </div><!-- col-6 -->
                                                                     
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        
+                                                        {% endfor %}
                                                         
 
                                                         <div class="col-md-12 col-lg-12 col-xl-8 mb-3">
@@ -106,11 +66,7 @@
                                                             </div>
                                                         </div>
                                                     </form>
-                                                    <div class="form-group mt-3">
-                                                        <div>
-                                                            <a href={% url 'guardarSemana' %} class="btn btn-primary">Guardar</button>
-                                                        </div>
-                                                    </div>
+                                                    
                                                 
                                                 </div>
                                             </div>

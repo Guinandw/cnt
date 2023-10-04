@@ -1,6 +1,6 @@
 from django import forms
-from .models import Evento
-from cuentas.models import Usuarios
+from .models import Evento, Feriados
+#from cuentas.models import Usuarios
 
 class EventoForm(forms.ModelForm):
     
@@ -60,6 +60,19 @@ class EventoForm(forms.ModelForm):
         
 
 
-
+class FeriadosForm(forms.ModelForm):
+    
+    fecha=forms.DateField(
+            label='Fecha Feriado', 
+            widget=forms.DateInput(attrs={'class':'form-control','type':'date'})
+        )
+    
+    class Meta:
+        model = Feriados
+        fields = '__all__'
+        widget = {
+            'fecha': forms.DateInput(attrs={'class':'form-control','type':'date'})
+        }
+    
         
         
