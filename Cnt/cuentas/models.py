@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser
 from datetime import datetime, timedelta
+
 # Create your models here.
 
 hoy = datetime.now()
@@ -79,11 +80,11 @@ class CNTs(models.Model):
 
 class equiposDeTrabajos(models.Model):
     
-    miembro = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+    usuarios = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     cnt = models.ForeignKey(CNTs, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f'{self.cnt} {self.miembro.first_name}'
+        return f'{self.cnt} {self.usuarios.first_name}'
     
     def __equipo__(self):
         return f'{self.cnt.nombre}'

@@ -54,24 +54,29 @@ class Evento(models.Model):
     
     #devuelve un datetime.datetime con el dia y la hora de inicio del evento
     def inicioRealdeEvento(self):
-        comienzoInicioJornada = datetime.datetime(year=self.diaInicio.year, month=self.diaInicio.month, day=self.diaInicio.day, hour=self.__horaInicio.hour, minute=self.__horaInicio.minute)
+        comienzoInicioJornada = datetime.datetime(year=self.diaInicio.year, month=self.diaInicio.month, day=self.diaInicio.day, hour=self.horaInicio.hour, minute=self.horaInicio.minute)
         return comienzoInicioJornada
     
+    #devuelve un datetime.datetime con el dia y la hora del ultimo dia del evento
     def finRealdeEvento(self):
-        finUltimaJornada = datetime.datetime(year=self.diaFin.year, month=self.diaFin.month, day=self.diaFin.day, hour=self.__horaInicio.hour, minute=self.__horaInicio.minute) + datetime.timedelta(hours=self.duracion)
+        finUltimaJornada = datetime.datetime(year=self.diaFin.year, month=self.diaFin.month, day=self.diaFin.day, hour=self.horaInicio.hour, minute=self.horaInicio.minute) + datetime.timedelta(hours=self.duracion)
         return finUltimaJornada
     
+    #si el evento se encuentra en el dia de hoy, devolvera la fecha de hoy con la hora de salida. sino devolvera falso
     def finDeEventoHoy(self):
         if self.diaInicio<= self.HOY.date() and self.HOY.date() <= self.diaFin:
-            comienzoJornadaHoy = datetime.datetime(year=hoy.year, month=hoy.month, day=hoy.day, hour=self.__horaInicio.hour, minute=self.__horaInicio.minute)
+            comienzoJornadaHoy = datetime.datetime(year=self.HOY.year, month=self.HOY.month, day=self.HOY.day, hour=self.horaInicio.hour, minute=self.horaInicio.minute)
             finJornadaHoy = comienzoJornadaHoy + datetime.timedelta(hours=self.duracion)
             return finJornadaHoy
         else:
             return False
-        
+    #si el evento se encuentra en el dia de hoy, devolvera la fecha de hoy con la hora de entrada, sino devolvera falso  
     def inicioDeEventoHoy(self):
+        #print(f'tipo {type(self.horaInicio)}, valor {self.horaInicio}')
+        
+        
         if self.diaInicio<= self.HOY.date() and self.HOY.date() <= self.diaFin:
-            comienzoJornadaHoy = datetime.datetime(year=self.HOY.year, month=self.HOY.month, day=self.HOY.day, hour=self.__horaInicio.hour, minute=self.__horaInicio.minute)
+            comienzoJornadaHoy = datetime.datetime(year=self.HOY.year, month=self.HOY.month, day=self.HOY.day, hour=self.horaInicio.hour, minute=self.horaInicio.minute)
             return comienzoJornadaHoy
         else:
             return False
@@ -88,7 +93,7 @@ class Feriados(models.Model):
     )
     
     def __str__(self):
-        strFecha = self.fecha.strftime('%d/%m/%Y')
+       
         return self.fecha.strftime('%d/%m/%Y')
     
         

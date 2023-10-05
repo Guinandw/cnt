@@ -1,0 +1,38 @@
+{% extends 'components/base-cnt.html' %}
+{% load static %}   
+
+{% block styles %}{% endblock styles %}
+
+{% block content %}
+
+   {% include 'publica/tables-copy.html' %}
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+	<!-- APEXCHART JS -->
+	<script src="{% static 'assets/js/apexcharts.js'%}"></script>
+
+	<!-- INTERNAL SELECT2 JS -->
+	<script src="{% static 'assets/plugins/select2/select2.full.min.js'%}"></script>
+
+	<!-- CHART-CIRCLE JS-->
+	<script src="{% static 'assets/js/circle-progress.min.js'%}"></script>
+
+	<!-- INTERNAL Data tables js-->
+	<script src="{% static 'assets/plugins/datatable/js/jquery.dataTables.min.js'%}"></script>
+	<script src="{% static 'assets/plugins/datatable/js/dataTables.bootstrap5.js'%}"></script>
+	<script src="{% static 'assets/plugins/datatable/dataTables.responsive.min.js'%}"></script>
+
+	<!-- INDEX JS -->
+	<script src="{% static 'assets/js/index1.js'%}"></script>
+
+	<!-- REPLY JS-->
+	<script src="{% static 'assets/js/reply.js'%}"></script>
+
+	<!-- THEMECOLORS JS -->
+	<script src="{% static 'assets/js/themeColors.js'%}"></script>
+
+{% endblock scripts %}

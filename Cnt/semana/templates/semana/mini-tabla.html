@@ -13,8 +13,8 @@
     {% for a in cnt  %}
     
     <tr>
-        <td>{{a.miembro.first_name}} {{a.miembro.last_name}}</td>
-        <td><a href="{% url "lista-evento" a.miembro.id %}" class='btn btn-info'>Ver</a><a href="{% url "cargar-evento" a.miembro.id %}" class='btn btn-primary ms-2'>Cargar</a></td>
+        <td>{{a.usuarios.first_name}} {{a.usuarios.last_name}}</td>
+        <td><a href="{% url "lista-evento" a.usuarios.id %}" class='btn btn-info'>Ver</a><a href="{% url "cargar-evento" a.usuarios.id %}" class='btn btn-primary ms-2'>Cargar</a></td>
         
     </tr>
     

@@ -68,10 +68,8 @@
 																			<thead>
 																				<tr>
 																					<th>Nombre</th>
-																					<th>Horario</th>
 																					<th>Telefonos</th>
 																					<th>Movil</th>
-																					<th>Notas</th>
 																				</tr>
 																			</thead>
 																			<tbody>
@@ -79,10 +77,9 @@
 																				{% for a in acceso  %}
 																				
 																				<tr>
-																					<td>{{a.usuarios.first_name}} {{a.usuarios.last_name}}</td>
-																					<td>{{a.usuarios.preferenciaHorario}} a {{a.usuarios.horaFin}}</td>
-																					<td>{{a.usuarios.telefono}}</td>
-																					<td>{{a.usuarios.movil}}</td>
+																					<td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+																					<td>{{a.profesional.telefono}}</td>
+																					<td>{{a.profesional.movil}}</td>
 																				</tr>
 																				
 																				
@@ -124,40 +121,19 @@
 																					<th>Nombre</th>
 																					<th>Horario</th>
 																					<th>Telefonos</th>
-																					<th>Notas</th>
 																				</tr>
 																			</thead>
 																			<tbody>
+																				{% for a in urbano  %}
+																				
 																				<tr>
-																					<td>Willian Guinand</td>
-																					<td>8 a 15</td>
-																					<td>4333-6227</td>
-																					<td>Disponibilidad</td>
+																					<td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+																					<td>{{a.profesional.telefono}}</td>
+																					<td>{{a.profesional.movil}}</td>
 																				</tr>
-																				<tr>
-																					<td>2</td>
-																					<td>Mark Ronson</td>
-																					<td>Sales Manager</td>
-																					<td>$45,500</td>
-																				</tr>
-																				<tr>
-																					<td>3</td>
-																					<td>Katy Perry</td>
-																					<td>Data Analyst</td>
-																					<td>$425,500</td>
-																				</tr>
-																				<tr>
-																					<td>4</td>
-																					<td>Pam Podrick</td>
-																					<td>Python Developer</td>
-																					<td>$415,900</td>
-																				</tr>
-																				<tr>
-																					<td>5</td>
-																					<td>Sandy Orell</td>
-																					<td>Backed Developer</td>
-																					<td>$95,900</td>
-																				</tr>
+																				
+																				
+																				{% endfor %}
 																			</tbody>
 																		</table>
 																	</div>
@@ -196,40 +172,19 @@
 																					<th>Nombre</th>
 																					<th>Horario</th>
 																					<th>Telefonos</th>
-																					<th>Notas</th>
 																				</tr>
 																			</thead>
 																			<tbody>
+																				{% for a in interu  %}
+																				
 																				<tr>
-																					<td>Willian Guinand</td>
-																					<td>8 a 15</td>
-																					<td>4333-6227</td>
-																					<td>Disponibilidad</td>
+																					<td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+																					<td>{{a.profesional.telefono}}</td>
+																					<td>{{a.profesional.movil}}</td>
 																				</tr>
-																				<tr>
-																					<td>Roberto Farinaz</td>
-																					<td>23 a 7</td>
-																					<td>4333-6258</td>
-																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
-																				</tr>
-																				<tr>
-																					<td>3</td>
-																					<td>Katy Perry</td>
-																					<td>Data Analyst</td>
-																					<td>$425,500</td>
-																				</tr>
-																				<tr>
-																					<td>4</td>
-																					<td>Pam Podrick</td>
-																					<td>Python Developer</td>
-																					<td>$415,900</td>
-																				</tr>
-																				<tr>
-																					<td>5</td>
-																					<td>Sandy Orell</td>
-																					<td>Backed Developer</td>
-																					<td>$95,900</td>
-																				</tr>
+																				
+																				
+																				{% endfor %}
 																			</tbody>
 																		</table>
 																	</div>
