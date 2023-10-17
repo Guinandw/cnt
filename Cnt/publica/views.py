@@ -2,13 +2,16 @@ from django.shortcuts import render
 from django.http import request
 from cuentas.models import Usuarios, equiposDeTrabajos, CNTs
 from semana.models import Evento, Feriados
-from semana.semana import Panel, hoy, ahora
+from semana.semana import Panel
 from django.db.models import Q
 import datetime
 
 
 # Create your views here.
 def inicio(request):
+    usuarioAcceso, usuarioUrbano, usuarioInteru = None,None,None
+    
+    eventos = []
     userAll = Usuarios.objects.all()
     
     usuarioAcceso = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=1))
@@ -16,16 +19,20 @@ def inicio(request):
     usuarioInteru = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=3))
     
     eventos = Evento.objects.filter(diaInicio__gt=datetime.datetime.now().date()-datetime.timedelta(days=8))
-    """ for e in eventosAcceso:
-        print(e.profesional.first_name)
-        print(e.diaInicio)
-        print(e.horaInicio)
-        print(type(e.horaInicio))  """
+    
         
     eventosAcceso =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=1))
-    eventosUrbano =  Evento.objects.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=2))
-    eventosInteru =  Evento.objects.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=3))
+    eventosUrbano =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=2))
+    eventosInteru =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=3))
 
+    """ for e in eventosAcceso:
+        print(e.profesional.first_name)
+        print(e.tipoEvento)
+        print(e.diaInicio)
+        print(e.horaInicio)
+        print(e.inicioDeEventoHoy())
+        print(e.finDeEventoHoy())
+        print(type(e.horaInicio)) """
     feriados = Feriados.objects.all()
 
     panelAcceso = Panel(eventosAcceso, usuarioAcceso,feriados)
@@ -33,11 +40,10 @@ def inicio(request):
     panelInteru = Panel(eventosInteru, usuarioInteru, feriados)
     
     
-    
-    
     onlineAcceso = panelAcceso.online()
     onlineUrbano = panelUrbano.online()
     onlineInteru = panelInteru.online()
+    
     """ for e in onlineAcceso:
         print(e.profesional.first_name)
         print(e.tipoEvento)
@@ -46,20 +52,20 @@ def inicio(request):
         print(e.finRealdeEvento())
         print(e.inicioDeEventoHoy())
         print(e.finDeEventoHoy())
-        if e.inicioDeEventoHoy() <= ahora and ahora <= e.finDeEventoHoy():
+        print('son las:'+ str(datetime.datetime.now()))
+        if e.inicioDeEventoHoy() <= datetime.datetime.now() and datetime.datetime.now() <= e.finDeEventoHoy():
             print('ONLINE')
         else:
             print('OFFLINE')
         print('\n') """
     contexto= {'acceso':onlineAcceso,'urbano':onlineUrbano, 'interu': onlineInteru}
     #pequeño script para corregir horarios de salida
-    """ for a in acceso:
-        a.miembro.save_horaSalida()
-        print(a.miembro.first_name)
-        print(a.miembro.preferenciaHorario)
-        print(a.miembro.horaSalida())
-    for u in urbano:
-        u.miembro.save_horaSalida()
-    for i in interurbano:
-        i.miembro.save_horaSalida() """
+    """ for a in usuarioAcceso:
+            a.save_horaSalida()
+            
+        for u in usuarioUrbano:
+            u.save_horaSalida()
+            
+        for i in usuarioInteru:
+            i.save_horaSalida()"""
     return render(request, 'publica/inicio-copy.html', context=contexto)

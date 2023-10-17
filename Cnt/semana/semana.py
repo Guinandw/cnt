@@ -2,8 +2,7 @@ import datetime
 from cuentas.models import Usuarios as Profesional
 from .models import Evento
 
-hoy = datetime.date.today()
-ahora = datetime.datetime.now()
+
 
 class Feriados:
     
@@ -21,22 +20,23 @@ class Panel:
         self.eventos = eventos
         self.profesionales = profesionales
         self.feriados = feriados
-        '''el panel debe machear todos los eventos que hay para todos los profesionales. Si el profesional no tiene nigun evento, debera trabajar en su horario
+        '''el panel debe machear todos los eventos que hay para todos los profesionales. Si el profesional 
+        no tiene nigun evento, debera trabajar en su horario
         normal de trabajo, en caso de haber algun evento (guardia/disponibilidad/franco/vacaciones)'''
         
     #esta funcion debera devolver una lista de TODOS los que trabajan hoy y el horario en la que trabajan., Y NO! SI ESTAN ONLINE O NO.
     def hoy_trabajan(self):
-        en_linea = []
+        en_linea = None
 
         #es hoy un feriado?
-        if str(hoy) in [str(feriado.fecha) for feriado in self.feriados]:
+        if str(datetime.date.today()) in [str(feriado.fecha) for feriado in self.feriados]:
             #Hoy es un dia feriado: solo trabajan los que estan de guardia, en el horario correspondiente. Se debe verificar la lista de eventos del dia
             #de hoy. Disponibilidad trabaja pero no esta online!
             print('Hoy es feriado')
             en_linea = self.eventos_hoy(['GUARDIA'])
             
         #elif: ESTOY HOY FIN DE SEMANA? SOLO TRABAJAN LOS QUE ESTAN DE GUARDIA
-        elif hoy.weekday() in [5,6]:
+        elif datetime.date.today().weekday() in [5,6]:
             print('Es Fin de semana')
             en_linea = self.eventos_hoy(['GUARDIA'])
         else:
@@ -55,7 +55,7 @@ class Panel:
                     if profesional.first_name in [guardia.nombre() for guardia in en_linea]:
                         pass
                     else:
-                        en_linea.append(Evento(profesional=profesional, tipoEvento='normal', diaInicio=hoy, diaFin=hoy, horaInicio=datetime.time(hour=profesional.preferenciaHorario, minute=00), duracion=profesional.horasXdia))
+                        en_linea.append(Evento(profesional=profesional, tipoEvento='normal', diaInicio=datetime.date.today(), diaFin=datetime.date.today(), horaInicio=datetime.time(hour=profesional.preferenciaHorario, minute=00), duracion=profesional.horasXdia))
                     #esta es la lista de los profesionales que no tienen franco, los que no tienen guardia se creara un evento con el horario normal.
                     
         #regresa una lista de los que trabajan hoy        
@@ -72,6 +72,7 @@ class Panel:
         for evento in self.eventos:
             #primero evaluamos si estamos dentro del inicio y fin reales del evento, sino no lo tomamos en cuenta
             #porque que es un evento pasado o futuro. 
+            
             if evento.inicioRealdeEvento() <= datetime.datetime.now() and datetime.datetime.now() <= evento.finRealdeEvento():
                 
                 #si no hay ningun filtro se agregan todos los eventos
@@ -90,11 +91,23 @@ class Panel:
         lista = self.hoy_trabajan()
         
         for e in lista:
-            if e.inicioDeEventoHoy() <= ahora and ahora <= e.finDeEventoHoy():
-                conectados.append(e)
-                #print('ONLINE')
-            else:
+            print(f'{e.profesional.first_name}')
+            print(f'{e.tipoEvento}')
+            print(e.inicioDeEventoHoy())
+            print(datetime.datetime.now())
+            print(e.finDeEventoHoy())
+            if not e.inicioDeEventoHoy() or not e.finDeEventoHoy():
                 pass
-                #print('OFFLINE')
+            else:
+                if e.inicioDeEventoHoy() <= datetime.datetime.now() and datetime.datetime.now() <= e.finDeEventoHoy():
+                    conectados.append(e)
+                    print(f'{e.profesional.first_name}: ONLINE')
+                    print(f'{e.tipoEvento}')
+                else:
+                    print(f'{e.profesional.first_name}: OFFLINE')
+                    
+                    
+                    pass
+                    
 
         return conectados

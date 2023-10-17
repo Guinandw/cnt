@@ -6,7 +6,7 @@ from cuentas.models import Usuarios
 
 class Evento(models.Model):
     
-    HOY = datetime.datetime.now()
+    #HOY = datetime.datetime.now()
     
     TIPO_EVENTO = [
         ('GUARDIA MAÑANA', 'GUARDIA MAÑANA'),
@@ -64,8 +64,8 @@ class Evento(models.Model):
     
     #si el evento se encuentra en el dia de hoy, devolvera la fecha de hoy con la hora de salida. sino devolvera falso
     def finDeEventoHoy(self):
-        if self.diaInicio<= self.HOY.date() and self.HOY.date() <= self.diaFin:
-            comienzoJornadaHoy = datetime.datetime(year=self.HOY.year, month=self.HOY.month, day=self.HOY.day, hour=self.horaInicio.hour, minute=self.horaInicio.minute)
+        if self.diaInicio<= datetime.datetime.now().date() and datetime.datetime.now().date() <= self.diaFin:
+            comienzoJornadaHoy = datetime.datetime(year=datetime.datetime.now().year, month=datetime.datetime.now().month, day=datetime.datetime.now().day, hour=self.horaInicio.hour, minute=self.horaInicio.minute)
             finJornadaHoy = comienzoJornadaHoy + datetime.timedelta(hours=self.duracion)
             return finJornadaHoy
         else:
@@ -75,8 +75,8 @@ class Evento(models.Model):
         #print(f'tipo {type(self.horaInicio)}, valor {self.horaInicio}')
         
         
-        if self.diaInicio<= self.HOY.date() and self.HOY.date() <= self.diaFin:
-            comienzoJornadaHoy = datetime.datetime(year=self.HOY.year, month=self.HOY.month, day=self.HOY.day, hour=self.horaInicio.hour, minute=self.horaInicio.minute)
+        if self.diaInicio<= datetime.datetime.now().date() and datetime.datetime.now().date() <= self.diaFin:
+            comienzoJornadaHoy = datetime.datetime(year=datetime.datetime.now().year, month=datetime.datetime.now().month, day=datetime.datetime.now().day, hour=self.horaInicio.hour, minute=self.horaInicio.minute)
             return comienzoJornadaHoy
         else:
             return False
