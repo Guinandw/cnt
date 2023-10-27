@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'publica',
     'cuentas',
     'semana',
+    
 ]
 
 MIDDLEWARE = [

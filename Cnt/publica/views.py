@@ -17,22 +17,33 @@ def inicio(request):
     usuarioAcceso = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=1))
     usuarioUrbano = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=2))
     usuarioInteru = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=3))
-    
+    supervisores = userAll.filter(is_supervisor=True)
     eventos = Evento.objects.filter(diaInicio__gt=datetime.datetime.now().date()-datetime.timedelta(days=8))
     
         
     eventosAcceso =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=1))
     eventosUrbano =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=2))
     eventosInteru =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=3))
-
-    """ for e in eventosAcceso:
-        print(e.profesional.first_name)
-        print(e.tipoEvento)
-        print(e.diaInicio)
-        print(e.horaInicio)
-        print(e.inicioDeEventoHoy())
-        print(e.finDeEventoHoy())
-        print(type(e.horaInicio)) """
+    eventosGN = eventos.filter(tipoEvento='GUARDIA NOCHE')
+    disponibilidades = eventos.filter(tipoEvento='DISPONIBILIDAD', profesional__is_supervisor=True)
+    gn = []
+    disp = []
+    
+    for e in eventosGN:
+        if e.evento_hoy():
+            print(e.profesional.first_name)
+            print(e.tipoEvento)
+            print(e.diaInicio)
+            print(e.inicioRealdeEvento())
+            print(e.finRealdeEvento())
+           
+            gn.append(e)
+        
+    for e in disponibilidades:
+        if e.evento_hoy():
+            disp.append(e)
+    
+            
     feriados = Feriados.objects.all()
 
     panelAcceso = Panel(eventosAcceso, usuarioAcceso,feriados)
@@ -58,7 +69,7 @@ def inicio(request):
         else:
             print('OFFLINE')
         print('\n') """
-    contexto= {'acceso':onlineAcceso,'urbano':onlineUrbano, 'interu': onlineInteru}
+    contexto= {'acceso':onlineAcceso,'urbano':onlineUrbano, 'interu': onlineInteru, 'noche': gn, 'disp':disp}
     #pequeño script para corregir horarios de salida
     """ for a in usuarioAcceso:
             a.save_horaSalida()

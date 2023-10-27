@@ -3,7 +3,6 @@ import datetime
 from cuentas.models import Usuarios
 
 # Create your models here.
-
 class Evento(models.Model):
     
     #HOY = datetime.datetime.now()
@@ -80,8 +79,15 @@ class Evento(models.Model):
             return comienzoJornadaHoy
         else:
             return False
-          
 
+    def evento_hoy(self):
+         #DEVUELVE TRUE SI EL DIA DE HOY VA A OCURRIR EL EVENTO, ES PARECIDO A EVENTOS_HOY DE LA CLASE PANEL            
+        if self.inicioRealdeEvento() <= datetime.datetime.now() and datetime.datetime.now() <= self.finRealdeEvento():
+            return True
+        else:
+            return False 
+               
+    
     def nombre(self):
         return self.profesional.first_name
     

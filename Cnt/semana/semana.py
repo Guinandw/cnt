@@ -91,15 +91,15 @@ class Panel:
         lista = self.hoy_trabajan()
         
         for e in lista:
-            print(f'{e.profesional.first_name}')
+            """ print(f'{e.profesional.first_name}')
             print(f'{e.tipoEvento}')
             print(e.inicioDeEventoHoy())
-            print(datetime.datetime.now())
-            print(e.finDeEventoHoy())
+            print(datetime.datetime.now().replace(minute=0, second=0, microsecond=0))
+            print(e.finDeEventoHoy()) """
             if not e.inicioDeEventoHoy() or not e.finDeEventoHoy():
                 pass
             else:
-                if e.inicioDeEventoHoy() <= datetime.datetime.now() and datetime.datetime.now() <= e.finDeEventoHoy():
+                if e.inicioDeEventoHoy() <= datetime.datetime.now().replace(minute=0, second=0, microsecond=0) <= e.finDeEventoHoy():
                     conectados.append(e)
                     print(f'{e.profesional.first_name}: ONLINE')
                     print(f'{e.tipoEvento}')
