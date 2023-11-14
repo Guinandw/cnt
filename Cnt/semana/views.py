@@ -108,7 +108,7 @@ def listaEvento(request, userId):
     
     try:
         usuario = Usuarios.objects.get(pk=userId)
-        eventos = Evento.objects.filter(profesional__pk = usuario.id)
+        eventos = Evento.objects.filter(profesional__pk = usuario.id).order_by('-diaInicio').values()
     except:
         usuario = False
         eventos = False
@@ -126,7 +126,7 @@ def eliminarEvento(request, id):
 @login_required
 def listarFeriados(request):
     #FALTA ORDENAR LOS FERIADOS DESCENDIENTES
-    feriados = Feriados.objects.all().order_by('fecha')
+    feriados = Feriados.objects.all().order_by('-fecha').values()
     context = {'titulo':'Lista de Feriados', 'feriados':feriados}
     return render(request, template_name='semana/listarFeriados.html', context=context)
 

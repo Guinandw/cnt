@@ -11,13 +11,13 @@ import datetime
 def inicio(request):
     usuarioAcceso, usuarioUrbano, usuarioInteru = None,None,None
     
-    eventos = []
+    eventos = None
     userAll = Usuarios.objects.all()
     
     usuarioAcceso = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=1))
     usuarioUrbano = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=2))
     usuarioInteru = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=3))
-    supervisores = userAll.filter(is_supervisor=True)
+    #supervisores = userAll.filter(is_supervisor=True)
     eventos = Evento.objects.filter(diaInicio__gt=datetime.datetime.now().date()-datetime.timedelta(days=8))
     
         

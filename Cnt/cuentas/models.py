@@ -37,6 +37,7 @@ class Usuarios(AbstractUser):
         (9,'9'),
     ]
     
+    email = models.EmailField( verbose_name='email', blank=False, unique=True)
     legajo = models.CharField(verbose_name='Legajo', max_length=6, blank=True, null=True)
     telefono = models.CharField(verbose_name='Telefono', max_length=10)
     movil = models.CharField(verbose_name='Movil', max_length=10)

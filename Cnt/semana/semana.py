@@ -43,6 +43,7 @@ class Panel:
             #Hoy es un dia Habil: trabajan todos menos quienes esten de franco/Vacaciones, 
             # se cambian el horario de conexion para quienes esten de guardia/disponibilidad
             print('Hoy es un dia Habil')
+            #EN_LINEA Y FRANCOS SON DOS LISTAS DE EVENTOS
             en_linea = self.eventos_hoy(['GUARDIA', 'DISPONIBILIDAD'])
             francos = self.eventos_hoy(['FRANCO', 'VACACIONES'])
             
@@ -99,12 +100,12 @@ class Panel:
             if not e.inicioDeEventoHoy() or not e.finDeEventoHoy():
                 pass
             else:
-                if e.inicioDeEventoHoy() <= datetime.datetime.now().replace(minute=0, second=0, microsecond=0) <= e.finDeEventoHoy():
+                if e.inicioDeEventoHoy() <= datetime.datetime.now() and datetime.datetime.now() <= e.finDeEventoHoy():
                     conectados.append(e)
-                    print(f'{e.profesional.first_name}: ONLINE')
-                    print(f'{e.tipoEvento}')
+                    #print(f'{e.profesional.first_name}: ONLINE')
+                    #print(f'{e.tipoEvento}')
                 else:
-                    print(f'{e.profesional.first_name}: OFFLINE')
+                    #print(f'{e.profesional.first_name}: OFFLINE')
                     
                     
                     pass

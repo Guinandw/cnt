@@ -139,3 +139,74 @@ class CrearUsuarioForm(forms.ModelForm):
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'telefono', 'movil', 'preferenciaHorario', 'horasXdia']    
         
 
+class CambiarPasswordForm(forms.Form):
+    
+    error_messages = {
+        "password_incorrect": (
+            "Your old password was entered incorrectly. Please enter it again."
+        ),
+    }
+    
+    old_password = forms.CharField(
+        label='Password Actual',
+        required=True,
+        max_length=100,
+        min_length=8,
+        widget=forms.TextInput(attrs={'class':'form-control', 'type':'password'})
+    )
+    
+    new_password1 = forms.CharField(
+        label='Nuevo Password',
+        required=True,
+        max_length=100,
+        min_length=8,
+        widget=forms.TextInput(attrs={'class':'form-control', 'type':'password'})
+    )
+    
+    new_password2 = forms.CharField(
+        label='Confirmar Password',
+        required=True,
+        max_length=100,
+        min_length=8,
+        widget=forms.TextInput(attrs={'class':'form-control', 'type':'password'})
+    )
+    
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get("new_password1")
+        password2 = self.cleaned_data.get("new_password2")
+        if password1 and password2:
+            if password1 != password2:
+                raise ValidationError(
+                    self.error_messages["password_mismatch"],
+                    code="password_mismatch",
+                )
+        return password2
+
+    
+    
+    def clean_old_password(self):
+        """
+        Validate that the old_password field is correct.
+        """
+        old_password = self.cleaned_data["old_password"]
+        if not self.user.check_password(old_password):
+            raise ValidationError(
+                self.error_messages["password_incorrect"],
+                code="password_incorrect",
+            )
+        return old_password
+    
+    def save(self, commit=True):
+        
+        password = self.cleaned_data["new_password1"]
+        self.user.set_password(password)
+        if commit:
+            self.user.save()
+        return self.user
+        
+        
