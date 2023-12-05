@@ -22,8 +22,11 @@
 							<div class="row">
 								<div class="col-lg-12 col-md-12">
 									<div class="card">
-										<div class="card-header border-bottom">
+										<div class="card-header border-bottom justify-content-between">
 											<h3 class="card-title">{{usuario.first_name}} {{usuario.last_name}}</h3>
+											
+												<a href="{% url "lista-cargar-evento"  %}" class='btn btn-info'>Volver</a>
+											
 										</div>
 
 										{% for message in messages %}
@@ -83,6 +86,7 @@
 																		</table>
 																	</div>
 																</div>
+
 															</div>
 													</div>
 											</div>

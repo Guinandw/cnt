@@ -63,7 +63,7 @@ class Evento(models.Model):
     
     #si el evento se encuentra en el dia de hoy, devolvera la fecha de hoy con la hora de salida. sino devolvera falso
     def finDeEventoHoy(self):
-        if self.diaInicio<= datetime.datetime.now().date() and datetime.datetime.now().date() <= self.diaFin:
+        if self.diaInicio <= datetime.datetime.now().date() and datetime.datetime.now().date() <= self.diaFin:
             comienzoJornadaHoy = datetime.datetime(year=datetime.datetime.now().year, month=datetime.datetime.now().month, day=datetime.datetime.now().day, hour=self.horaInicio.hour, minute=self.horaInicio.minute)
             finJornadaHoy = comienzoJornadaHoy + datetime.timedelta(hours=self.duracion)
             return finJornadaHoy
@@ -88,8 +88,8 @@ class Evento(models.Model):
             return False 
                
     
-    def nombre(self):
-        return self.profesional.first_name
+    def username(self):
+        return self.profesional.username
     
 
 class Feriados(models.Model):

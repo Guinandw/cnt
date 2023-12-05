@@ -55,8 +55,8 @@ def inicio(request):
     onlineUrbano = panelUrbano.online()
     onlineInteru = panelInteru.online()
     
-    """ for e in onlineAcceso:
-        print(e.profesional.first_name)
+    for e in onlineAcceso:
+        """ print(e.profesional.first_name)
         print(e.tipoEvento)
         print(e.diaInicio)
         print(e.inicioRealdeEvento())

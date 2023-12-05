@@ -50,10 +50,10 @@ class Panel:
             for profesional in self.profesionales:
                 
                 #verificando quien esta de franco
-                if profesional.first_name in [franco.nombre() for franco in francos]:
+                if profesional.username in [franco.username() for franco in francos]:
                     pass
                 else:
-                    if profesional.first_name in [guardia.nombre() for guardia in en_linea]:
+                    if profesional.username in [guardia.username() for guardia in en_linea]:
                         pass
                     else:
                         en_linea.append(Evento(profesional=profesional, tipoEvento='normal', diaInicio=datetime.date.today(), diaFin=datetime.date.today(), horaInicio=datetime.time(hour=profesional.preferenciaHorario, minute=00), duracion=profesional.horasXdia))
@@ -102,10 +102,10 @@ class Panel:
             else:
                 if e.inicioDeEventoHoy() <= datetime.datetime.now() and datetime.datetime.now() <= e.finDeEventoHoy():
                     conectados.append(e)
-                    #print(f'{e.profesional.first_name}: ONLINE')
+                    print(f'{e.profesional.first_name}: ONLINE')
                     #print(f'{e.tipoEvento}')
                 else:
-                    #print(f'{e.profesional.first_name}: OFFLINE')
+                    print(f'{e.profesional.first_name}: OFFLINE')
                     
                     
                     pass
