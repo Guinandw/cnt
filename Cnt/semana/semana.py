@@ -53,7 +53,9 @@ class Panel:
                 if profesional.username in [franco.username() for franco in francos]:
                     pass
                 else:
+                    
                     if profesional.username in [guardia.username() for guardia in en_linea]:
+                        #GUARDIA ACA
                         pass
                     else:
                         en_linea.append(Evento(profesional=profesional, tipoEvento='normal', diaInicio=datetime.date.today(), diaFin=datetime.date.today(), horaInicio=datetime.time(hour=profesional.preferenciaHorario, minute=00), duracion=profesional.horasXdia))
@@ -71,10 +73,10 @@ class Panel:
         #a la lista de eventos
         lista = []
         for evento in self.eventos:
-            #primero evaluamos si estamos dentro del inicio y fin reales del evento, sino no lo tomamos en cuenta
+            #primero evaluamos si estamos dentro de la FECHA (.date()) inicio y fin reales del evento, sino no lo tomamos en cuenta
             #porque que es un evento pasado o futuro. 
-            
-            if evento.inicioRealdeEvento() <= datetime.datetime.now() and datetime.datetime.now() <= evento.finRealdeEvento():
+            #No interesan la hora exacta, solo si esta dentro del dia
+            if evento.inicioRealdeEvento().date() <= datetime.datetime.now().date() and datetime.datetime.now().date() <= evento.finRealdeEvento().date():
                 
                 #si no hay ningun filtro se agregan todos los eventos
                 if filtro == None:
@@ -92,22 +94,21 @@ class Panel:
         lista = self.hoy_trabajan()
         
         for e in lista:
-            """ print(f'{e.profesional.first_name}')
+            '''print(f'-----------')
             print(f'{e.tipoEvento}')
             print(e.inicioDeEventoHoy())
             print(datetime.datetime.now().replace(minute=0, second=0, microsecond=0))
-            print(e.finDeEventoHoy()) """
+            print(e.finDeEventoHoy())'''
             if not e.inicioDeEventoHoy() or not e.finDeEventoHoy():
                 pass
             else:
                 if e.inicioDeEventoHoy() <= datetime.datetime.now() and datetime.datetime.now() <= e.finDeEventoHoy():
                     conectados.append(e)
-                    print(f'{e.profesional.first_name}: ONLINE')
+                    #print(f'{e.profesional.username}: ONLINE')
                     #print(f'{e.tipoEvento}')
                 else:
-                    print(f'{e.profesional.first_name}: OFFLINE')
-                    
-                    
+                    #print(f'{e.profesional.username}: OFFLINE')
+                                      
                     pass
                     
 

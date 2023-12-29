@@ -9,7 +9,7 @@ import datetime
 
 # Create your views here.
 def inicio(request):
-    usuarioAcceso, usuarioUrbano, usuarioInteru = None,None,None
+    usuarioAcceso, usuarioUrbano, usuarioInteru = [],[],[]
     
     eventos = None
     userAll = Usuarios.objects.all()
