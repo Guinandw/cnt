@@ -29,9 +29,13 @@
 										<div class="tab-pane active show" id="profileMain">
 											<div class="card">
 												<div class="card-body p-0">
-													
+													{% for message in messages %}
+														<div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+														{{message}}
+														</div>
+						  							{% endfor %}
 													<div class="table-responsive p-5">
-														<h3 class="card-title">Informacion Personal</h3>
+														<h3 class="card-title">Informacion Personal <spam> <a href="{% url 'editar_perfil' %}" class="text-warning"><i class="fa fa-edit"></i></a>    </spam> </h3>
 														<table class="table row table-borderless">
 															<tbody class="col-lg-12 col-xl-6 p-0">
 																{% if usuario.is_supervisor %}
@@ -87,14 +91,24 @@
 														<div class="profile-cover__info ms-4 ms-auto p-0">
 															
 															<ul class="nav p-0 border-bottom-0 mb-0">
+																{% if cnts %}
 																{% for cnt in cnts %}
-																<li class="border p-2 br-5 bg-light-lightest wpx-100 hpx-70 text-center m-1 ">
+																<li class="border p-2 br-5 bg-light-lightest wpx-150 hpx-50 text-center m-1 ">
 																
 																	
 																	<span class="border-0 mb-0 pb-0 fs-21 ml-2">{{cnt.cnt}}</span>
 																	
 																</li>
 																{% endfor %}
+																{% else %}
+																<li class="border p-2 br-5 bg-light-lightest wpx-200 hpx-50 text-center m-1 ">
+																
+																	
+																	<span class="border-0 mb-0 pb-0 fs-21 ml-2">NINGUNO</span>
+																	
+																</li>
+
+																{% endif %}
 															</ul>
 														</div>
 													</div>

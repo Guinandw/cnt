@@ -1,11 +1,11 @@
 from django import forms
-from .models import Evento
-from cuentas.models import Usuarios
+from .models import Evento, Feriados
+#from cuentas.models import Usuarios
 
 class EventoForm(forms.ModelForm):
     
-    D = Usuarios.HORASXDIA 
-    D.append((4,'24'))
+    D = Evento.HORASXDIA
+    
     
     '''el profesional va a ser recibido directamente desde un parametro
     a la vista'''
@@ -37,7 +37,7 @@ class EventoForm(forms.ModelForm):
         exclude = ['profesional']
         widget = {
             'tipoEvento': forms.TextInput(attrs={'class':'form-control'}),
-            'diaInicio': forms.DateInput(attrs={'class':'','type':'date'})
+            'diaInicio': forms.DateInput(attrs={'class':'form-control','type':'date'})
         }
         
         
@@ -60,6 +60,19 @@ class EventoForm(forms.ModelForm):
         
 
 
-
+class FeriadosForm(forms.ModelForm):
+    
+    fecha=forms.DateField(
+            label='Fecha Feriado', 
+            widget=forms.DateInput(attrs={'class':'form-control','type':'date'})
+        )
+    
+    class Meta:
+        model = Feriados
+        fields = '__all__'
+        widget = {
+            'fecha': forms.DateInput(attrs={'class':'form-control','type':'date'})
+        }
+    
         
         

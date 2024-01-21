@@ -51,6 +51,7 @@ class CrearUsuarioForm(forms.ModelForm):
     username = forms.CharField(
         label='Nombre de Usuario',
         required=True,
+        min_length=5,
         max_length=100,
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Alias...'})
     )
@@ -137,5 +138,146 @@ class CrearUsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuarios
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'telefono', 'movil', 'preferenciaHorario', 'horasXdia']    
-        
 
+class EditarUsuarioForm(forms.ModelForm):
+    
+   
+    
+    email = forms.EmailField(
+        max_length=200, 
+        label='Correo',
+        validators=(validador_email,),
+        error_messages={ 
+                        "required":'Correo Invalido'},
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Correo', 'type':'email'})
+        )
+    
+    first_name = forms.CharField(
+        label='Nombre',
+        required=True,
+        max_length=100,
+        validators=(validador_nombres,),
+        error_messages={'required':'probando'},
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre...'})
+    )
+    
+    last_name = forms.CharField(
+        label='Apellido',
+        max_length=100,
+        validators=(validador_nombres,),
+        error_messages={'required':'probando'},
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido...'})
+    )
+    
+    """ legajo = forms.CharField(
+        label='Legajo',
+        max_length=6,
+        validators=(validador_numeros,),
+        required=False,
+    ) """
+    
+    telefono = forms.CharField(
+        label='Telefono',
+        max_length=11,
+        validators=(validador_numeros,),
+        
+    )
+    
+    movil = forms.CharField(
+        label='Movil',
+        max_length=11,
+        validators=(validador_numeros,),
+    )
+    
+    preferenciaHorario = forms.ChoiceField(
+        label='Preferencia Inicio Jornada',
+        choices=PREFERENCIAS,
+    )
+
+    horasXdia = forms.ChoiceField(
+        label='Horas por Jornada',
+        choices=HORASXDIA,
+    )
+    
+    def save_conHoraSalida(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.save_horaSalida()
+        return user
+    
+    class Meta:
+        model = Usuarios
+        fields = ['first_name', 'last_name', 'email',  'telefono', 'movil', 'preferenciaHorario', 'horasXdia']    
+                
+
+class CambiarPasswordForm(forms.Form):
+    
+    error_messages = {
+        "password_incorrect": (
+            "Your old password was entered incorrectly. Please enter it again."
+        ),
+    }
+    
+    old_password = forms.CharField(
+        label='Password Actual',
+        required=True,
+        max_length=100,
+        min_length=8,
+        widget=forms.TextInput(attrs={'class':'form-control', 'type':'password'})
+    )
+    
+    new_password1 = forms.CharField(
+        label='Nuevo Password',
+        required=True,
+        max_length=100,
+        min_length=8,
+        widget=forms.TextInput(attrs={'class':'form-control', 'type':'password'})
+    )
+    
+    new_password2 = forms.CharField(
+        label='Confirmar Password',
+        required=True,
+        max_length=100,
+        min_length=8,
+        widget=forms.TextInput(attrs={'class':'form-control', 'type':'password'})
+    )
+    
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get("new_password1")
+        password2 = self.cleaned_data.get("new_password2")
+        if password1 and password2:
+            if password1 != password2:
+                raise ValidationError(
+                    self.error_messages["password_mismatch"],
+                    code="password_mismatch",
+                )
+        return password2
+
+    
+    
+    def clean_old_password(self):
+        """
+        Validate that the old_password field is correct.
+        """
+        old_password = self.cleaned_data["old_password"]
+        if not self.user.check_password(old_password):
+            raise ValidationError(
+                self.error_messages["password_incorrect"],
+                code="password_incorrect",
+            )
+        return old_password
+    
+    def save(self, commit=True):
+        
+        password = self.cleaned_data["new_password1"]
+        self.user.set_password(password)
+        if commit:
+            self.user.save()
+        return self.user
+        
+        
