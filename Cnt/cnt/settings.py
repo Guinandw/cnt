@@ -44,7 +44,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["10.248.32.102",]
 
 
 # Application definition
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'publica',
     'cuentas',
     'semana',
+    
 ]
 
 MIDDLEWARE = [

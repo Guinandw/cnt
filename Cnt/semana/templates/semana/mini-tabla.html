@@ -1,0 +1,24 @@
+{% load static %}
+
+
+<thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Evento</th>
+        
+    </tr>
+</thead>
+<tbody>
+    
+    {% for a in cnt  %}
+    
+    <tr>
+        <td>{{a.usuarios.first_name}} {{a.usuarios.last_name}}</td>
+        <td><a href="{% url "lista-evento" a.usuarios.id %}" class='btn btn-info'>Ver</a><a href="{% url "cargar-evento" a.usuarios.id %}" class='btn btn-primary ms-2'>Cargar</a></td>
+        
+    </tr>
+    
+    
+    {% endfor %}
+    
+</tbody>

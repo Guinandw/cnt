@@ -4,7 +4,7 @@
 							<!-- PAGE-HEADER -->
 							<div class="page-header">
 								<div>
-									<h1 class="page-title">Horarios</h1>
+									<h1 class="page-title">CARGA DE EVENTOS</h1>
 								</div>
 							
 							</div>
@@ -30,19 +30,11 @@
 											
 											<div aria-multiselectable="true" class="accordion" id="accordion" role="tablist">
 
-												<div class="card mb-0 border-0">
-													<div class="card-header border-bottom-0" id="supervisor" role="tab">
-														<a aria-controls="collapseOne" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseOne">Supervisor Guardia</a>
-													</div>
-													<div aria-labelledby="supervisor" class="collapse" data-bs-parent="#accordion" id="collapseOne" role="tabpanel">
-														<div class="card-body br-bottom-radius-5">
-															Gustavo Parrado: 11-2222-2222
-														</div>
-													</div><!-- collapse -->
-												</div>
+												
 
 
-											<div class="card mb-0 mt-2 border-0">
+											
+                                            <div class="card mb-0 mt-2 border-0">
 													<div class="card-header border-bottom-0" id="cnt-acceso" role="tab">
 														<a aria-controls="collapseFour" aria-expanded="false" data-bs-toggle="collapse" href="#collapseFour" class="accordion collapsed accor-basic">Acceso</a>
 													</div>
@@ -65,30 +57,7 @@
 																	
 																	<div class="table-responsive">
 																		<table class="table text-wrap text-md-nowrap table-bordered">
-																			<thead>
-																				<tr>
-																					<th>Nombre</th>
-																					<th>Horario</th>
-																					<th>Telefonos</th>
-																					<th>Movil</th>
-																					<th>Notas</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				
-																				{% for a in acceso  %}
-																				
-																				<tr>
-																					<td>{{a.usuarios.first_name}} {{a.usuarios.last_name}}</td>
-																					<td>{{a.usuarios.preferenciaHorario}} a {{a.usuarios.horaFin}}</td>
-																					<td>{{a.usuarios.telefono}}</td>
-																					<td>{{a.usuarios.movil}}</td>
-																				</tr>
-																				
-																				
-																				{% endfor %}
-																				
-																			</tbody>
+                                                                            {% include 'semana/mini-tabla.html' with cnt=acceso %}
 																		</table>
 																	</div>
 																</div>
@@ -119,46 +88,8 @@
 
 																	<div class="table-responsive">
 																		<table class="table text-nowrap text-md-nowrap table-bordered">
-																			<thead>
-																				<tr>
-																					<th>Nombre</th>
-																					<th>Horario</th>
-																					<th>Telefonos</th>
-																					<th>Notas</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				<tr>
-																					<td>Willian Guinand</td>
-																					<td>8 a 15</td>
-																					<td>4333-6227</td>
-																					<td>Disponibilidad</td>
-																				</tr>
-																				<tr>
-																					<td>2</td>
-																					<td>Mark Ronson</td>
-																					<td>Sales Manager</td>
-																					<td>$45,500</td>
-																				</tr>
-																				<tr>
-																					<td>3</td>
-																					<td>Katy Perry</td>
-																					<td>Data Analyst</td>
-																					<td>$425,500</td>
-																				</tr>
-																				<tr>
-																					<td>4</td>
-																					<td>Pam Podrick</td>
-																					<td>Python Developer</td>
-																					<td>$415,900</td>
-																				</tr>
-																				<tr>
-																					<td>5</td>
-																					<td>Sandy Orell</td>
-																					<td>Backed Developer</td>
-																					<td>$95,900</td>
-																				</tr>
-																			</tbody>
+																			 
+                                                                            {% include 'semana/mini-tabla.html' with cnt=urbano %}
 																		</table>
 																	</div>
 																</div>
@@ -191,54 +122,17 @@
 																	
 																	<div class="table-responsive">
 																		<table class="table text-wrap text-md-nowrap table-bordered">
-																			<thead>
-																				<tr>
-																					<th>Nombre</th>
-																					<th>Horario</th>
-																					<th>Telefonos</th>
-																					<th>Notas</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				<tr>
-																					<td>Willian Guinand</td>
-																					<td>8 a 15</td>
-																					<td>4333-6227</td>
-																					<td>Disponibilidad</td>
-																				</tr>
-																				<tr>
-																					<td>Roberto Farinaz</td>
-																					<td>23 a 7</td>
-																					<td>4333-6258</td>
-																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
-																				</tr>
-																				<tr>
-																					<td>3</td>
-																					<td>Katy Perry</td>
-																					<td>Data Analyst</td>
-																					<td>$425,500</td>
-																				</tr>
-																				<tr>
-																					<td>4</td>
-																					<td>Pam Podrick</td>
-																					<td>Python Developer</td>
-																					<td>$415,900</td>
-																				</tr>
-																				<tr>
-																					<td>5</td>
-																					<td>Sandy Orell</td>
-																					<td>Backed Developer</td>
-																					<td>$95,900</td>
-																				</tr>
-																			</tbody>
+																				 
+                                                                            {% include 'semana/mini-tabla.html' with cnt=interu %}
+																			
 																		</table>
 																	</div>
 																</div>
 															</div>
 
 														</div>
-													</div><!-- collapse -->
-											</div>
+											</div><!-- collapse -->
+										{% comment %} 	</div>
 
 											<div class="card mb-0 mt-2 border-0">
 													<div class="card-header border-bottom-0" id="headingThree" role="tab">
@@ -454,7 +348,7 @@
 														</div>
 													</div><!-- collapse -->
 											</div>
-												
+												 {% endcomment %}
 												
 											{% comment %} </div><!-- accordion --> {% endcomment %}
 										</div>
