@@ -11,7 +11,7 @@
             // Lógica para cambiar los campos según el tipo de evento
             if (tipoEvento === "GUARDIA MAÑANA") {
                 // Cambiar la lógica según tus requisitos
-                horaInicioInput.value = "08:00";
+                horaInicioInput.value = "07:00";
                 duracionSelect.value = "8";
             } else if (tipoEvento === "GUARDIA TARDE") {
                 horaInicioInput.value = "15:00";

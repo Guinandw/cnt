@@ -11,7 +11,7 @@ from django.contrib import messages
 
 from django.views.generic import CreateView, UpdateView, ListView
 
-from .form import CrearUsuarioForm, CambiarPasswordForm
+from .form import CrearUsuarioForm, CambiarPasswordForm, EditarUsuarioForm
 from .models import Usuarios, equiposDeTrabajos, NOMBRES
 
 
@@ -97,14 +97,45 @@ def cambiar_password(request):
             user = form.save()
             
             update_session_auth_hash(request, user)
-            messages.success(request, ('Your password was successfully updated!'))
+            messages.success(request, ('La contraseña ha sido actualizada'))
             logout(request)
             return redirect('login')
         else:
-            messages.error(request, ('Please correct the error below.'))
+            messages.error(request, ('Favor verificar:'))
     else:
         form = CambiarPasswordForm(request.user)
     return render(request, 'cuentas/cambiar_password.html', {
         'form': form})
     
 
+@login_required
+def editar_perfil(request):
+    usuario = Usuarios.objects.get(pk=request.user.id)
+    
+    if request.method == 'GET':
+        form = EditarUsuarioForm(instance=usuario)
+        return render(request, 'cuentas/editar_perfil.html', {'form':form})
+    else:
+        userForm = EditarUsuarioForm(request.POST, instance=usuario)
+        
+        userForm.email = request.POST['email']
+        userForm.first_name = request.POST['first_name']
+        userForm.last_name = request.POST['last_name']
+        userForm.telefono = request.POST['telefono']
+        userForm.movil = request.POST['movil']
+        userForm.preferenciaHorario = request.POST['preferenciaHorario']
+        userForm.horasXdia = request.POST['horasXdia']
+        #userForm.legajo = request.POST['legajo']
+      
+        if userForm.is_valid():
+                
+                usuario = userForm.save(commit=False)
+                usuario.save_horaSalida()
+                #usuario.save()
+                messages.success(request, f'Cambios Guardados')
+            
+        else:
+            messages.warning(request, userForm.errors)
+            form = EditarUsuarioForm(instance=usuario)
+            return render(request, 'cuentas/editar_perfil.html', {'form':form})
+        return redirect('perfil')

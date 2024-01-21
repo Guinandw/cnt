@@ -24,9 +24,9 @@
 									<div class="card">
 										<div class="card-header border-bottom justify-content-between">
 											<h3 class="card-title">{{usuario.first_name}} {{usuario.last_name}}</h3>
-											
+											{% if request.user.is_supervisor %}
 												<a href="{% url "lista-cargar-evento"  %}" class='btn btn-info'>Volver</a>
-											
+											{% endif %}
 										</div>
 
 										{% for message in messages %}

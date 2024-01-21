@@ -16,7 +16,7 @@
 						<div class="wrap-login100 p-0">
 							<div class="card-body">
 								<span class="login100-form-title">
-									Cambiar Password
+									Editar Perfil: {{request.user.username}}
 								</span>
 								{% for message in messages %}
 								<div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
@@ -24,13 +24,20 @@
 								</div>
 						  		{% endfor %}
 
-								<form class="login100-form validate-form" method='POST' action='{% url 'cambiar_password' %}'>
+								<form class="login100-form validate-form" method='POST' action='{% url 'editar_perfil' %}'>
 									{% csrf_token %}
-								
 									
-                                    {{ form.as_p }}
 
-                                    <button type="submit" class='btn btn-primary'>Guardar</button>
+                                    {{ form.as_p }}
+									
+
+
+									<div class="container-login100-form-btn">
+										<button type='submit' class="login100-form-btn btn-info">
+											Guardar
+										</button>
+									</div>
+									
 								</form>
 							</div>
 							

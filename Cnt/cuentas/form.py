@@ -51,6 +51,7 @@ class CrearUsuarioForm(forms.ModelForm):
     username = forms.CharField(
         label='Nombre de Usuario',
         required=True,
+        min_length=5,
         max_length=100,
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Alias...'})
     )
@@ -137,7 +138,77 @@ class CrearUsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuarios
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'telefono', 'movil', 'preferenciaHorario', 'horasXdia']    
+
+class EditarUsuarioForm(forms.ModelForm):
+    
+   
+    
+    email = forms.EmailField(
+        max_length=200, 
+        label='Correo',
+        validators=(validador_email,),
+        error_messages={ 
+                        "required":'Correo Invalido'},
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Correo', 'type':'email'})
+        )
+    
+    first_name = forms.CharField(
+        label='Nombre',
+        required=True,
+        max_length=100,
+        validators=(validador_nombres,),
+        error_messages={'required':'probando'},
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre...'})
+    )
+    
+    last_name = forms.CharField(
+        label='Apellido',
+        max_length=100,
+        validators=(validador_nombres,),
+        error_messages={'required':'probando'},
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido...'})
+    )
+    
+    """ legajo = forms.CharField(
+        label='Legajo',
+        max_length=6,
+        validators=(validador_numeros,),
+        required=False,
+    ) """
+    
+    telefono = forms.CharField(
+        label='Telefono',
+        max_length=11,
+        validators=(validador_numeros,),
         
+    )
+    
+    movil = forms.CharField(
+        label='Movil',
+        max_length=11,
+        validators=(validador_numeros,),
+    )
+    
+    preferenciaHorario = forms.ChoiceField(
+        label='Preferencia Inicio Jornada',
+        choices=PREFERENCIAS,
+    )
+
+    horasXdia = forms.ChoiceField(
+        label='Horas por Jornada',
+        choices=HORASXDIA,
+    )
+    
+    def save_conHoraSalida(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.save_horaSalida()
+        return user
+    
+    class Meta:
+        model = Usuarios
+        fields = ['first_name', 'last_name', 'email',  'telefono', 'movil', 'preferenciaHorario', 'horasXdia']    
+                
 
 class CambiarPasswordForm(forms.Form):
     
