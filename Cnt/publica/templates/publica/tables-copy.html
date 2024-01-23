@@ -218,19 +218,109 @@
 																					</div>
 																				</div>
 																				<div class="tab-pane" id="tabTellabs">
-																					<p>Cupiditate non provident voluptatum deleniti atque corrupti quos dolores et quas praesentium voluptatum delenitiof pleasure of the moment, so blinded by desire quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-																					<p>Cupiditate non provident voluptatum deleniti atque corrupti quos dolores et quas praesentium voluptatum deleniti of pleasure of the moment, so blinded by desire quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-																					<p class="mb-0">Cupiditate non provident voluptatum deleniti atque corrupti quos dolores et quas praesentium voluptatum deleniti facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus </p>
+																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																						<div class="p-sm-4 p-2 ">
+																							<p class="text-muted">Supervisor: Leonardo Moya</p>
+																						</div>
+																						<div class="p-sm-4 p-2 ">
+																							<p class="text-muted">0800-333-6737 Opc 1 Opc 4</p>
+																						</div>
+																						
+																					</div>																	
+																					
+																					<div class="table-responsive">
+																						<table class="table text-wrap text-md-nowrap table-bordered">
+																							<thead>
+																								<tr>
+																									<th>Nombre</th>
+																									<th>Teléfono</th>
+																									<th>Móvil</th>
+																								</tr>
+																							</thead>
+																							<tbody>
+																								{% for a in tellabs  %}
+																								
+																								<tr>
+																									<td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+																									<td>{{a.profesional.telefono}}</td>
+																									<td>{{a.profesional.movil}}</td>
+																								</tr>
+																								
+																								
+																								{% endfor %}
+																							</tbody>
+																						</table>
+																					</div>
 																				</div>
 																				<div class="tab-pane" id="tabRadio">
-																					<p>Cupiditate non provident voluptatum deleniti atque corrupti quos dolores et quas praesentium voluptatum delenitiof pleasure of the moment, so blinded by desire quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-																					<p>Cupiditate non provident voluptatum deleniti atque corrupti quos dolores et quas praesentium voluptatum deleniti of pleasure of the moment, so blinded by desire quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-																					<p class="mb-0">Cupiditate non provident voluptatum deleniti atque corrupti quos dolores et quas praesentium voluptatum deleniti facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus </p>
+																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																						<div class="p-sm-4 p-2 ">
+																							<p class="text-muted">Supervisor: Clerc Sebastian</p>
+																						</div>
+																						<div class="p-sm-4 p-2 ">
+																							<p class="text-muted">0800-333-6737 Opc 1 Opc 7</p>
+																						</div>
+																						
+																					</div>																	
+																					
+																					<div class="table-responsive">
+																						<table class="table text-wrap text-md-nowrap table-bordered">
+																							<thead>
+																								<tr>
+																									<th>Nombre</th>
+																									<th>Teléfono</th>
+																									<th>Móvil</th>
+																								</tr>
+																							</thead>
+																							<tbody>
+																								{% for a in radio  %}
+																								
+																								<tr>
+																									<td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+																									<td>{{a.profesional.telefono}}</td>
+																									<td>{{a.profesional.movil}}</td>
+																								</tr>
+																								
+																								
+																								{% endfor %}
+																							</tbody>
+																						</table>
+																					</div>	
 																				</div>
 																				<div class="tab-pane" id="tabSincro">
-																					<p>Cupiditate non provident voluptatum deleniti atque corrupti quos dolores et quas praesentium voluptatum delenitiof pleasure of the moment, so blinded by desire quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-																					<p>Cupiditate non provident voluptatum deleniti atque corrupti quos dolores et quas praesentium voluptatum deleniti of pleasure of the moment, so blinded by desire quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-																					<p class="mb-0">Cupiditate non provident voluptatum deleniti atque corrupti quos dolores et quas praesentium voluptatum deleniti facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus </p>
+																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																						<div class="p-sm-4 p-2 ">
+																							<p class="text-muted">Supervisor: Luis Capelleti</p>
+																						</div>
+																						<div class="p-sm-4 p-2 ">
+																							<p class="text-muted">11-4333-7444</p>
+																						</div>
+																						
+																					</div>																	
+																					
+																					<div class="table-responsive">
+																						<table class="table text-wrap text-md-nowrap table-bordered">
+																							<thead>
+																								<tr>
+																									<th>Nombre</th>
+																									<th>Teléfono</th>
+																									<th>Móvil</th>
+																								</tr>
+																							</thead>
+																							<tbody>
+																								{% for a in sincro  %}
+																								
+																								<tr>
+																									<td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+																									<td>{{a.profesional.telefono}}</td>
+																									<td>{{a.profesional.movil}}</td>
+																								</tr>
+																								
+																								
+																								{% endfor %}
+																							</tbody>
+																						</table>
+																					</div>	
 																				</div>
 																			</div>
 																		</div>
