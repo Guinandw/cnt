@@ -1,0 +1,108 @@
+{% extends 'components/base-cnt.html' %}
+{% load static %}
+
+    {% block styles %}
+
+    {% endblock %}
+    
+        {% block content %}
+
+                            	<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Generar Reporte</h1>
+								</div>
+								
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+                            <div class="row">
+                                <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">
+                                    <div class="card">
+                                        
+                                        <div class="card-body">
+                                            {% if messages %}
+                                            <div class="example">
+                                                <div class="row row-sm">
+                                                    <div class="col-md-12 col-lg-12 col-xl-8 mb-3">
+                                                        {% for message in messages %}
+			          				                        <div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+				          				                    {{message}}
+			          				                        </div>
+		        				                        {% endfor %}
+                                                        
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                                    <form action="{% url 'reportes-form' %}" method='POST' id='formulario'>
+                                                        {% csrf_token %}
+                                                        {% for campo in form  %}
+
+                                                        <div class="col-md-12 col-lg-12 col-xl-8 mb-3">
+                                                            <div class="example">
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 mb-3">
+                                                                        {{campo.label}}
+                                                                        {{campo}}
+                                                                        {{campo.errors}}
+                                                                    </div><!-- col-6 -->
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        {% endfor %}
+                                                        
+
+                                                        <div class="col-md-12 col-lg-12 col-xl-8 mb-3">
+                                                            <div class="form-group mt-3">
+                                                                <div>
+                                                                    <button type="submit" class="btn btn-primary">Generar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Row Closed -->
+
+        {% endblock content %}
+
+
+
+
+{% block scripts %}
+
+
+<!-- Bootstrap-Date Range Picker js-->
+<script src=" {% static 'assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js' %} "></script>
+
+<!-- jQuery UI Date Picker js -->
+<script src=" {% static 'assets/plugins/date-picker/jquery-ui.js' %} "></script>
+
+
+
+<!-- bootstrap-datepicker js (Date picker Style-01) -->
+<script src=" {% static 'assets/plugins/bootstrap-datepicker/js/datepicker.js' %} "></script>
+
+<!-- Amaze UI Date Picker js-->
+<script src=" {% static 'assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js' %} "></script>
+
+<!-- Simple Date Time Picker js-->
+<script src=" {% static 'assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js' %} "></script>
+
+<!-- FORM ELEMENTS JS -->
+<script src=" {% static 'assets/js/formelementadvnced.js' %} "></script>
+
+<!-- THEMECOLORS JS -->
+<script src="{% static 'assets/js/themeColors.js'%}"></script>
+
+{% endblock scripts %}

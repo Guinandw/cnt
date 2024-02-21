@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import request
-from cuentas.models import Usuarios, equiposDeTrabajos, CNTs
+from cuentas.models import Usuarios, CNTs
 from semana.models import Evento, Feriados
 from semana.semana import Panel
 from django.db.models import Q
@@ -21,7 +21,7 @@ def inicio(request):
     usuarioRadio = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=7))
     usuarioSincro = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=5))
     
-    eventos = Evento.objects.filter(diaInicio__gt=datetime.datetime.now().date()-datetime.timedelta(days=15))
+    eventos = Evento.objects.filter(diaInicio__gt=datetime.datetime.now().date()-datetime.timedelta(days=30))
     
         
     eventosAcceso =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=1))
@@ -38,11 +38,11 @@ def inicio(request):
     
     for e in eventosGN:
         if e.evento_hoy():
-            print(e.profesional.first_name)
+            """ print(e.profesional.first_name)
             print(e.tipoEvento)
             print(e.diaInicio)
             print(e.inicioRealdeEvento())
-            print(e.finRealdeEvento())
+            print(e.finRealdeEvento()) """
            
             gn.append(e)
         

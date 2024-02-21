@@ -46,6 +46,7 @@ DEBUG = True
 
 #rama develop no tiene configurado el allowed_host
 ALLOWED_HOSTS = []
+#"10.248.32.102",
 
 
 # Application definition
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
     'publica',
     'cuentas',
     'semana',
+    'reportes',
     
 ]
 
