@@ -32,17 +32,17 @@ class Panel:
         if str(datetime.date.today()) in [str(feriado.fecha) for feriado in self.feriados]:
             #Hoy es un dia feriado: solo trabajan los que estan de guardia, en el horario correspondiente. Se debe verificar la lista de eventos del dia
             #de hoy. Disponibilidad trabaja pero no esta online!
-            print('Hoy es feriado')
+            #print('Hoy es feriado')
             en_linea = self.eventos_hoy(['GUARDIA'])
             
         #elif: ESTOY HOY FIN DE SEMANA? SOLO TRABAJAN LOS QUE ESTAN DE GUARDIA
         elif datetime.date.today().weekday() in [5,6]:
-            print('Es Fin de semana')
+            #print('Es Fin de semana')
             en_linea = self.eventos_hoy(['GUARDIA'])
         else:
             #Hoy es un dia Habil: trabajan todos menos quienes esten de franco/Vacaciones, 
             # se cambian el horario de conexion para quienes esten de guardia/disponibilidad
-            print('Hoy es un dia Habil')
+            #print('Hoy es un dia Habil')
             #EN_LINEA Y FRANCOS SON DOS LISTAS DE EVENTOS
             en_linea = self.eventos_hoy(['GUARDIA', 'DISPONIBILIDAD'])
             francos = self.eventos_hoy(['FRANCO', 'VACACIONES'])
