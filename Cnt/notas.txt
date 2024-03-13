@@ -1,0 +1,53 @@
+reporte = {
+    'dia1' = {
+        'numero' = '7/3',
+        'profesionales' = {
+            'guinandw' = '8a15',
+            'pollig' = '8a15',
+            'garroc' = 'Franco'
+
+        }
+    'dia2' = {
+        'numero' = '8/3',
+        'profesionales' = {
+
+
+        }
+    }
+    }
+}
+
+MEJOR ESTE MODELO DE Reporte
+reporte = {
+    fechas = { 
+        dia1 = '3/7',
+        dia2 = '4/7,
+        ...
+
+    },
+    profesionales = {
+        guinandw ={
+            nombreCompleto = profesional.nombre +' ' + profesional.apellido,
+            telefono = profesional.telefono,
+            movil = profesional.movil,
+            dia1 = 'dia1'
+            dia2 = 'dia2'
+            .... 
+        }
+    }
+}
+
+
+
+<body>
+    <h1>Reporte</h1>
+    {% for dia, datos_dia in reporte.items %}
+        <h2>Día: {{ dia }}</h2>
+        <p>Número: {{ datos_dia.numero }}</p>
+        <ul>
+            {% for profesional, hora in datos_dia.profesionales.items %}
+                <li>{{ profesional }} - {{ hora }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>

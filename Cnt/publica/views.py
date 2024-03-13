@@ -1,14 +1,18 @@
+import datetime
+
+from django.db.models import Q
 from django.shortcuts import render
 from django.http import request
+
 from cuentas.models import Usuarios, CNTs
 from semana.models import Evento, Feriados
 from semana.semana import Panel
-from django.db.models import Q
-import datetime
-
+from reportes.reporte import Test
 
 # Create your views here.
 def inicio(request):
+    #test = Test()
+    #test.prueba()
     usuarioAcceso, usuarioUrbano, usuarioInteru = [],[],[]
     
     eventos = None
@@ -31,6 +35,7 @@ def inicio(request):
     eventosRadio =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=7))
     eventoSincro = eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=5))
     
+    #print(str(eventosAcceso.query))
     eventosGN = eventos.filter(tipoEvento='GUARDIA NOCHE')
     disponibilidades = eventos.filter(tipoEvento='DISPONIBILIDAD', profesional__is_supervisor=True)
     gn = []
