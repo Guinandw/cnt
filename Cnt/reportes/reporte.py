@@ -2,7 +2,7 @@
 from datetime import timedelta, datetime, date, time
 
 from django.db.models import Q
-from cuentas.models import Usuarios as Profesionales
+from cuentas.models import Usuarios as Profesionales, CNTs
 from cuentas import constantes as c
 from semana.models import Evento, Feriados
 
@@ -35,16 +35,22 @@ class Reportes:
         
         while inicio <= fin:
             #print(inicio)
-            dias[inicio.strftime('%Y-%m-%d')]= inicio
+            dias[inicio.strftime('%d/%m')]= inicio
             inicio += timedelta(days=1)
         return dias
     
-    def eventos(self):
+    def eventos(self,filtro):
         prof = {}
-        profesionales = Profesionales.objects.exclude(equiposdetrabajos__isnull=True)
-        eventos = Evento.objects.filter(diaInicio__range=(self.fechaInicio, self.fechaFin))
+        #profesionales = Profesionales.objects.exclude(equiposdetrabajos__isnull=True)
+        userAll = Profesionales.objects.all()
+    
+        profesionales = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=filtro))
+        
         
         dias = self.__dias__()
+        
+          
+             
         for profesional in profesionales:
             prof[profesional.username]= {}
             prof[profesional.username]["nombreCompleto"]=profesional.first_name + ' ' + profesional.last_name
@@ -90,13 +96,49 @@ class Reportes:
                         horario = str(profesional.preferenciaHorario)+'a'+str(profesional.horaFin)
                                    
                 prof[profesional.username][str(dia)]=horario   
+        
 
-        for key, value in prof.items():
-            print("clave:", key)
-            for key, v in value.items():
-                print("clave:", key)
-                print("valor:", v)
-                print("------")
+        print(prof)
+        return prof
+
+    def supervision(self):
+        prof={}
+        if Evento.objects.filter(diaInicio__range=(self.fechaInicio, self.fechaFin)).exists():
+            eventos = Evento.objects.filter(diaInicio__range=(self.fechaInicio, self.fechaFin))
+            if eventos.filter(tipoEvento='DISPONIBILIDAD', profesional__is_supervisor=True).exists():
+                disponibilidades = eventos.filter(tipoEvento='DISPONIBILIDAD', profesional__is_supervisor=True)
+                
+                for d in disponibilidades:
+                    prof[d.profesional.username]= {}
+                    prof[d.profesional.username]["Nombre"]=d.profesional.first_name + ' ' + d.profesional.last_name
+                    prof[d.profesional.username]["Telefono"]= d.profesional.telefono
+                    prof[d.profesional.username]["Movil"]=d.profesional.movil
+                    prof[d.profesional.username]["Desde"]=d.diaInicio.strftime('%d/%m')
+                    prof[d.profesional.username]["Hasta"]=d.diaFin.strftime('%d/%m')
+            else:
+                prof = None
+        return prof
+    
+    def guardiaNoche(self):
+        #como la guardia noche siempre comienza un dia antes que cualquier guardia, se tuvo que crear la variable diaInicio para la noche
+        diaInicioNocturno =  datetime.strptime(self.fechaInicio, "%Y-%m-%d" ).date() - timedelta(days=1)
+        diaFinNocturno = datetime.strptime(self.fechaFin, "%Y-%m-%d" ).date() - timedelta(days=1)
+        prof={}
+        if Evento.objects.filter(diaInicio__range=(diaInicioNocturno, diaFinNocturno)).exists():
+            eventos = Evento.objects.filter(diaInicio__range=(diaInicioNocturno, diaFinNocturno))
+            if eventos.filter(tipoEvento='GUARDIA NOCHE').exists():
+                disponibilidades = eventos.filter(tipoEvento='GUARDIA NOCHE')
+                
+                for d in disponibilidades:
+                    prof[d.profesional.username]= {}
+                    prof[d.profesional.username]["Nombre"]=d.profesional.first_name + ' ' + d.profesional.last_name
+                    prof[d.profesional.username]["Telefono"]= d.profesional.telefono
+                    prof[d.profesional.username]["Movil"]=d.profesional.movil
+                    prof[d.profesional.username]["Desde"]=d.diaInicio.strftime('%d/%m')
+                    prof[d.profesional.username]["Hasta"]=d.diaFin.strftime('%d/%m')
+            else:
+                prof = None
+        return prof
         
 class Test:
     def __init__(self):

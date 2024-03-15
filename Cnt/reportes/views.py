@@ -10,6 +10,7 @@ from cuentas.models import Usuarios, CNTs
 from semana.models import Evento, Feriados
 from semana.semana import Panel
 from .reporte import Reportes, Test
+from cuentas import constantes as c
 # Create your views here.
 
 
@@ -35,7 +36,19 @@ def reportesForm(request):
 def reportes(request, fechaInicio, fechaFin):
     
     reporte = Reportes(fechaInicio=fechaInicio, fechaFin=fechaFin)
-    reporte.eventos()
-  
-    return redirect('inicio')
+    accReporte = reporte.eventos(c.ACCESO)
+    urbReporte = reporte.eventos(c.URBANO)
+    intReporte = reporte.eventos(c.INTERURBANO)
+    telReporte = reporte.eventos(c.TELLABS)
+    radReporte = reporte.eventos(c.RADIO)
+    sinReporte = reporte.eventos(c.SINCRONISMO)
+    sopReporte = reporte.eventos(c.SOPORTE)
+    
+    dias = reporte.__dias__()
+    supervision = reporte.supervision()
+    noche = reporte.guardiaNoche()
+    contexto = {'dias': dias,'supervision':supervision, 'acceso':accReporte, 'urbano':urbReporte, 'interurbano': intReporte, 'tellabs': telReporte, 
+                'radio': radReporte, 'sincronismo': sinReporte, 'soporte': sopReporte, 'noche':noche }
+   
+    return render(request, template_name='reportes/reportes.html', context=contexto)
 
