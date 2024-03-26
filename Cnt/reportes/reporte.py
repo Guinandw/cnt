@@ -98,7 +98,7 @@ class Reportes:
                 prof[profesional.username][str(dia)]=horario   
         
 
-        print(prof)
+        #print(prof)
         return prof
 
     def supervision(self):

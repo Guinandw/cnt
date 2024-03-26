@@ -3,11 +3,17 @@
         
 							<!-- PAGE-HEADER -->
 							<div class="page-header">
-								<div>
-									<h1 class="page-title">Horarios</h1>
-								</div>
-							
-							</div>
+								<div class="col-lg-12 col-md-12">
+									<div class="card">
+										<div class="card-header border-bottom justify-content-between">
+											<h3 class="page-title">Horarios {{fechaInicio}} a {{fechaFin}}</h3>
+											{% if request.user.is_supervisor %}
+												<a href="{% url "reportes" fechaInicio fechaFin 1 %}" class='btn btn-danger'>Guardar PDF</a>
+										{% endif %}
+										</div>
+								
+									</div>
+								
 							<!-- PAGE-HEADER END -->
 
 							<div class="row row-sm">
@@ -20,8 +26,9 @@
 										<div class="card-body">
 											{% comment %} comienzo de tablas {% endcomment %}
 											<div class="card-body">
-												<div class="card-header border-bottom bg-info">
-												<h3 class="card-title">Guardia Noche</h3>
+												<div class="card-header border-bottom bg-warning justify-content-between">
+												<h3 class="card-title">Guardia Noche       </h3>
+												<h3 class="card-title">0800-333-6737 Opc 1	</h3>
 											 </div>
 												<div class="table-responsive">
 													<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
@@ -53,8 +60,8 @@
 												</div>
 												<br>
 											{% comment %} separador de tablas {% endcomment %}
-											<div class="card-header border-bottom bg-info">
-											<h3 class="card-title">Supervision</h3>
+											<div class="card-header border-bottom bg-success" >
+											<h3 class="card-title" >Supervision</h3>
 										 </div>
 											<div class="table-responsive">
 												<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
@@ -86,11 +93,11 @@
 											</div>
 											<br>
 											{% comment %} separador de tabla {% endcomment %}
-											<div class="card-header border-bottom bg-info">
+											<div class="card-header border-bottom  bg-info">
 												<h3 class="card-title">Acceso</h3>
 											 </div>
 											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
+												<table class="table text-nowrap text-md-nowrap table-bordered table-striped">
 													<thead>
 														<tr>
 															<th>Nombre</th>
