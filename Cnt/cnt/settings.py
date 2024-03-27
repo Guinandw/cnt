@@ -44,7 +44,9 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["10.248.32.102",]
+#rama develop no tiene configurado el allowed_host
+ALLOWED_HOSTS = []
+#"10.248.32.102",
 
 
 # Application definition
@@ -61,6 +63,7 @@ INSTALLED_APPS = [
     'publica',
     'cuentas',
     'semana',
+    'reportes',
     
 ]
 
@@ -161,7 +164,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [STATIC_DIR]
-print(STATIC_DIR)
+#print(STATIC_DIR)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

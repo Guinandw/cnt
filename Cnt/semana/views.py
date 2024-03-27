@@ -91,17 +91,13 @@ def listaCargarEvento(request):
     acceso = equipos.filter(cnt__nombre=1)
     urbano = equipos.filter(cnt__nombre=2)
     interurbano = equipos.filter(cnt__nombre=3)
-    contexto= {'acceso':acceso,'urbano':urbano, 'interu': interurbano}
-    #pequeño script para corregir horarios de salida
-    """ for a in acceso:
-        a.miembro.save_horaSalida()
-        print(a.miembro.first_name)
-        print(a.miembro.preferenciaHorario)
-        print(a.miembro.horaSalida())
-    for u in urbano:
-        u.miembro.save_horaSalida()
-    for i in interurbano:
-        i.miembro.save_horaSalida() """
+    tellabs = equipos.filter(cnt__nombre=4)
+    radio = equipos.filter(cnt__nombre=5)
+    sincro = equipos.filter(cnt__nombre=6)
+    
+    
+    contexto= {'acceso':acceso,'urbano':urbano, 'interu': interurbano, 'tellabs':tellabs, 'radio':radio, 'sincro':sincro}
+    
     return render(request, 'semana/listaCargarEvento.html', context=contexto)
 
 def listaEvento(request, userId):
