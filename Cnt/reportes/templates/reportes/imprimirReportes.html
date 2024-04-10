@@ -5,10 +5,7 @@
   <title>Reporte</title>
   <meta charset='UTF-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> {% endcomment %}
- 
-  {% comment %} <link id="style" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet" /> {% endcomment %}
-	{% comment %} <link href="{% static 'assets/css/style.css'%}" rel="stylesheet" />  {% endcomment %}
+  {% comment %} <link href="{% static 'assets/css/reporteStyle.css'%}" rel="stylesheet" /> {% endcomment %}
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -54,14 +51,22 @@
     .card-header {
       display: flex;
       flex: 1 1 auto;
-      padding: 1rem 1rem;
+      padding: 0 1rem;
     }
     .page-title {
       margin: 0;
     }
 
     .h-100{
-      height: 100%;
+      height: 60%;
+    }
+
+    .p-horizontal1rem {
+      padding: auto 1rem;
+    }
+
+    .p-thick {
+      font-weight: bold;
     }
     
     /* Estilos para las tablas */
@@ -91,7 +96,7 @@
 <div class="container">
 	<div class="page-header">
     <div>
-      <h1 class="page-title">Horarios {{fechaInicio}} a {{fechaFin}}</h1>
+      <h1 class="page-title">{{titulo}}</h1>
     </div>
   
   </div>
@@ -182,8 +187,9 @@
           {% comment %} separador de tabla {% endcomment %}
           <div class="card-body ">
           <div class="card-header border-bottom justify-content-between bg-info h-100 ">
-            <h3 >Acceso</h3>
+            <h3 >ACCESO</h3>
             <h3>0800-333-6737 Opc 1 Opc 3</h3>
+            <h3>Supervisor: Leonardo Moya</h3>
           </div>
           <div class="table-responsive">
             <table class="table text-nowrap text-md-nowrap table-bordered table-striped">
@@ -219,6 +225,7 @@
             <div class="card-header border-bottom justify-content-between bg-info h-100 ">
               <h3 >URBANO</h3>
               <h3>0800-333-6737 Opc 1 Opc 2</h3>
+              <h3>Supervisor: Gustavo Parrado</h3>
             </div>
           <div class="table-responsive">
             <table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
@@ -254,6 +261,7 @@
             <div class="card-header border-bottom justify-content-between bg-info h-100 ">
               <h3 >INTERURBANO</h3>
               <h3>0800-333-6737 Opc 1 Opc 1</h3>
+              <h3>Supervisor: Cynthia Veron</h3>
             </div>
           <div class="table-responsive">
             <table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
@@ -289,7 +297,9 @@
           <div class="card-body ">
             <div class="card-header border-bottom justify-content-between bg-info h-100 ">
               <h3 >TELLABS</h3>
-              <h3>0800-333-6737 Opc 1 Opc 4 o 4333-6350</h3>
+              <h4>0800-333-6737 Opc 1 Opc 4 o 4333-6350</h4>
+              <h4>Disponibilidad: {{dispTellabs.profesional.first_name}} {{dispTellabs.profesional.last_name}} {{dispTellabs.profesional.movil}}</h4>
+              <h4>Supervision: Leonardo Moya</h4>
             </div>
           <div class="table-responsive">
             <table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
@@ -330,25 +340,42 @@
             <table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
               <thead>
                 <tr>
+                  <th>Descripción</th>
                   <th>Nombre</th>
                   <th>Telefono</th>
                   <th>Movil</th>
-                  {% for key, value in dias.items %}
-                  <th>{{key}}</th>
-                  {% endfor %}
-                </tr>
+                  <th>Desde</th>
+                  <th>Hasta</th>
+                 </tr>
               </thead>
               <tbody>
-                {% for key,value in radio.items  %}
+                {% for key,value in radioRadio.items  %}
                 <tr>
+                  <td>Radio</td>
                   {% for key,v in value.items%}
                   <td>{{v}}</td>
                   {% endfor %}
                   
                 </tr>
                 {% endfor %}
-                
-                
+                {% for key,value in radioGestores.items  %}
+                <tr>
+                  <td>Gestores</td>
+                  {% for key,v in value.items%}
+                  <td>{{v}}</td>
+                  {% endfor %}
+                  
+                </tr>
+                {% endfor %}
+                {% for key,value in radioEscalamiento.items  %}
+                <tr>
+                  <td>Escalamiento</td>
+                  {% for key,v in value.items%}
+                  <td>{{v}}</td>
+                  {% endfor %}
+                  
+                </tr>
+                {% endfor %}
                 
               </tbody>
             </table>
@@ -357,70 +384,20 @@
           </div>
           {% comment %} separador de tablas {% endcomment %}
           <div class="card-body ">
-            <div class="card-header border-bottom justify-content-between bg-info h-100 ">
-              <h3 >SINCRONISMO</h3>
-            </div>
-          <div class="table-responsive">
-            <table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Telefono</th>
-                  <th>Movil</th>
-                  {% for key, value in dias.items %}
-                  <th>{{key}}</th>
-                  {% endfor %}
-                </tr>
-              </thead>
-              <tbody>
-                {% for key,value in sincronismo.items  %}
-                <tr>
-                  {% for key,v in value.items%}
-                  <td>{{v}}</td>
-                  {% endfor %}
-                  
-                </tr>
-                {% endfor %}
-                
-                
-                
-              </tbody>
-            </table>
+              <div class="card-header border-bottom justify-content-between bg-info h-100 ">
+                <h3 >SINCRONISMO</h3>
+                <h3 >ESCALAMIENTO : Luis Cappelletti 1144925683</h3>
+              </div>
+              <div class="card-body p-horizontal1rem">
+            
+                  <p class='p-thick'>LUNES A VIERNES: 18HS A 8 HS Y FIN DE SEMANA/FERIADOS: 24 HORAS: 11-4333-7444</p>
+            
+               
+              
+            
+              </div>
           </div>
-          <br>
-          </div>
-          {% comment %} separador de tablas {% endcomment %}
-          {% comment %} <div class="card-header border-bottom bg-info">
-            <h3 class="card-title">SOPORTE</h3>
-           </div>
-          <div class="table-responsive">
-            <table class="table text-nowrap text-md-nowrap table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Telefono</th>
-                  <th>Movil</th>
-                  {% for key, value in dias.items %}
-                  <th>{{key}}</th>
-                  {% endfor %}
-                </tr>
-              </thead>
-              <tbody>
-                {% for key,value in soporte.items  %}
-                <tr>
-                  {% for key,v in value.items%}
-                  <td>{{v}}</td>
-                  {% endfor %}
-                  
-                </tr>
-                {% endfor %}
-                
-                
-                
-              </tbody>
-            </table>
-          </div> {% endcomment %}
-          {% comment %} separador de tablas {% endcomment %}
+          
         </div>
       </div>
     </div>

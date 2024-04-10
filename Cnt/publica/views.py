@@ -7,6 +7,7 @@ from django.http import request
 from cuentas.models import Usuarios, CNTs
 from semana.models import Evento, Feriados
 from semana.semana import Panel
+from cuentas import constantes as c
 from reportes.reporte import Test
 
 # Create your views here.
@@ -22,22 +23,26 @@ def inicio(request):
     usuarioUrbano = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=2))
     usuarioInteru = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=3))
     usuarioTellabs = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=4))
-    usuarioRadio = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=7))
     usuarioSincro = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=5))
     
     eventos = Evento.objects.filter(diaInicio__gt=datetime.datetime.now().date()-datetime.timedelta(days=30))
     
         
-    eventosAcceso =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=1))
-    eventosUrbano =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=2))
-    eventosInteru =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=3))
-    eventosTellabs =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=4))
-    eventosRadio =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=7))
-    eventoSincro = eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=5))
+    eventosAcceso =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.ACCESO))
+    eventosUrbano =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.URBANO))
+    eventosInteru =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.INTERURBANO))
+    eventosTellabs =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.TELLABS))
+    eventosRadio =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.RADIO))
+    eventoSincro = eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.SINCRONISMO))
     
-    #print(str(eventosAcceso.query))
     eventosGN = eventos.filter(tipoEvento='GUARDIA NOCHE')
-    disponibilidades = eventos.filter(tipoEvento='DISPONIBILIDAD', profesional__is_supervisor=True)
+    disponibilidades = eventos.filter(tipoEvento='DISPONIBILIDAD', profesional__is_supervisor=True, profesional__equiposdetrabajos__cnt__in=[c.ACCESO,c.URBANO,c.INTERURBANO])
+    radioRadio = eventosRadio.filter(tipoEvento='RADIO: RADIO', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date())
+    radioGestores = eventosRadio.filter(tipoEvento='RADIO: GESTORES', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date())
+    radioEscalamieneto =  eventosRadio.filter(tipoEvento='RADIO: ESCALAMIENTO', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date())
+    tellabsEscalamiento =  eventosTellabs.filter(tipoEvento='DISPONIBILIDAD', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date()).last()
+    
+    
     gn = []
     disp = []
     
@@ -55,6 +60,8 @@ def inicio(request):
         if e.evento_hoy():
             disp.append(e)
     
+    
+    
             
     feriados = Feriados.objects.all()
 
@@ -62,30 +69,18 @@ def inicio(request):
     panelUrbano = Panel(eventosUrbano, usuarioUrbano, feriados)
     panelInteru = Panel(eventosInteru, usuarioInteru, feriados)
     panelTellabs = Panel(eventosTellabs, usuarioTellabs, feriados)
-    panelRadio = Panel(eventosRadio, usuarioRadio, feriados)
     panelSincro = Panel(eventoSincro, usuarioSincro, feriados)
     
     onlineAcceso = panelAcceso.online()
     onlineUrbano = panelUrbano.online()
     onlineInteru = panelInteru.online()
     onlineTellabs = panelTellabs.online()
-    onlineRadio = panelRadio.online()
     onlineSincro = panelSincro.online()
-    """ for e in onlineTellabs:
-        print(e.profesional.first_name)
-        print(e.tipoEvento)
-        print(e.diaInicio)
-        print(e.inicioRealdeEvento())
-        print(e.finRealdeEvento())
-        print(e.inicioDeEventoHoy())
-        print(e.finDeEventoHoy())
-        print('son las:'+ str(datetime.datetime.now()))
-        if e.inicioDeEventoHoy() <= datetime.datetime.now() and datetime.datetime.now() <= e.finDeEventoHoy():
-            print('ONLINE')
-        else:
-            print('OFFLINE')
-        print('\n') """
-    contexto= {'acceso':onlineAcceso,'urbano':onlineUrbano, 'interu': onlineInteru, 'tellabs':onlineTellabs, 'radio': onlineRadio, 'sincro':onlineSincro ,'noche': gn, 'disp':disp}
+    
+    
+    contexto= {'acceso':onlineAcceso,'urbano':onlineUrbano, 'interu': onlineInteru,'eTellabs':tellabsEscalamiento , 'tellabs':onlineTellabs,
+               'radioRadio': radioRadio, 'radioGestores': radioGestores, 'radioEscalamiento': radioEscalamieneto , 'sincro':onlineSincro ,'noche': gn, 'disp':disp}
+    
     #pequeño script para corregir horarios de salida
     """ for a in usuarioAcceso:
             a.save_horaSalida()

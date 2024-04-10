@@ -43,17 +43,18 @@ def reportes(request, fechaInicio, fechaFin, bandera:int=None):
     urbReporte = reporte.eventos(c.URBANO)
     intReporte = reporte.eventos(c.INTERURBANO)
     telReporte = reporte.eventos(c.TELLABS)
-    radReporte = reporte.eventos(c.RADIO)
+    radioRadio = reporte.__getEventFilter__('RADIO: RADIO',0,False,[c.RADIO])
+    radioGestores = reporte.__getEventFilter__('RADIO: GESTORES',0,False,[c.RADIO])
+    radioEscalamiento = reporte.__getEventFilter__('RADIO: ESCALAMIENTO',0,None,[c.RADIO])
     sinReporte = reporte.eventos(c.SINCRONISMO)
     sopReporte = reporte.eventos(c.SOPORTE)
-    
+    dispTellabs = reporte.dispTellabs()
+    titulo = reporte.__get_titulo__()
     dias = reporte.__dias__()
-    supervision = reporte.supervision()
-    noche = reporte.guardiaNoche()
-    contexto = {'dias': dias,'supervision':supervision, 'acceso':accReporte, 'urbano':urbReporte, 'interurbano': intReporte, 'tellabs': telReporte, 
-                'radio': radReporte, 'sincronismo': sinReporte, 'soporte': sopReporte, 'noche':noche, 'fechaInicio':fechaInicio, 'fechaFin':fechaFin }
-    
-    
+    supervision = reporte.__getEventFilter__('DISPONIBILIDAD',0,True,[c.ACCESO,c.URBANO,c.INTERURBANO])
+    noche = reporte.__getEventFilter__('GUARDIA NOCHE',1,False,[c.ACCESO,c.URBANO, c.INTERURBANO])
+    contexto = {'titulo':titulo,'dias': dias,'supervision':supervision, 'acceso':accReporte, 'urbano':urbReporte, 'interurbano': intReporte, 'tellabs': telReporte, 
+                'radioRadio': radioRadio,'radioGestores':radioGestores,'radioEscalamiento':radioEscalamiento, 'sincronismo': sinReporte, 'soporte': sopReporte, 'noche':noche, "dispTellabs": dispTellabs ,'fechaInicio':fechaInicio, 'fechaFin':fechaFin }
     
     if bandera:
         seleccionar_ruta_destino(contexto=contexto)

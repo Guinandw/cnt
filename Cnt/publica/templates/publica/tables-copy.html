@@ -115,7 +115,7 @@
 
 																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
 																						<div class="p-sm-4 p-2 ">
-																							<p class="text-muted">Supervisor: Leonardo Moya</p>
+																							<p class="text-muted"><span class="text-bold">Supervisor:</span> Leonardo Moya</p>
 																						</div>
 																						<div class="p-sm-4 p-2 ">
 																							<p class="text-muted">0800-333-6737 Opc 1 Opc 3</p>
@@ -153,7 +153,7 @@
 																				<div class="tab-pane" id="tabUrbano">
 																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
 																						<div class="p-sm-4 p-2 ">
-																							<p class="text-muted">Supervisor: Gustavo Parrado</p>
+																							<p class="text-muted"><span class="text-bold">Supervisor:</span> Gustavo Parrado</p>
 																						</div>
 																						<div class="p-sm-4 p-2 ">
 																							<p class="text-muted">0800-333-6737 Opc 1 Opc 2</p>
@@ -188,7 +188,7 @@
 																				<div class="tab-pane" id="tabInterubano">
 																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
 																						<div class="p-sm-4 p-2 ">
-																							<p class="text-muted">Supervisor: Cynthia Veron</p>
+																							<p class="text-muted"><span class="text-bold">Supervisor:</span> Cynthia Veron</p>
 																						</div>
 																						<div class="p-sm-4 p-2 ">
 																							<p class="text-muted">0800-333-6737 Opc 1 Opc 1</p>
@@ -223,10 +223,13 @@
 																				<div class="tab-pane" id="tabTellabs">
 																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
 																						<div class="p-sm-4 p-2 ">
-																							<p class="text-muted">Supervisor: Leonardo Moya</p>
+																							<p class="text-muted"><span class="text-bold">Supervisor:</span> Leonardo Moya</p>
 																						</div>
 																						<div class="p-sm-4 p-2 ">
 																							<p class="text-muted">0800-333-6737 Opc 1 Opc 4</p>
+																						</div>
+																						<div class="p-sm-4 p-2 ">
+																							<p class="text-muted"><spann class="text-bold">Disponibilidad: </spann>{{eTellabs.profesional.first_name}} {{eTellabs.profesional.last_name}} {{eTellabs.profesional.movil}}</p>
 																						</div>
 																						
 																					</div>																	
@@ -258,34 +261,63 @@
 																				<div class="tab-pane" id="tabRadio">
 																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
 																						<div class="p-sm-4 p-2 ">
-																							<p class="text-muted">Supervisor: Clerc Sebastian</p>
+																							<p class="text-bold">Lunes a Viernes de 8 a 18 hs deben llamar al 0800- 3336737 Opción 7. Fuera de ese horario, llamar a : </p>
 																						</div>
-																						<div class="p-sm-4 p-2 ">
-																							<p class="text-muted">0800-333-6737 Opc 1 Opc 7</p>
-																						</div>
-																						
 																					</div>																	
 																					
 																					<div class="table-responsive">
 																						<table class="table text-wrap text-md-nowrap table-bordered">
 																							<thead>
 																								<tr>
+																									<th >Descripción</th>
 																									<th>Nombre</th>
 																									<th>Teléfono</th>
 																									<th>Móvil</th>
+																									<th>Desde</th>
+																									<th>Hasta</th>
 																								</tr>
 																							</thead>
 																							<tbody>
-																								{% for a in radio  %}
+																								{% for a in radioRadio  %}
 																								
 																								<tr>
+																									<td class="text-bold">Radios</td>
 																									<td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
 																									<td>{{a.profesional.telefono}}</td>
 																									<td>{{a.profesional.movil}}</td>
+																									<td>{{a.diaInicio}}</td>
+																									<td>{{a.diaFin}}</td>
 																								</tr>
 																								
 																								
 																								{% endfor %}
+
+																								{% for a in radioGestores  %}
+
+																								<tr>
+																									<td class="text-bold">Gestores</td>
+																									<td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+																									<td>{{a.profesional.telefono}}</td>
+																									<td>{{a.profesional.movil}}</td>
+																									<td>{{a.diaInicio}}</td>
+																									<td>{{a.diaFin}}</td>
+																								</tr>
+																								
+																								{% endfor %}
+
+																								{% for a in radioEscalamiento  %}
+
+																								<tr>
+																									<td class="text-bold">Escalamiento</td>
+																									<td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+																									<td>{{a.profesional.telefono}}</td>
+																									<td>{{a.profesional.movil}}</td>
+																									<td>{{a.diaInicio}}</td>
+																									<td>{{a.diaFin}}</td>
+																								</tr>
+																								
+																								{% endfor %}
+
 																							</tbody>
 																						</table>
 																					</div>	
@@ -293,7 +325,7 @@
 																				<div class="tab-pane" id="tabSincro">
 																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
 																						<div class="p-sm-4 p-2 ">
-																							<p class="text-muted">Supervisor: Luis Capelleti</p>
+																							<p class="text-muted"><span class="text-bold">Supervisor:</span> Luis Capelleti</p>
 																						</div>
 																						<div class="p-sm-4 p-2 ">
 																							<p class="text-muted">11-4333-7444</p>

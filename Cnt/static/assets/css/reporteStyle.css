@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    width: 100%;
+  }
+  
+  .container {
+    margin-top: 20px;
+  }
+  
+  .page-header {
+    background-color: #59adec;
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .bg-warning{
+    background-color: #e7c354;
+    color: black;
+    margin: 0;
+    padding: 0;
+  }
+  .bg-success{
+    background-color: #13bfa6;
+    color: black;
+    margin: 0;
+    padding: 0;
+  }
+
+  .bg-info {
+    background-color: #59adec ;
+    color: black;
+    margin: 0;
+    padding: 0;
+  }
+
+  .justify-content-between {
+    justify-content: space-between;
+  }
+  .card-header {
+    display: flex;
+    flex: 1 1 auto;
+    padding: 0 1rem;
+  }
+  .page-title {
+    margin: 0;
+  }
+
+  .h-100{
+    height: 60%;
+  }
+
+  .p-horizontal1rem {
+    padding: auto 1rem;
+  }
+
+  .p-thick {
+    font-weight: bold;
+  }
+  
+  /* Estilos para las tablas */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  /* Estilos para las filas impares */
+  .table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }

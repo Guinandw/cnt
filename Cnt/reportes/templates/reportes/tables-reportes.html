@@ -6,7 +6,7 @@
 								<div class="col-lg-12 col-md-12">
 									<div class="card">
 										<div class="card-header border-bottom justify-content-between">
-											<h3 class="page-title">Horarios {{fechaInicio}} a {{fechaFin}}</h3>
+											<h3 class="page-title">{{titulo}}</h3>
 											{% if request.user.is_supervisor %}
 												<a href="{% url "reportes" fechaInicio fechaFin 1 %}" class='btn btn-danger'>Guardar PDF</a>
 										{% endif %}
@@ -93,8 +93,10 @@
 											</div>
 											<br>
 											{% comment %} separador de tabla {% endcomment %}
-											<div class="card-header border-bottom  bg-info">
-												<h3 class="card-title">Acceso</h3>
+											<div class="card-header border-bottom  bg-info justify-content-between">
+												<h3 class='card-title' >ACCESO</h3>
+												<h3 class='card-title'>0800-333-6737 Opc 1 Opc 3</h3>
+												<h3 class='card-title'>Supervisor: Leonardo Moya</h3>
 											 </div>
 											<div class="table-responsive">
 												<table class="table text-nowrap text-md-nowrap table-bordered table-striped">
@@ -125,8 +127,10 @@
 											</div>
 											
 											{% comment %} separador de tablas {% endcomment %}
-											<div class="card-header border-bottom bg-info">
-												<h3 class="card-title">URBANO</h3>
+											<div class="card-header border-bottom bg-info justify-content-between">
+												<h3 class='card-title' >URBANO</h3>
+												<h3 class='card-title'>0800-333-6737 Opc 1 Opc 2</h3>
+												<h3 class='card-title'>Supervisor: Gustavo Parrado</h3>
 											 </div>
 											<div class="table-responsive">
 												<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
@@ -158,8 +162,10 @@
 
 											{% comment %} separador de tablas {% endcomment %}
 
-											<div class="card-header border-bottom bg-info">
-												<h3 class="card-title">INTERURBANO</h3>
+											<div class="card-header border-bottom bg-info justify-content-between">
+												<h3 class='card-title' >INTERURBANO</h3>
+												<h3 class='card-title'>0800-333-6737 Opc 1 Opc 1</h3>
+												<h3 class='card-title'>Supervisor: Cynthia Veron</h3>
 											 </div>
 											<div class="table-responsive">
 												<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
@@ -190,9 +196,12 @@
 											</div>
 
 											{% comment %} separador de tablas {% endcomment %}
-											<div class="card-header border-bottom bg-info">
-												<h3 class="card-title">TELLABS</h3>
-											 </div>
+											<div class="card-header border-bottom bg-info justify-content-between">
+												<h3 class='card-title' >TELLABS</h3>
+												<h4 class='card-title'>0800-333-6737 Opc 1 Opc 4 o 4333-6350</h4>
+												<h4 class='card-title'>Disponibilidad: {{dispTellabs.profesional.first_name}} {{dispTellabs.profesional.last_name}} {{dispTellabs.profesional.movil}}</h4>
+												<h4 class='card-title'>Supervision: Leonardo Moya</h4>
+											</div>
 											<div class="table-responsive">
 												<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
 													<thead>
@@ -221,24 +230,36 @@
 												</table>
 											</div>
 											{% comment %} separador de tablas {% endcomment %}
-											<div class="card-header border-bottom bg-info">
-												<h3 class="card-title">RADIO</h3>
+											<div class="card-header border-bottom bg-info justify-content-between">
+												<h3 class='card-title' >RADIO</h3>
+												<h3 class='card-title'>0800-333-6737 Opc 7</h3>
 											 </div>
 											<div class="table-responsive">
 												<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
 													<thead>
 														<tr>
+															<th>Descripción</th>
 															<th>Nombre</th>
 															<th>Telefono</th>
 															<th>Movil</th>
-															{% for key, value in dias.items %}
-															<th>{{key}}</th>
-															{% endfor %}
+															<th>Desde</th>
+															<th>Hasta</th>
 														</tr>
 													</thead>
 													<tbody>
-														{% for key,value in radio.items  %}
+														{% for key,value in radioRadio.items  %}
 														<tr>
+															<td>Radio</td>
+															{% for key,v in value.items%}
+															<td>{{v}}</td>
+															{% endfor %}
+															
+														</tr>
+														{% endfor %}
+
+														{% for key,value in radioGestores.items  %}
+														<tr>
+															<td>Gestores</td>
 															{% for key,v in value.items%}
 															<td>{{v}}</td>
 															{% endfor %}
@@ -246,42 +267,29 @@
 														</tr>
 														{% endfor %}
 														
+														{% for key,value in radioEscalamiento.items  %}
+														<tr>
+															<td>Escalamiento</td>
+															{% for key,v in value.items%}
+															<td>{{v}}</td>
+															{% endfor %}
+															
+														</tr>
+														{% endfor %}
 														
 														
 													</tbody>
 												</table>
 											</div>
 											{% comment %} separador de tablas {% endcomment %}
-											<div class="card-header border-bottom bg-info">
-												<h3 class="card-title">SINCRONISMO</h3>
+											
+											<div class="card-header border-bottom bg-info justify-content-between">
+												<h3 class='card-title' >SINCRONISMO</h3>
+                								<h3 class='card-title' >ESCALAMIENTO : Luis Cappelletti 1144925683</h3>
 											 </div>
-											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
-													<thead>
-														<tr>
-															<th>Nombre</th>
-															<th>Telefono</th>
-															<th>Movil</th>
-															{% for key, value in dias.items %}
-															<th>{{key}}</th>
-															{% endfor %}
-														</tr>
-													</thead>
-													<tbody>
-														{% for key,value in sincronismo.items  %}
-														<tr>
-															{% for key,v in value.items%}
-															<td>{{v}}</td>
-															{% endfor %}
-															
-														</tr>
-														{% endfor %}
-														
-														
-														
-													</tbody>
-												</table>
-											</div>
+												<div class="card-body p-horizontal1rem">
+													<p class='card-title'>LUNES A VIERNES: 18HS A 8 HS Y FIN DE SEMANA/FERIADOS: 24 HORAS: 11-4333-7444</p>
+												</div>
 											{% comment %} separador de tablas {% endcomment %}
 											{% comment %} <div class="card-header border-bottom bg-info">
 												<h3 class="card-title">SOPORTE</h3>

@@ -5,6 +5,7 @@ from django.db.models import Q
 from cuentas.models import Usuarios as Profesionales, CNTs
 from cuentas import constantes as c
 from semana.models import Evento, Feriados
+from cuentas import constantes as c
 
 ''' 
 -INGRESA FECHA INICIO Y FECHA FIN 
@@ -22,7 +23,8 @@ class Reportes:
         self.fechaInicio = fechaInicio
         self.fechaFin = fechaFin
         self.feriados = Feriados.objects.all()
-        
+        self.dias = self.__dias__()
+        self.userAll = Profesionales.objects.all()
         #OJO: QUE PASA SI NO HAY NINGUN EVENTO?
         
     
@@ -39,17 +41,44 @@ class Reportes:
             inicio += timedelta(days=1)
         return dias
     
+    def __get_titulo__(self):
+        inicio = datetime.strptime(self.fechaInicio, "%Y-%m-%d" ).date()
+        fin = datetime.strptime(self.fechaFin, "%Y-%m-%d").date()
+        
+        return 'Reporte del '+ inicio.strftime("%d/%m") + ' al ' + fin.strftime("%d/%m")
+        
+    
+    def __get_evento__(self, profesional, dia):
+        #Hay evento para este dia? verificamos si existe primero
+                
+        if Evento.objects.filter(Q(profesional=profesional) & Q(diaInicio__lte=dia) & Q(diaFin__gte=dia)).exists():
+            #Y si existe lo obtengo
+            return Evento.objects.get(Q(profesional=profesional) & Q(diaInicio__lte=dia) & Q(diaFin__gte=dia))
+        else:
+            return Evento(profesional=profesional, tipoEvento='NORMAL', diaInicio=date.today(), diaFin=date.today(), horaInicio=time(hour=profesional.preferenciaHorario, minute=00), duracion=profesional.horasXdia)
+    
+    def __get_horario__(self, evento_del_dia, dia):
+        horaFin = datetime(year=dia.year,month=dia.month,day=dia.day,hour=evento_del_dia.horaInicio.hour) + timedelta(hours=evento_del_dia.duracion)
+        if str(dia) in [str(feriado.fecha) for feriado in self.feriados] or dia.weekday() in [5,6]:
+            if evento_del_dia.tipoEvento in ['GUARDIA MAÑANA', 'GUARDIA TARDE']:
+                return str(evento_del_dia.horaInicio.hour)+'a'+str(horaFin.hour)
+            elif evento_del_dia.tipoEvento == 'GUARDIA NOCHE':
+                return '23a7'
+            else:
+                return '/'
+        else:
+            if evento_del_dia.tipoEvento in ['GUARDIA MAÑANA', 'GUARDIA TARDE','GUARDIA NOCHE', 'DISPONIBILIDAD']:
+                return str(evento_del_dia.horaInicio.hour)+'a'+str(horaFin.hour)
+            elif evento_del_dia.tipoEvento in ['FRANCO', 'VACACIONES']:
+                return evento_del_dia.tipoEvento[0]
+            else:
+                return str(evento_del_dia.profesional.preferenciaHorario)+'a'+str(evento_del_dia.profesional.horaFin)
+
+    
     def eventos(self,filtro):
         prof = {}
-        #profesionales = Profesionales.objects.exclude(equiposdetrabajos__isnull=True)
-        userAll = Profesionales.objects.all()
     
-        profesionales = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=filtro))
-        
-        
-        dias = self.__dias__()
-        
-          
+        profesionales = self.userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=filtro))
              
         for profesional in profesionales:
             prof[profesional.username]= {}
@@ -57,44 +86,11 @@ class Reportes:
             prof[profesional.username]["telefono"]= profesional.telefono
             prof[profesional.username]["movil"]=profesional.movil
                 
-            for key,dia in dias.items():
+            for key,dia in self.dias.items():
                 #dia es un datetime.date
                 
-                #Hay evento para este dia? verificamos si existe primero
-                #Y si existe lo obtengo
-                if Evento.objects.filter(Q(profesional=profesional) & Q(diaInicio__lte=dia) & Q(diaFin__gte=dia)).exists():
-                    evento_del_dia = Evento.objects.get(Q(profesional=profesional) & Q(diaInicio__lte=dia) & Q(diaFin__gte=dia))
-                else:
-                    evento_del_dia = Evento(profesional=profesional, tipoEvento='NORMAL', diaInicio=date.today(), diaFin=date.today(), horaInicio=time(hour=profesional.preferenciaHorario, minute=00), duracion=profesional.horasXdia)
-                
-                
-                horaFin = datetime(year=dia.year,month=dia.month,day=dia.day,hour=evento_del_dia.horaInicio.hour) + timedelta(hours=evento_del_dia.duracion)
-                
-                
-                #verificamos si el dia es feriado o fin de semana
-                if str(dia) in [str(feriado.fecha) for feriado in self.feriados] or dia.weekday() in [5,6] :
-                       
-                    if evento_del_dia.tipoEvento in ['GUARDIA MAÑANA', 'GUARDIA TARDE']:
-                        horario = str(evento_del_dia.horaInicio.hour)+'a'+str(horaFin.hour)
-                    elif evento_del_dia.tipoEvento in ['GUARDIA NOCHE']:
-                        horario = '23a7'
-                    else:
-                        horario = '/'
-                else:
-                    if evento_del_dia.tipoEvento in ['GUARDIA MAÑANA', 'GUARDIA TARDE']:
-                        horario = str(evento_del_dia.horaInicio.hour)+'a'+str(horaFin.hour)
-                    elif evento_del_dia.tipoEvento in ['GUARDIA NOCHE']:
-                        horario = '23a7'
-                    elif evento_del_dia.tipoEvento in ['DISPONIBILIDAD']:
-                        horario = str(evento_del_dia.horaInicio.hour)+'a'+str(horaFin.hour)
-                    elif evento_del_dia.tipoEvento in ['FRANCO']:
-                        horario = 'F'
-                    elif evento_del_dia.tipoEvento in ['VACACIONES']:
-                        horario = 'V'
-                    else:
-                        #por ultimo es el caso que no hay eventos, entonces el horario es su horario del perfil.
-                        horario = str(profesional.preferenciaHorario)+'a'+str(profesional.horaFin)
-                                   
+                evento_del_dia = self.__get_evento__(profesional,dia)
+                horario = self.__get_horario__(evento_del_dia, dia)
                 prof[profesional.username][str(dia)]=horario   
         
 
@@ -139,7 +135,43 @@ class Reportes:
             else:
                 prof = None
         return prof
-        
+
+    def dispTellabs(self):
+        eventosTellabs =  Evento.objects.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=4))
+        eventosTellabs = eventosTellabs.filter(Q(diaInicio__lte=self.fechaInicio) & Q(diaFin__gte=self.fechaFin))
+        if eventosTellabs.filter(tipoEvento='DISPONIBILIDAD').exists():
+            disp = eventosTellabs.filter(tipoEvento='DISPONIBILIDAD').last()        
+        else:
+            disp = None
+        return disp    
+    
+    def __getEventFilter__(self, tipoEvento:str, deltaTime:int, supervision:bool=None, cnts_a_buscar=[]):
+        diaInicioNocturno =  datetime.strptime(self.fechaInicio, "%Y-%m-%d" ).date() - timedelta(days=deltaTime)
+        diaFinNocturno = datetime.strptime(self.fechaFin, "%Y-%m-%d" ).date() - timedelta(days=deltaTime)
+        prof={}
+        if Evento.objects.filter(diaInicio__range=(diaInicioNocturno, diaFinNocturno), profesional__equiposdetrabajos__cnt__in=cnts_a_buscar).exists():
+            eventos = Evento.objects.filter(diaInicio__range=(diaInicioNocturno, diaFinNocturno), profesional__equiposdetrabajos__cnt__in=cnts_a_buscar)
+            if eventos.filter(tipoEvento=tipoEvento).exists():
+                if supervision is None:
+                    disponibilidades = eventos.filter(tipoEvento=tipoEvento)
+                else:
+                    disponibilidades = eventos.filter(tipoEvento=tipoEvento, profesional__is_supervisor=supervision)
+
+            
+                
+                for d in disponibilidades:
+                    prof[d.profesional.username]= {}
+                    prof[d.profesional.username]["Nombre"]=d.profesional.first_name + ' ' + d.profesional.last_name
+                    prof[d.profesional.username]["Telefono"]= d.profesional.telefono
+                    prof[d.profesional.username]["Movil"]=d.profesional.movil
+                    prof[d.profesional.username]["Desde"]=d.diaInicio.strftime('%d/%m')
+                    prof[d.profesional.username]["Hasta"]=d.diaFin.strftime('%d/%m')
+            else:
+                prof = None
+        return prof
+    
+    
+       
 class Test:
     def __init__(self):
         self.fechaInicio = None
