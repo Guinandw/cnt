@@ -14,6 +14,9 @@ class Evento(models.Model):
         ('DISPONIBILIDAD', 'DISPONIBILIDAD'),
         ('FRANCO', 'FRANCO'),
         ('VACACIONES', 'VACACIONES'),
+        ('RADIO: RADIO', 'RADIO: RADIO'),
+        ('RADIO: GESTORES', 'RADIO: GESTORES'),
+        ('RADIO: ESCALAMIENTO', 'RADIO: ESCALAMIENTO')
     ]
     
     HORASXDIA = [

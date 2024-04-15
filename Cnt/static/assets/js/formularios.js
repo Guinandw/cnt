@@ -29,6 +29,15 @@
             }else if (tipoEvento === "FRANCO") {
                 horaInicioInput.value = "00:00";
                 duracionSelect.value = "24";
+            }else if (tipoEvento === "RADIO: RADIO") {
+                horaInicioInput.value = "00:00";
+                duracionSelect.value = "24";
+            }else if (tipoEvento === "RADIO: GESTORES") {
+                horaInicioInput.value = "00:00";
+                duracionSelect.value = "24";
+            }else if (tipoEvento === "RADIO: ESCALAMIENTO") {
+                horaInicioInput.value = "00:00";
+                duracionSelect.value = "24";
             }// Agregar más casos según sea necesario
         }
 
