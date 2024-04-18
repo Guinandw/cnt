@@ -57,7 +57,8 @@ def reportes(request, fechaInicio, fechaFin, bandera:int=None):
                 'radioRadio': radioRadio,'radioGestores':radioGestores,'radioEscalamiento':radioEscalamiento, 'sincronismo': sinReporte, 'soporte': sopReporte, 'noche':noche, "dispTellabs": dispTellabs ,'fechaInicio':fechaInicio, 'fechaFin':fechaFin }
     
     if bandera:
-        seleccionar_ruta_destino(contexto=contexto)
+        
+        seleccionar_ruta_destino(contexto=contexto, titulo=titulo)
     
     #HTML(string=html_template, base_url=request.build_absolute_uri()).write_pdf(stylesheets=[CSS(bootstrap),CSS(css_url)],encoding='utf-8')
     #return HttpResponse(pdf, content_type='application/pdf')
@@ -75,13 +76,14 @@ def generar_pdf(contexto, ruta_destino):
     HTML(string=html_template).write_pdf(target=ruta_destino, presentational_hints=True, 
                                          stylesheets=[CSS(string='@page { size: %s %s; }' % (paper_width, paper_height))])
 
-def seleccionar_ruta_destino(contexto):
+def seleccionar_ruta_destino(contexto, titulo):
     # Crear una ventana tkinter
     root = tk.Tk()
     root.title("Guardar PDF")
     
+    root.attributes('-topmost', True)
     # Obtener la ruta de destino del archivo PDF
-    ruta_destino = filedialog.asksaveasfilename(defaultextension=".pdf", filetypes=[("Archivos PDF", "*.pdf")])
+    ruta_destino = filedialog.asksaveasfilename(defaultextension=".pdf", filetypes=[("Archivos PDF", "*.pdf")], initialfile=titulo)
     
     # Cerrar la ventana tkinter
     root.destroy()

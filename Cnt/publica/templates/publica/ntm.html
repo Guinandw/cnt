@@ -1,0 +1,22 @@
+
+
+<table class="table text-wrap text-md-nowrap table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Móvil</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for a in var  %}
+            <tr>
+                <td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+                <td>{{a.profesional.telefono}}</td>
+                <td>{{a.profesional.movil}}</td>
+            </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>

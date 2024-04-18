@@ -19,9 +19,7 @@
 							<div class="row row-sm">
 								<div class="col-lg-12">
 									<div class="card custom-card">
-										{% comment %} <div class="card-header border-bottom">
-											<h3 class="card-title">Bordered Table</h3>
-										</div> {% endcomment %}
+									
 										
 										<div class="card-body">
 											{% comment %} comienzo de tablas {% endcomment %}
@@ -31,32 +29,7 @@
 												<h3 class="card-title">0800-333-6737 Opc 1	</h3>
 											 </div>
 												<div class="table-responsive">
-													<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
-														<thead>
-															<tr>
-																
-															<th>Nombre</th>
-															<th>Telefono</th>
-															<th>Movil</th>
-															<th>Desde</th>
-															<th>Hasta</th>
-																
-															</tr>
-														</thead>
-														<tbody>
-															{% for key,value in noche.items  %}
-															<tr>
-																{% for key,v in value.items%}
-																<td>{{v}}</td>
-																{% endfor %}
-																
-															</tr>
-															{% endfor %}
-															
-															
-															
-														</tbody>
-													</table>
+													{% include 'reportes/ntmda.html' with var=noche %}
 												</div>
 												<br>
 											{% comment %} separador de tablas {% endcomment %}
@@ -64,32 +37,7 @@
 											<h3 class="card-title" >Supervision</h3>
 										 </div>
 											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
-													<thead>
-														<tr>
-															
-														<th>Nombre</th>
-														<th>Telefono</th>
-														<th>Movil</th>
-														<th>Desde</th>
-														<th>Hasta</th>
-															
-														</tr>
-													</thead>
-													<tbody>
-														{% for key,value in supervision.items  %}
-														<tr>
-															{% for key,v in value.items%}
-															<td>{{v}}</td>
-															{% endfor %}
-															
-														</tr>
-														{% endfor %}
-														
-														
-														
-													</tbody>
-												</table>
+												{% include 'reportes/ntmda.html' with var=supervision %}
 											</div>
 											<br>
 											{% comment %} separador de tabla {% endcomment %}
@@ -99,31 +47,7 @@
 												<h3 class='card-title'>Supervisor: Leonardo Moya</h3>
 											 </div>
 											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered table-striped">
-													<thead>
-														<tr>
-															<th>Nombre</th>
-															<th>Telefono</th>
-															<th>Movil</th>
-															{% for key, value in dias.items %}
-															<th>{{key}}</th>
-															{% endfor %}
-														</tr>
-													</thead>
-													<tbody>
-														{% for key,value in acceso.items  %}
-														<tr>
-															{% for key,v in value.items%}
-															<td>{{v}}</td>
-															{% endfor %}
-															
-														</tr>
-														{% endfor %}
-														
-														
-														
-													</tbody>
-												</table>
+												{% include 'reportes/ntmd.html' with dias=dias var=acceso %}
 											</div>
 											
 											{% comment %} separador de tablas {% endcomment %}
@@ -133,31 +57,7 @@
 												<h3 class='card-title'>Supervisor: Gustavo Parrado</h3>
 											 </div>
 											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
-													<thead>
-														<tr>
-															<th>Nombre</th>
-															<th>Telefono</th>
-															<th>Movil</th>
-															{% for key, value in dias.items %}
-															<th>{{key}}</th>
-															{% endfor %}
-														</tr>
-													</thead>
-													<tbody>
-														{% for key,value in urbano.items  %}
-														<tr>
-															{% for key,v in value.items%}
-															<td>{{v}}</td>
-															{% endfor %}
-															
-														</tr>
-														{% endfor %}
-														
-														
-														
-													</tbody>
-												</table>
+												{% include 'reportes/ntmd.html' with dias=dias var=urbano %}
 											</div>
 
 											{% comment %} separador de tablas {% endcomment %}
@@ -168,31 +68,7 @@
 												<h3 class='card-title'>Supervisor: Cynthia Veron</h3>
 											 </div>
 											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
-													<thead>
-														<tr>
-															<th>Nombre</th>
-															<th>Telefono</th>
-															<th>Movil</th>
-															{% for key, value in dias.items %}
-															<th>{{key}}</th>
-															{% endfor %}
-														</tr>
-													</thead>
-													<tbody>
-														{% for key,value in interurbano.items  %}
-														<tr>
-															{% for key,v in value.items%}
-															<td>{{v}}</td>
-															{% endfor %}
-															
-														</tr>
-														{% endfor %}
-														
-														
-														
-													</tbody>
-												</table>
+												{% include 'reportes/ntmd.html' with dias=dias var=interurbano %}
 											</div>
 
 											{% comment %} separador de tablas {% endcomment %}
@@ -203,31 +79,7 @@
 												<h4 class='card-title'>Supervision: Leonardo Moya</h4>
 											</div>
 											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered table-striped ">
-													<thead>
-														<tr>
-															<th>Nombre</th>
-															<th>Telefono</th>
-															<th>Movil</th>
-															{% for key, value in dias.items %}
-															<th>{{key}}</th>
-															{% endfor %}
-														</tr>
-													</thead>
-													<tbody>
-														{% for key,value in tellabs.items  %}
-														<tr>
-															{% for key,v in value.items%}
-															<td>{{v}}</td>
-															{% endfor %}
-															
-														</tr>
-														{% endfor %}
-														
-														
-														
-													</tbody>
-												</table>
+												{% include 'reportes/ntmd.html' with dias=dias var=tellabs %}
 											</div>
 											{% comment %} separador de tablas {% endcomment %}
 											<div class="card-header border-bottom bg-info justify-content-between">
@@ -249,9 +101,9 @@
 													<tbody>
 														{% for key,value in radioRadio.items  %}
 														<tr>
-															<td>Radio</td>
+															<td class="text-default">Radio</td>
 															{% for key,v in value.items%}
-															<td>{{v}}</td>
+															<td class="text-default">{{v}}</td>
 															{% endfor %}
 															
 														</tr>
@@ -259,9 +111,9 @@
 
 														{% for key,value in radioGestores.items  %}
 														<tr>
-															<td>Gestores</td>
+															<td class="text-default">Gestores</td>
 															{% for key,v in value.items%}
-															<td>{{v}}</td>
+															<td class="text-default">{{v}}</td>
 															{% endfor %}
 															
 														</tr>
@@ -269,9 +121,9 @@
 														
 														{% for key,value in radioEscalamiento.items  %}
 														<tr>
-															<td>Escalamiento</td>
+															<td class="text-default">Escalamiento</td>
 															{% for key,v in value.items%}
-															<td>{{v}}</td>
+															<td class="text-default">{{v}}</td>
 															{% endfor %}
 															
 														</tr>
@@ -290,38 +142,7 @@
 												<div class="card-body p-horizontal1rem">
 													<p class='card-title'>LUNES A VIERNES: 18HS A 8 HS Y FIN DE SEMANA/FERIADOS: 24 HORAS: 11-4333-7444</p>
 												</div>
-											{% comment %} separador de tablas {% endcomment %}
-											{% comment %} <div class="card-header border-bottom bg-info">
-												<h3 class="card-title">SOPORTE</h3>
-											 </div>
-											<div class="table-responsive">
-												<table class="table text-nowrap text-md-nowrap table-bordered table-striped">
-													<thead>
-														<tr>
-															<th>Nombre</th>
-															<th>Telefono</th>
-															<th>Movil</th>
-															{% for key, value in dias.items %}
-															<th>{{key}}</th>
-															{% endfor %}
-														</tr>
-													</thead>
-													<tbody>
-														{% for key,value in soporte.items  %}
-														<tr>
-															{% for key,v in value.items%}
-															<td>{{v}}</td>
-															{% endfor %}
-															
-														</tr>
-														{% endfor %}
-														
-														
-														
-													</tbody>
-												</table>
-											</div> {% endcomment %}
-											{% comment %} separador de tablas {% endcomment %}
+											
 										</div>
 									</div>
 								</div>
