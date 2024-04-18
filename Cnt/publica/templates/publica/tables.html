@@ -19,450 +19,212 @@
 								<div class="col-lg-12 col-md-12">
 									<div class="card">
 										<div class="card-header border-bottom justify-content-between">
-											<h3 class="card-title">CNTssss</h3>
+											<h3 class="card-title">CNT</h3>
 											{% if request.user.is_supervisor %}
-												<a href="{% url "inicio"  %}" class='btn btn-info'>Volver</a>
+												<a href="{% url "reportes-form"  %}" class='btn btn-danger'>Generar PDF</a>
 											{% endif %}
 										</div>
 
+										{% comment %} <div class="card-body"> {% endcomment %}
+											{% comment %} <p class=" ">The default collapse behavior to create an accordion.</p> {% endcomment %}
+											
+											
+												
+													
+														
+														
+															
+															<div class="example">
+																<div class="d-sm-flex">
+																	<div class="panel panel-primary tabs-style-4">
+																		<div class="tab-menu-heading border br-5 me-3 my-2">
+																			<div class="tabs-menu">
+																				<!-- Tabs -->
+																				<ul class="nav panel-tabs flex-column">
+																					<li><a href="#sup" class="active text-default vertical-tabs mb-2" data-bs-toggle="tab">Supervisión</a></li>
+																					<li><a href="#noche" class="text-default vertical-tabs mb-2" data-bs-toggle="tab"> Guardia Noche</a></li>
+																					<li><a href="#tabAcceso" class="text-default vertical-tabs mb-2" data-bs-toggle="tab"> Acceso</a></li>
+																					<li><a href="#tabUrbano" class="text-default vertical-tabs mb-2" data-bs-toggle="tab"> Urbano</a></li>
+																					<li><a href="#tabInterubano" class="text-default vertical-tabs mb-2" data-bs-toggle="tab"> Interurbano</a></li>
+																					<li><a href="#tabTellabs" class="text-default vertical-tabs mb-2" data-bs-toggle="tab"> Tellabs</a></li>
+																					<li><a href="#tabRadio" class="text-default vertical-tabs mb-2" data-bs-toggle="tab"> Radio</a></li>
+																					<li><a href="#tabSincro" class="text-default vertical-tabs mb-2" data-bs-toggle="tab"> Op. Sincronismo</a></li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="tabs-style-4 flex-2 border br-5">
+																		<div class="panel-body tabs-menu-body border-0">
+																			<div class="tab-content">
+																				
+																				<div class="tab-pane active" id="sup">
+																					{% include 'publica/ntda.html' with var=disp subtitulo="" %}
+																					
+																				</div>
+																				<div class="tab-pane" id="noche">
+																					<div class="table-responsive">
+																						{% include 'publica/ntda.html' with var=noche subtitulo="Entre las 23:00 y las 07:00" %}
+																					
+																					</div>
+																					
+																				</div>
+																				<div class="tab-pane" id="tabAcceso">
+
+																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																						<div class="p-sm-4 p-2 ">
+																							<p class=""><span class="text-bold">Supervisor:</span> Leonardo Moya</p>
+																						</div>
+																						<div class="p-sm-4 p-2 ">
+																							<p class="">0800-333-6737 Opc 1 Opc 3</p>
+																						</div>
+																						
+																					</div>		
+
+																					<div class="table-responsive">
+																						
+																						{% include 'publica/ntm.html' with var=acceso %}
+																					</div>
+
+																				</div>
+
+																				<div class="tab-pane" id="tabUrbano">
+																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																						<div class="p-sm-4 p-2 ">
+																							<p class=""><span class="text-bold">Supervisor:</span> Gustavo Parrado</p>
+																						</div>
+																						<div class="p-sm-4 p-2 ">
+																							<p class="">0800-333-6737 Opc 1 Opc 2</p>
+																						</div>
+																						
+																					</div>		
+				
+																					<div class="table-responsive">
+																						
+																						{% include 'publica/ntm.html' with var=urbano %}
+
+																					</div>	
+																				</div>
+
+																				<div class="tab-pane" id="tabInterubano">
+																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																						<div class="p-sm-4 p-2 ">
+																							<p class=""><span class="text-bold">Supervisor:</span> Cynthia Veron</p>
+																						</div>
+																						<div class="p-sm-4 p-2 ">
+																							<p class="">0800-333-6737 Opc 1 Opc 1</p>
+																						</div>
+																						
+																					</div>																	
+																					
+																					<div class="table-responsive">
+																						{% include 'publica/ntm.html' with var=interu %}
+																						</table>
+																					</div>
+																				</div>
+																				
+																				<div class="tab-pane" id="tabTellabs">
+																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																						<div class="p-sm-4 p-2 ">
+																							<p class=""><span class="text-bold">Supervisor:</span> Leonardo Moya</p>
+																						</div>
+																						<div class="p-sm-4 p-2 ">
+																							<p class="">0800-333-6737 Opc 1 Opc 4</p>
+																						</div>
+																						<div class="p-sm-4 p-2 ">
+																							<p class=""><spann class="text-bold">Disponibilidad: </spann>{{eTellabs.profesional.first_name}} {{eTellabs.profesional.last_name}} {{eTellabs.profesional.movil}}</p>
+																						</div>
+																						
+																					</div>																	
+																					
+																					<div class="table-responsive">
+																						{% include 'publica/ntm.html' with var=tellabs %}
+																					</div>
+																				</div>
+																				<div class="tab-pane" id="tabRadio">
+																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																						<div class="p-sm-4 p-2 ">
+																							<p class="text-bold">Lunes a Viernes de 8 a 18 hs deben llamar al 0800- 3336737 Opción 7. Fuera de ese horario, llamar a : </p>
+																						</div>
+																					</div>																	
+																					
+																					<div class="table-responsive">
+																						<table class="table text-wrap text-md-nowrap table-bordered">
+																							<thead>
+																								<tr>
+																									<th >Descripción</th>
+																									<th>Nombre</th>
+																									<th>Teléfono</th>
+																									<th>Móvil</th>
+																									<th>Desde</th>
+																									<th>Hasta</th>
+																								</tr>
+																							</thead>
+																							<tbody>
+																								{% for a in radioRadio  %}
+																								
+																								<tr>
+																									<td class="text-bold">Radios</td>
+																									{% include 'publica/ntmif.html' %}																						
+																									
+
+																								</tr>
+																								
+																								
+																								{% endfor %}
+
+																								{% for a in radioGestores  %}
+
+																								<tr>
+																									<td class="text-bold">Gestores</td>
+																									{% include 'publica/ntmif.html' %}
+																								</tr>
+																								
+																								{% endfor %}
+
+																								{% for a in radioEscalamiento  %}
+
+																								<tr>
+																									<td class="text-bold">Escalamiento</td>
+																									{% include 'publica/ntmif.html' %}
+																								</tr>
+																								
+																								{% endfor %}
+
+																							</tbody>
+																						</table>
+																					</div>	
+																				</div>
+																				<div class="tab-pane" id="tabSincro">
+																					<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
+																						<div class="p-sm-4 p-2 ">
+																							<p class=""><span class="text-bold">Supervisor:</span> Luis Capelleti</p>
+																						</div>
+																						<div class="p-sm-4 p-2 ">
+																							<p class="">11-4333-7444</p>
+																						</div>
+																						
+																					</div>																	
+																					
+																					<div class="table-responsive">
+																						{% include 'publica/ntm.html' with var=sincro %}
+																					</div>	
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+										{% comment %} </div> {% endcomment %}
+														
+													
+											
 										
-
-										<div class="card-body">
-											{% comment %} <p class="text-muted ">The default collapse behavior to create an accordion.</p> {% endcomment %}
-											
-											
-											<div aria-multiselectable="true" class="accordion" id="accordion" role="tablist">
-
-												<div class="card mb-0 border-0">
-													<div class="card-header border-bottom-0" id="supervisor" role="tab">
-														<a aria-controls="collapseOne" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseOne">Supervisor Guardia</a>
-													</div>
-													<div aria-labelledby="supervisor" class="collapse" data-bs-parent="#accordion" id="collapseOne" role="tabpanel">
-														<div class="card-body br-bottom-radius-5">
-															Gustavo Parrado: 11-2222-2222
-														</div>
-													</div><!-- collapse -->
-												</div>
-
-
-											<div class="card mb-0 mt-2 border-0">
-													<div class="card-header border-bottom-0" id="cnt-acceso" role="tab">
-														<a aria-controls="collapseFour" aria-expanded="false" data-bs-toggle="collapse" href="#collapseFour" class="accordion collapsed accor-basic">Acceso</a>
-													</div>
-													<div aria-labelledby="cnt-acceso" class="collapse" data-bs-parent="#accordion" id="collapseFour" role="tabpanel">
-														<div class="card-body br-bottom-radius-5">
-															<div class="card custom-card">
-																<div class="card-header border-bottom">
-																</div>
-																<div class="card-body">
-
-																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">Supervisor: Leonardo Moya</p>
-																		</div>
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">0800-333-6737 Opc 1 Opc 3</p>
-																		</div>
-																		
-																	</div>																	
-																	
-																	<div class="table-responsive">
-																		<table class="table text-wrap text-md-nowrap table-bordered">
-																			<thead>
-																				<tr>
-																					<th>Nombre</th>
-																					<th>Horario</th>
-																					<th>Telefonos</th>
-																					<th>Movil</th>
-																					<th>Notas</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				
-																				{% for a in acceso  %}
-																				
-																				<tr>
-																					<td>{{a.usuarios.first_name}} {{a.usuarios.last_name}}</td>
-																					<td>{{a.usuarios.preferenciaHorario}} a {{a.usuarios.horaFin}}</td>
-																					<td>{{a.usuarios.telefono}}</td>
-																					<td>{{a.usuarios.movil}}</td>
-																				</tr>
-																				
-																				
-																				{% endfor %}
-																				
-																			</tbody>
-																		</table>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-											</div>
-
-											<div class="card mb-0 mt-2 border-0">
-													<div class="card-header border-bottom-0" id="headingTwo" role="tab">
-														<a aria-controls="collapseTwo" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseTwo">Urbano</a>
-													</div>
-													<div aria-labelledby="headingTwo" class="collapse" data-bs-parent="#accordion" id="collapseTwo" role="tabpanel">
-														<div class="card-body br-bottom-radius-5">
-															<div class="card custom-card">
-																<div class="card-header border-bottom">
-																</div>
-																<div class="card-body">
-																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">Supervisor: Gustavo Parrado</p>
-																		</div>
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">0800-333-6737 Opc 1 Opc 2</p>
-																		</div>
-																		
-																	</div>		
-
-																	<div class="table-responsive">
-																		<table class="table text-nowrap text-md-nowrap table-bordered">
-																			<thead>
-																				<tr>
-																					<th>Nombre</th>
-																					<th>Horario</th>
-																					<th>Telefonos</th>
-																					<th>Notas</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				<tr>
-																					<td>Willian Guinand</td>
-																					<td>8 a 15</td>
-																					<td>4333-6227</td>
-																					<td>Disponibilidad</td>
-																				</tr>
-																				<tr>
-																					<td>2</td>
-																					<td>Mark Ronson</td>
-																					<td>Sales Manager</td>
-																					<td>$45,500</td>
-																				</tr>
-																				<tr>
-																					<td>3</td>
-																					<td>Katy Perry</td>
-																					<td>Data Analyst</td>
-																					<td>$425,500</td>
-																				</tr>
-																				<tr>
-																					<td>4</td>
-																					<td>Pam Podrick</td>
-																					<td>Python Developer</td>
-																					<td>$415,900</td>
-																				</tr>
-																				<tr>
-																					<td>5</td>
-																					<td>Sandy Orell</td>
-																					<td>Backed Developer</td>
-																					<td>$95,900</td>
-																				</tr>
-																			</tbody>
-																		</table>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-											</div>
-
-											<div class="card mb-0 mt-2 border-0">
-													<div class="card-header border-bottom-0" id="headingThree" role="tab">
-														<a aria-controls="collapseThree" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseThree">InterUrbano</a>
-													</div>
-													<div aria-labelledby="headingThree" class="collapse" data-bs-parent="#accordion" id="collapseThree" role="tabpanel">
-														<div class="card-body br-bottom-radius-5">
-															
-															<div class="card custom-card">
-																<div class="card-header border-bottom">
-																</div>
-																<div class="card-body">
-
-																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">Supervisor: Cynthia Veron</p>
-																		</div>
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">0800-333-6737 Opc 1 Opc 1</p>
-																		</div>
-																		
-																	</div>																	
-																	
-																	<div class="table-responsive">
-																		<table class="table text-wrap text-md-nowrap table-bordered">
-																			<thead>
-																				<tr>
-																					<th>Nombre</th>
-																					<th>Horario</th>
-																					<th>Telefonos</th>
-																					<th>Notas</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				<tr>
-																					<td>Willian Guinand</td>
-																					<td>8 a 15</td>
-																					<td>4333-6227</td>
-																					<td>Disponibilidad</td>
-																				</tr>
-																				<tr>
-																					<td>Roberto Farinaz</td>
-																					<td>23 a 7</td>
-																					<td>4333-6258</td>
-																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
-																				</tr>
-																				<tr>
-																					<td>3</td>
-																					<td>Katy Perry</td>
-																					<td>Data Analyst</td>
-																					<td>$425,500</td>
-																				</tr>
-																				<tr>
-																					<td>4</td>
-																					<td>Pam Podrick</td>
-																					<td>Python Developer</td>
-																					<td>$415,900</td>
-																				</tr>
-																				<tr>
-																					<td>5</td>
-																					<td>Sandy Orell</td>
-																					<td>Backed Developer</td>
-																					<td>$95,900</td>
-																				</tr>
-																			</tbody>
-																		</table>
-																	</div>
-																</div>
-															</div>
-
-														</div>
-													</div><!-- collapse -->
-											</div>
-
-											<div class="card mb-0 mt-2 border-0">
-													<div class="card-header border-bottom-0" id="headingThree" role="tab">
-														<a aria-controls="collapseFive" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseFive">Tellabs</a>
-													</div>
-													<div aria-labelledby="headingThree" class="collapse" data-bs-parent="#accordion" id="collapseFive" role="tabpanel">
-														<div class="card-body br-bottom-radius-5">
-															<div class="card custom-card">
-																<div class="card-header border-bottom">
-																</div>
-																<div class="card-body">
-
-																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">Supervisor: Leonardo Moya</p>
-																		</div>
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">0800-333-6737 Opc 1 Opc 4 o 4333-6350</p>
-																		</div>
-																		
-																	</div>																	
-																	
-																	<div class="table-responsive">
-																		<table class="table text-wrap text-md-nowrap table-bordered">
-																			<thead>
-																				<tr>
-																					<th>Nombre</th>
-																					<th>Horario</th>
-																					<th>Telefonos</th>
-																					<th>Notas</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				<tr>
-																					<td>Willian Guinand</td>
-																					<td>8 a 15</td>
-																					<td>4333-6227</td>
-																					<td>Disponibilidad</td>
-																				</tr>
-																				<tr>
-																					<td>Roberto Farinaz</td>
-																					<td>23 a 7</td>
-																					<td>4333-6258</td>
-																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
-																				</tr>
-																				<tr>
-																					<td>3</td>
-																					<td>Katy Perry</td>
-																					<td>Data Analyst</td>
-																					<td>$425,500</td>
-																				</tr>
-																				<tr>
-																					<td>4</td>
-																					<td>Pam Podrick</td>
-																					<td>Python Developer</td>
-																					<td>$415,900</td>
-																				</tr>
-																				<tr>
-																					<td>5</td>
-																					<td>Sandy Orell</td>
-																					<td>Backed Developer</td>
-																					<td>$95,900</td>
-																				</tr>
-																			</tbody>
-																		</table>
-																	</div>
-																</div>
-															</div>
-															
-														</div>
-													</div><!-- collapse -->
-											</div>
-
-											<div class="card mb-0 mt-2 border-0">
-													<div class="card-header border-bottom-0" id="headingThree" role="tab">
-														<a aria-controls="collapseSix" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseSix">Radio</a>
-													</div>
-													<div aria-labelledby="headingThree" class="collapse" data-bs-parent="#accordion" id="collapseSix" role="tabpanel">
-														<div class="card-body br-bottom-radius-5">
-															<div class="card custom-card">
-																<div class="card-header border-bottom">
-																</div>
-																<div class="card-body">
-
-																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">Escalamiento: Ricardo Puertas (1156526768)</p>
-																		</div>
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">0800-333-6737 Opc 7</p>
-																		</div>
-																		
-																	</div>																	
-																	
-																	<div class="table-responsive">
-																		<table class="table text-wrap text-md-nowrap table-bordered">
-																			<thead>
-																				<tr>
-																					<th>Nombre</th>
-																					<th>Horario</th>
-																					<th>Telefonos</th>
-																					<th>Notas</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				<tr>
-																					<td>Willian Guinand</td>
-																					<td>8 a 15</td>
-																					<td>4333-6227</td>
-																					<td>Disponibilidad</td>
-																				</tr>
-																				<tr>
-																					<td>Roberto Farinaz</td>
-																					<td>23 a 7</td>
-																					<td>4333-6258</td>
-																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
-																				</tr>
-																				<tr>
-																					<td>3</td>
-																					<td>Katy Perry</td>
-																					<td>Data Analyst</td>
-																					<td>$425,500</td>
-																				</tr>
-																				<tr>
-																					<td>4</td>
-																					<td>Pam Podrick</td>
-																					<td>Python Developer</td>
-																					<td>$415,900</td>
-																				</tr>
-																				<tr>
-																					<td>5</td>
-																					<td>Sandy Orell</td>
-																					<td>Backed Developer</td>
-																					<td>$95,900</td>
-																				</tr>
-																			</tbody>
-																		</table>
-																	</div>
-																</div>
-															</div>
-															
-														</div>
-													</div><!-- collapse -->
-											</div>
-
-											<div class="card mt-2 border-5">
-													<div class="card-header border-bottom-0" id="headingThree" role="tab">
-														<a aria-controls="collapseSeven" aria-expanded="false" class="accordion collapsed accor-basic" data-bs-toggle="collapse" href="#collapseSeven">Operaciones Sincronismo</a>
-													</div>
-													<div aria-labelledby="headingThree" class="collapse" data-bs-parent="#accordion" id="collapseSeven" role="tabpanel">
-														<div class="card-body br-bottom-radius-5">
-															<div class="card custom-card">
-																<div class="card-header border-bottom">
-																</div>
-																<div class="card-body">
-
-																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">Escalamiento: Luis Cappelletti (1144925683)</p>
-																		</div>
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted"></p>
-																		</div>
-																		
-																	</div>																	
-																	
-																	<div class="table-responsive">
-																		<table class="table text-wrap text-md-nowrap table-bordered">
-																			<thead>
-																				<tr>
-																					<th>Nombre</th>
-																					<th>Horario</th>
-																					<th>Telefonos</th>
-																					<th>Notas</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				<tr>
-																					<td>Willian Guinand</td>
-																					<td>8 a 15</td>
-																					<td>4333-6227</td>
-																					<td>Disponibilidad</td>
-																				</tr>
-																				<tr>
-																					<td>Roberto Farinaz</td>
-																					<td>23 a 7</td>
-																					<td>4333-6258</td>
-																					<td>Guardia Nocturna: comienza el Domingo 30 de Julio al Sabado 6 de Agosto.</td>
-																				</tr>
-																				<tr>
-																					<td>3</td>
-																					<td>Katy Perry</td>
-																					<td>Data Analyst</td>
-																					<td>$425,500</td>
-																				</tr>
-																				<tr>
-																					<td>4</td>
-																					<td>Pam Podrick</td>
-																					<td>Python Developer</td>
-																					<td>$415,900</td>
-																				</tr>
-																				<tr>
-																					<td>5</td>
-																					<td>Sandy Orell</td>
-																					<td>Backed Developer</td>
-																					<td>$95,900</td>
-																				</tr>
-																			</tbody>
-																		</table>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div><!-- collapse -->
-											</div>
+											<!-- ROW-3 CLOSED -->
+				
 												
-												
-											{% comment %} </div><!-- accordion --> {% endcomment %}
-										</div>
+											{% comment %} estos 3 /div quedan abajo {% endcomment %}
 									</div>
 								</div>
+								
 							</div>
 
 

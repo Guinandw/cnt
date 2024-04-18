@@ -1,0 +1,25 @@
+<table class="table text-nowrap text-md-nowrap table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Movil</th>
+            {% for key, value in dias.items %}
+            <th>{{key}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for key,value in var.items  %}
+        <tr>
+            {% for key,v in value.items%}
+            <td class="text-default">{{v}}</td>
+            {% endfor %}
+            
+        </tr>
+        {% endfor %}
+        
+        
+        
+    </tbody>
+</table>

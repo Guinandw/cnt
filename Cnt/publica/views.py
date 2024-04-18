@@ -40,7 +40,7 @@ def inicio(request):
     radioRadio = eventosRadio.filter(tipoEvento='RADIO: RADIO', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date())
     radioGestores = eventosRadio.filter(tipoEvento='RADIO: GESTORES', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date())
     radioEscalamieneto =  eventosRadio.filter(tipoEvento='RADIO: ESCALAMIENTO', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date())
-    tellabsEscalamiento =  eventosTellabs.filter(tipoEvento='DISPONIBILIDAD', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date()).last()
+    tellabsEscalamiento =  eventosTellabs.filter(tipoEvento='DISPONIBILIDAD', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date(), profesional__is_supervisor=False).last()
     
     
     gn = []
@@ -92,4 +92,4 @@ def inicio(request):
             i.save_horaSalida()
     for u in usuarioTellabs:
         u.save_horaSalida()"""
-    return render(request, 'publica/inicio-copy.html', context=contexto)
+    return render(request, 'publica/inicio.html', context=contexto)

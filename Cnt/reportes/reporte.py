@@ -45,7 +45,7 @@ class Reportes:
         inicio = datetime.strptime(self.fechaInicio, "%Y-%m-%d" ).date()
         fin = datetime.strptime(self.fechaFin, "%Y-%m-%d").date()
         
-        return 'Reporte del '+ inicio.strftime("%d/%m") + ' al ' + fin.strftime("%d/%m")
+        return 'Reporte del '+ inicio.strftime("%d-%m") + ' al ' + fin.strftime("%d-%m")
         
     
     def __get_evento__(self, profesional, dia):
@@ -140,7 +140,7 @@ class Reportes:
         eventosTellabs =  Evento.objects.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=4))
         eventosTellabs = eventosTellabs.filter(Q(diaInicio__lte=self.fechaInicio) & Q(diaFin__gte=self.fechaFin))
         if eventosTellabs.filter(tipoEvento='DISPONIBILIDAD').exists():
-            disp = eventosTellabs.filter(tipoEvento='DISPONIBILIDAD').last()        
+            disp = eventosTellabs.filter(tipoEvento='DISPONIBILIDAD', profesional__is_supervisor=False).last()        
         else:
             disp = None
         return disp    

@@ -1,0 +1,24 @@
+<div class="table-responsive">
+    <table class="table text-wrap text-md-nowrap table-bordered">
+        <p>{{subtitulo}}</p>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Telefono</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in var %}
+            <tr>
+                <td>{{d.profesional.first_name}} {{d.profesional.last_name}}</td>
+                <td>{{d.profesional.movil}}</td>
+                <td>{{d.diaInicio}}</td>
+                <td>{{d.diaFin}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
