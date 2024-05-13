@@ -1657,6 +1657,20 @@ pre {
     color: #d12c47;
 }
 
+.alert-error {
+    color: #d12c47;
+    background-color: rgba(231, 84, 111, 0.15);
+    border-color: rgba(231, 84, 111, 0.15);
+}
+
+.alert-error hr {
+    border-top-color: #d12c47;
+}
+
+.alert-error .alert-link {
+    color: #d12c47;
+}
+
 .alert-dark {
     color: #323251;
     background-color: rgba(68, 69, 70, 0.15);

@@ -119,6 +119,17 @@
 		color: $danger;
 	}
 }
+.alert-error {
+	color: $error;
+	background-color: rgba($error, 0.15);
+	border-color: rgba($error, 0.15);
+	hr {
+		border-top-color: $error;
+	}
+	.alert-link {
+		color: $error;
+	}
+}
 .alert-dark {
 	color: $gray-900;
 	background-color: rgba($gray-dark, 0.15);

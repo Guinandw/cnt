@@ -947,6 +947,12 @@ pre {
   border-color: #cbe7fb;
 }
 
+.alert-error {
+  color: #d12c48;
+  background-color: #d12c4867;
+  border-color: #cbe7fb;
+}
+
 .alert-info hr {
   border-top-color: #b3dcf9;
 }
