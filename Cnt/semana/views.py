@@ -2,12 +2,15 @@ from django.shortcuts import render,redirect, resolve_url
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.exceptions import EmptyResultSet
+from django.db.models import Q
+
 import datetime
 from .forms import EventoForm, FeriadosForm
 from cuentas.models import Usuarios, equiposDeTrabajos
 from .models import Evento, Feriados
 
-from django.core.exceptions import EmptyResultSet
+
 
 
 
@@ -73,8 +76,13 @@ def eventoId(request, userId):
             e.diaFin = form.cleaned_data['diaFin']
             e.horaInicio = form.cleaned_data['horaInicio']
             e.duracion = form.cleaned_data['duracion']
-            e.save()
-            messages.info(request, 'Evento creado satisfactoriamente')
+            #NO SE PUEDEN CREAR 2 EVENTOS EN 1 DIA, SE VERIFICA SI HAY OTRO EVENTO.
+            if Evento.objects.filter(Q(profesional=usuario) & Q(diaInicio__lte=e.diaInicio) & Q(diaFin__gte=e.diaFin)).exists():
+                messages.error(request, 'No se puede crear 2 eventos en la misma fecha.')
+                
+            else:
+                e.save()
+                messages.info(request, 'Evento creado satisfactoriamente')
             
             return redirect('lista-evento', userId=e.profesional.id)
             
