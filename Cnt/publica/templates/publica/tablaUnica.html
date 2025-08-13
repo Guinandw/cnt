@@ -1,0 +1,86 @@
+{% load static %}
+
+    {% block styles %}
+
+    {% endblock %}
+    
+        {% block content %}
+        
+							<!-- PAGE-HEADER -->
+							<div class="page-header justify-content-between">
+								<div>
+									<h1 class="page-title">Horarios</h1>
+								</div>
+                                <div>
+									{% if request.user.is_supervisor %}
+												<a href="{% url "reportes-form"  %}" class='btn btn-danger'>Generar PDF</a>
+									{% endif %}
+								</div>
+								
+							</div>
+							<!-- PAGE-HEADER END -->
+
+							<!-- Row TABLA SIMPLE-->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+									<div class="card custom-card">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">GUARDIA SUPERVISIÓN</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive">
+                                                {% include 'publica/ntda.html' with var=disp subtitulo="" %}
+                                                
+                                            </div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+
+                            	<!-- Row TABLA SIMPLE-->
+                                <div class="row row-sm">
+                                    <div class="col-lg-12">
+                                        <div class="card custom-card">
+                                            <div class="card-header border-bottom">
+                                                <h3 class="card-title">GUARDIA NOCHE</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    {% include 'publica/ntda.html' with var=noche subtitulo="Entre las 23:00 y las 07:00" %}
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+							
+							<!-- End Row -->
+
+							
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+									<div class="card">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">CNT</h3>
+										</div>
+										<div class="card-body">
+                                            <div class="table-responsive export-table">
+                                                
+                                                {% include 'publica/ntm2.html' with acceso=acceso urbano=urbano int=interu tellabs=tellabs %}
+                                            </div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+
+
+                        
+        {% endblock %}
+
+   

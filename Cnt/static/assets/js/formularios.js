@@ -25,7 +25,7 @@
                 duracionSelect.value = "7";
             } else if (tipoEvento === "VACACIONES") {
                 horaInicioInput.value = "00:00";
-                duracionSelect.value = "24";
+                duracionSelect.value = "23";
             }else if (tipoEvento === "FRANCO") {
                 horaInicioInput.value = "00:00";
                 duracionSelect.value = "24";

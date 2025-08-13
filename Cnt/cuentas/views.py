@@ -87,6 +87,7 @@ def perfil(request):
         cnt = equiposDeTrabajos.objects.filter(usuarios = usuario)
     except:
         cnt = False
+        messages.warning(request, 'Aun no ha sido asignado a ningun grupo de trabajo.')
     return render(request, 'cuentas/profile.html', context={'usuario': usuario, 'cnts':cnt})
 
 @login_required
