@@ -60,17 +60,19 @@ class Reportes:
     def __get_horario__(self, evento_del_dia, dia):
         horaFin = datetime(year=dia.year,month=dia.month,day=dia.day,hour=evento_del_dia.horaInicio.hour) + timedelta(hours=evento_del_dia.duracion)
         if str(dia) in [str(feriado.fecha) for feriado in self.feriados] or dia.weekday() in [5,6]:
-            if evento_del_dia.tipoEvento in ['GUARDIA MAÑANA', 'GUARDIA TARDE']:
+            if evento_del_dia.tipoEvento in ['GUARDIA MAÑANA', 'GUARDIA TARDE', 'GUARDIA INTERMEDIA']:
                 return str(evento_del_dia.horaInicio.hour)+'a'+str(horaFin.hour)
             elif evento_del_dia.tipoEvento == 'GUARDIA NOCHE':
                 return '23a7'
             else:
                 return '/'
         else:
-            if evento_del_dia.tipoEvento in ['GUARDIA MAÑANA', 'GUARDIA TARDE','GUARDIA NOCHE', 'DISPONIBILIDAD']:
+            if evento_del_dia.tipoEvento in ['GUARDIA MAÑANA', 'GUARDIA TARDE','GUARDIA NOCHE','GUARDIA INTERMEDIA' ,  'DISPONIBILIDAD']:
                 return str(evento_del_dia.horaInicio.hour)+'a'+str(horaFin.hour)
-            elif evento_del_dia.tipoEvento in ['FRANCO', 'VACACIONES']:
-                return evento_del_dia.tipoEvento[0]
+            elif evento_del_dia.tipoEvento in ['FRANCO', 'VACACIONES', 'LICENCIA']:
+                #imprime las primeras letras del tipo de evento, (FRA)
+                #return evento_del_dia.tipoEvento[0:3]
+                return '/'
             else:
                 return str(evento_del_dia.profesional.preferenciaHorario)+'a'+str(evento_del_dia.profesional.horaFin)
 

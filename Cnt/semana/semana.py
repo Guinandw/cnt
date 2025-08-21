@@ -45,7 +45,7 @@ class Panel:
             #print('Hoy es un dia Habil')
             #EN_LINEA Y FRANCOS SON DOS LISTAS DE EVENTOS
             en_linea = self.eventos_hoy(['GUARDIA', 'DISPONIBILIDAD'])
-            francos = self.eventos_hoy(['FRANCO', 'VACACIONES'])
+            francos = self.eventos_hoy(['FRANCO', 'VACACIONES', 'LICENCIA'])
             
             for profesional in self.profesionales:
                 
