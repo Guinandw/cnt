@@ -32,6 +32,24 @@
 								<span class="side-menu__label">Guardias</span>
 							</a>
 						</li>
+
+						{% if request.user.is_supervisor %}
+						<li class="slide">
+							<a id='boton-inicio' class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'lista-cargar-evento' %}">
+								<i class="icon icon-book-open side-menu__icon"></i>
+								<span class="side-menu__label">Eventos</span>
+							</a>
+						</li>
+						{% endif %}
+
+						{% if request.user.is_supervisor %}
+						<li class="slide">
+							<a id='boton-inicio' class="side-menu__item has-link" data-bs-toggle="slide" href="{% url 'listar-feriados' %}">
+								<i class="icon icon-game-controller side-menu__icon"></i>
+								<span class="side-menu__label">Feriados</span>
+							</a>
+						</li>
+						{% endif %}
 						{% comment %} <li class="slide">
 							<a class="side-menu__item has-link" data-bs-toggle="slide" href="/">
 								<i class="fa fa-book side-menu__icon"></i>
