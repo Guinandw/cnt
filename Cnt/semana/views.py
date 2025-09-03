@@ -54,7 +54,6 @@ def eventoId(request, userId):
     try:
         usuario = Usuarios.objects.get(pk=userId)
         eventos = Evento.objects.filter(profesional__pk = usuario.id)
-        ultimoEvento = Evento.objects.filter(profesional__pk = usuario.id).order_by('-diaInicio', '-horaInicio').first()
     except:
         usuario = False
         eventos = False
@@ -78,7 +77,6 @@ def eventoId(request, userId):
             e.horaInicio = form.cleaned_data['horaInicio']
             e.duracion = form.cleaned_data['duracion']
             #NO SE PUEDEN CREAR 2 EVENTOS EN 1 DIA, SE VERIFICA SI HAY OTRO EVENTO.
-            if (ultimoEvento.diaInicio <= e.diaInicio & ultimoEvento.diaFin >= )
             if Evento.objects.filter(Q(profesional=usuario) & Q(diaInicio__lte=e.diaInicio) & Q(diaFin__gte=e.diaFin)).exists():
                 messages.error(request, 'No se puede crear 2 eventos en la misma fecha.')
                 
