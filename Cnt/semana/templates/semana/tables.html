@@ -31,7 +31,29 @@
 											<div aria-multiselectable="true" class="accordion" id="accordion" role="tablist">
 
 												
+												<div class="card mb-0 mt-2 border-0">
+													<div class="card-header border-bottom-0" id="jefe" role="tab">
+														<a aria-controls="collapseSeven" aria-expanded="false" data-bs-toggle="collapse" href="#collapseSeven" class="accordion collapsed accor-basic">Jefe</a>
+													</div>
+													<div aria-labelledby="jefe" class="collapse" data-bs-parent="#accordion" id="collapseSeven" role="tabpanel">
+														<div class="card-body br-bottom-radius-5">
+															<div class="card custom-card">
+																<div class="card-header border-bottom">
+																</div>
+																<div class="card-body">
 
+																																		
+																	
+																	<div class="table-responsive">
+																		<table class="table text-wrap text-md-nowrap table-bordered">
+                                                                            {% include 'semana/mini-tabla.html' with cnt=jefe %}
+																		</table>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+											</div>
 
 											
                                             <div class="card mb-0 mt-2 border-0">

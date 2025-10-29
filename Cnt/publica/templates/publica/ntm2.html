@@ -8,6 +8,7 @@
             <th>Teléfono</th>
             <th>Móvil</th>
             <th>Sector</th>
+            <th>Hora Fin</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,8 @@
                 <td>{{a.profesional.telefono}}</td>
                 <td>{{a.profesional.movil}}</td>
                 <td>Acceso {% if a.profesional.is_supervisor %}/Supervisor{% endif %}</td>
+                <td>{{ a.hora_fin|time:"H:i" }}</td>
+
             </tr>
         {% endfor %}
 
@@ -31,6 +34,7 @@
                 <td>{{a.profesional.telefono}}</td>
                 <td>{{a.profesional.movil}}</td>
                 <td>Acceso/Tellabs</td>
+                <td>{{ a.hora_fin|time:"H:i" }}</td>
             </tr>
         {% endfor %}
 
@@ -43,7 +47,8 @@
             <td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
             <td>{{a.profesional.telefono}}</td>
             <td>{{a.profesional.movil}}</td>
-            <td>Urbano{% if a.profesional.is_supervisor %}/supervisor{% endif %}</td>
+            <td>Urbano{% if a.profesional.is_supervisor %}/Acceso/Tellabs/Supervisor{% endif %}</td>
+            <td>{{ a.hora_fin|time:"H:i" }}</td>
         </tr>
     {% endfor %}
 
@@ -57,7 +62,8 @@
         <td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
         <td>{{a.profesional.telefono}}</td>
         <td>{{a.profesional.movil}}</td>
-        <td>Interurbano{% if a.profesional.is_supervisor %}/supervisor{% endif %}</td>
+        <td>Interurbano{% if a.profesional.is_supervisor %}/Supervisor{% endif %}</td>
+        <td>{{ a.hora_fin|time:"H:i" }}</td>
     </tr>
 {% endfor %}
         

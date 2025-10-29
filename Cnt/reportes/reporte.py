@@ -67,7 +67,7 @@ class Reportes:
             else:
                 return '/'
         else:
-            if evento_del_dia.tipoEvento in ['GUARDIA MAÑANA', 'GUARDIA TARDE','GUARDIA NOCHE','GUARDIA INTERMEDIA' ,  'DISPONIBILIDAD']:
+            if evento_del_dia.tipoEvento in ['GUARDIA MAÑANA', 'GUARDIA TARDE','GUARDIA NOCHE','GUARDIA INTERMEDIA' ,  'DISPONIBILIDAD', 'CAMBIO HORARIO']:
                 return str(evento_del_dia.horaInicio.hour)+'a'+str(horaFin.hour)
             elif evento_del_dia.tipoEvento in ['FRANCO', 'VACACIONES', 'LICENCIA']:
                 #imprime las primeras letras del tipo de evento, (FRA)

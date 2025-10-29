@@ -17,26 +17,27 @@ def inicio(request):
     usuarioAcceso, usuarioUrbano, usuarioInteru = [],[],[]
     
     eventos = None
-    userAll = Usuarios.objects.all()
+    userAll = Usuarios.objects.all().order_by('?')
     
-    usuarioAcceso = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=1))
-    usuarioUrbano = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=2))
-    usuarioInteru = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=3))
-    usuarioTellabs = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=4))
-    usuarioSincro = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=5))
+    usuarioAcceso = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=c.ACCESO))
+    usuarioUrbano = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=c.URBANO))
+    usuarioInteru = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=c.INTERURBANO))
+    usuarioTellabs = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=c.TELLABS))
+    usuarioSincro = userAll.filter(equiposdetrabajos__cnt=CNTs.objects.get(id=c.SINCRONISMO))
+       
     
     eventos = Evento.objects.filter(diaInicio__gt=datetime.datetime.now().date()-datetime.timedelta(days=30))
     
         
-    eventosAcceso =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.ACCESO))
-    eventosUrbano =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.URBANO))
-    eventosInteru =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.INTERURBANO))
-    eventosTellabs =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.TELLABS))
-    eventosRadio =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.RADIO))
-    eventoSincro = eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.SINCRONISMO))
+    eventosAcceso =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.ACCESO)).order_by('?')
+    eventosUrbano =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.URBANO)).order_by('?')
+    eventosInteru =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.INTERURBANO)).order_by('?')
+    eventosTellabs =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.TELLABS)).order_by('?')
+    eventosRadio =  eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.RADIO)).order_by('?')
+    eventoSincro = eventos.filter(profesional__equiposdetrabajos__cnt=CNTs.objects.get(id=c.SINCRONISMO)).order_by('?')
     
     eventosGN = eventos.filter(tipoEvento='GUARDIA NOCHE')
-    disponibilidades = eventos.filter(tipoEvento='DISPONIBILIDAD', profesional__is_supervisor=True, profesional__equiposdetrabajos__cnt__in=[c.ACCESO,c.URBANO,c.INTERURBANO])
+    disponibilidades = eventos.filter(tipoEvento='DISPONIBILIDAD', profesional__is_supervisor=True, profesional__equiposdetrabajos__cnt__in=[c.ACCESO,c.URBANO,c.INTERURBANO, c.JEFE])
     radioRadio = eventosRadio.filter(tipoEvento='RADIO: RADIO', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date())
     radioGestores = eventosRadio.filter(tipoEvento='RADIO: GESTORES', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date())
     radioEscalamieneto =  eventosRadio.filter(tipoEvento='RADIO: ESCALAMIENTO', diaInicio__lte=datetime.datetime.now().date(), diaFin__gte=datetime.datetime.now().date())

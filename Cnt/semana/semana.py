@@ -44,7 +44,7 @@ class Panel:
             # se cambian el horario de conexion para quienes esten de guardia/disponibilidad
             #print('Hoy es un dia Habil')
             #EN_LINEA Y FRANCOS SON DOS LISTAS DE EVENTOS
-            en_linea = self.eventos_hoy(['GUARDIA', 'DISPONIBILIDAD'])
+            en_linea = self.eventos_hoy(['GUARDIA', 'DISPONIBILIDAD', "CAMBIO HORARIO"])
             francos = self.eventos_hoy(['FRANCO', 'VACACIONES', 'LICENCIA'])
             
             for profesional in self.profesionales:
@@ -110,6 +110,4 @@ class Panel:
                     #print(f'{e.profesional.username}: OFFLINE')
                                       
                     pass
-                    
-
         return conectados
