@@ -31,7 +31,29 @@
 											<div aria-multiselectable="true" class="accordion" id="accordion" role="tablist">
 
 												
+												<div class="card mb-0 mt-2 border-0">
+													<div class="card-header border-bottom-0" id="jefe" role="tab">
+														<a aria-controls="collapseSeven" aria-expanded="false" data-bs-toggle="collapse" href="#collapseSeven" class="accordion collapsed accor-basic">Jefe</a>
+													</div>
+													<div aria-labelledby="jefe" class="collapse" data-bs-parent="#accordion" id="collapseSeven" role="tabpanel">
+														<div class="card-body br-bottom-radius-5">
+															<div class="card custom-card">
+																<div class="card-header border-bottom">
+																</div>
+																<div class="card-body">
 
+																																		
+																	
+																	<div class="table-responsive">
+																		<table class="table text-wrap text-md-nowrap table-bordered">
+                                                                            {% include 'semana/mini-tabla.html' with cnt=jefe %}
+																		</table>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+											</div>
 
 											
                                             <div class="card mb-0 mt-2 border-0">
@@ -45,15 +67,7 @@
 																</div>
 																<div class="card-body">
 
-																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">Supervisor: Leonardo Moya</p>
-																		</div>
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">0800-333-6737 Opc 1 Opc 3</p>
-																		</div>
-																		
-																	</div>																	
+																																		
 																	
 																	<div class="table-responsive">
 																		<table class="table text-wrap text-md-nowrap table-bordered">
@@ -76,15 +90,7 @@
 																<div class="card-header border-bottom">
 																</div>
 																<div class="card-body">
-																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">Supervisor: Gustavo Parrado</p>
-																		</div>
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">0800-333-6737 Opc 1 Opc 2</p>
-																		</div>
 																		
-																	</div>		
 
 																	<div class="table-responsive">
 																		<table class="table text-nowrap text-md-nowrap table-bordered">
@@ -110,15 +116,7 @@
 																</div>
 																<div class="card-body">
 
-																	<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">Supervisor: Cynthia Veron</p>
-																		</div>
-																		<div class="p-sm-4 p-2 ">
-																			<p class="text-muted">0800-333-6737 Opc 1 Opc 1</p>
-																		</div>
-																		
-																	</div>																	
+																																	
 																	
 																	<div class="table-responsive">
 																		<table class="table text-wrap text-md-nowrap table-bordered">
@@ -145,15 +143,6 @@
 														</div>
 														<div class="card-body">
 
-															<div class="d-flex flex-row justify-content-between mb-2  border p-3 br-5">
-																<div class="p-sm-4 p-2 ">
-																	<p class="text-muted">Supervisor: Leonardo Moya</p>
-																</div>
-																<div class="p-sm-4 p-2 ">
-																	<p class="text-muted">0800-333-6737 Opc 1 Opc 4</p>
-																</div>
-																
-															</div>																	
 															
 															<div class="table-responsive">
 																<table class="table text-wrap text-md-nowrap table-bordered">
@@ -196,7 +185,7 @@
 												</div>
 											</div>
 										</div>
-									</div>
+									</div> 
 
 								<div class="card mb-0 mt-2 border-0">
 									<div class="card-header border-bottom-0" id="cnt-sincro" role="tab">
@@ -229,7 +218,7 @@
 										</div>
 									</div>
 							</div>
-												
+									 		
 												
 											{% comment %} </div><!-- accordion --> {% endcomment %}
 										</div>

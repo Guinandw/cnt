@@ -1,0 +1,71 @@
+
+
+
+<table d="editable-file-datatable" class="table editable-table table-nowrap table-bordered table-edit wp-100">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Móvil</th>
+            <th>Sector</th>
+            <th>Hora Fin</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for a in acceso  %}
+        {% if a.profesional.is_supervisor %}
+        <tr class="bg-primary">
+        {% else %}
+        <tr>
+        {% endif %}
+                <td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+                <td>{{a.profesional.telefono}}</td>
+                <td>{{a.profesional.movil}}</td>
+                <td>Acceso {% if a.profesional.is_supervisor %}/Supervisor{% endif %}</td>
+                <td>{{ a.hora_fin|time:"H:i" }}</td>
+
+            </tr>
+        {% endfor %}
+
+        {% for a in tellabs  %}
+            <tr>
+                <td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+                <td>{{a.profesional.telefono}}</td>
+                <td>{{a.profesional.movil}}</td>
+                <td>Acceso/Tellabs</td>
+                <td>{{ a.hora_fin|time:"H:i" }}</td>
+            </tr>
+        {% endfor %}
+
+        {% for a in urbano  %}
+        {% if a.profesional.is_supervisor %}
+        <tr class="bg-primary">
+        {% else %}
+        <tr>
+        {% endif %}
+            <td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+            <td>{{a.profesional.telefono}}</td>
+            <td>{{a.profesional.movil}}</td>
+            <td>Urbano{% if a.profesional.is_supervisor %}/Acceso/Tellabs/Supervisor{% endif %}</td>
+            <td>{{ a.hora_fin|time:"H:i" }}</td>
+        </tr>
+    {% endfor %}
+
+    {% for a in int  %}
+
+    {% if a.profesional.is_supervisor %}
+        <tr class="bg-primary">
+    {% else %}
+        <tr>
+    {% endif %}
+        <td>{{a.profesional.first_name}} {{a.profesional.last_name}}</td>
+        <td>{{a.profesional.telefono}}</td>
+        <td>{{a.profesional.movil}}</td>
+        <td>Interurbano{% if a.profesional.is_supervisor %}/Supervisor{% endif %}</td>
+        <td>{{ a.hora_fin|time:"H:i" }}</td>
+    </tr>
+{% endfor %}
+        
+    </tbody>
+</table>

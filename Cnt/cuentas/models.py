@@ -14,7 +14,8 @@ NOMBRES = [
         (4,'Tellabs'),
         (5, 'Radio'),
         (6,'Sincronismo'),
-        (7, 'Soporte')
+        (7, 'Soporte'),
+        (8, 'Jefe')
     ]
 
 class Usuarios(AbstractUser):

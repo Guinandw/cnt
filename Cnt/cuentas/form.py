@@ -40,7 +40,8 @@ NOMBRES = [
         (4,'Tellabs'),
         (5, 'Radio'),
         (6,'Sincronismo'),
-        (7,'Soporte')
+        (7,'Soporte'),
+        (8, 'Jefe'),
     ]
     
 HORASXDIA = Usuarios.HORASXDIA
@@ -53,7 +54,7 @@ class CrearUsuarioForm(forms.ModelForm):
         required=True,
         min_length=5,
         max_length=100,
-        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Alias...'})
+        widget=forms.TextInput(attrs={'class':'form-control lowercase', 'placeholder':'Alias...'})
     )
     
     password1 = forms.CharField(
@@ -134,6 +135,12 @@ class CrearUsuarioForm(forms.ModelForm):
         if commit:
             user.save_horaSalida()
         return user
+    
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        username = str(username).lower()
+        return username
+        
     
     class Meta:
         model = Usuarios

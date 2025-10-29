@@ -1,16 +1,14 @@
-// Función para recargar la página en cada cambio de hora
-function refrescarEnCambioDeHora() {
-    // Obtener la fecha actual
-    var fechaActual = new Date();
-    
-    // Calcular el tiempo restante hasta el próximo cambio de hora
-    var tiempoRestanteHastaProximoCambioDeHora = (60 - fechaActual.getMinutes()) * 60 * 1000 - fechaActual.getSeconds() * 1000; // Tiempo restante hasta el próximo cambio de hora en milisegundos
-    
-    // Establecer el tiempo de espera antes de recargar la página
-    setTimeout(function() {
-      location.reload();
-    }, tiempoRestanteHastaProximoCambioDeHora);
+  function clicCada10Minutos() {
+      setInterval(function () {
+          var boton = document.getElementById("boton-inicio");
+          if (boton) {
+              boton.click(); // Simula el clic
+              console.log("Clic en botón-inicio ejecutado");
+          } else {
+              console.warn("No se encontró el botón con id 'boton-inicio'");
+          }
+      }, 600000); // 10 minutos en milisegundos
   }
-  
-  // Llamar a la función para recargar en cada cambio de hora
-  refrescarEnCambioDeHora();
+
+  window.onload = clicCada10Minutos;
+
