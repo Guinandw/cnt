@@ -45,7 +45,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
 
 #rama develop no tiene configurado el allowed_host
-ALLOWED_HOSTS = ["10.248.32.102",]
+ALLOWED_HOSTS = []
 #"10.248.32.102",
 
 

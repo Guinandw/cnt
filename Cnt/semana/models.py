@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+
 from cuentas.models import Usuarios
 
 # Create your models here.
@@ -11,9 +12,12 @@ class Evento(models.Model):
         ('GUARDIA MAÑANA', 'GUARDIA MAÑANA'),
         ('GUARDIA TARDE', 'GUARDIA TARDE'),
         ('GUARDIA NOCHE', 'GUARDIA NOCHE'),
+        ('GUARDIA INTERMEDIA', 'GUARDIA INTERMEDIA'),
         ('DISPONIBILIDAD', 'DISPONIBILIDAD'),
+        ('CAMBIO HORARIO','CAMBIO HORARIO'),
         ('FRANCO', 'FRANCO'),
         ('VACACIONES', 'VACACIONES'),
+        ('LICENCIA', 'LICENCIA'),
         ('RADIO: RADIO', 'RADIO: RADIO'),
         ('RADIO: GESTORES', 'RADIO: GESTORES'),
         ('RADIO: ESCALAMIENTO', 'RADIO: ESCALAMIENTO')
@@ -23,7 +27,7 @@ class Evento(models.Model):
         (7,'7'),
         (8,'8'),
         (9,'9'),
-        (24,'24'),
+        (23,'23'),
     ]
     
     
@@ -50,6 +54,11 @@ class Evento(models.Model):
         verbose_name='Duracion',
         choices=HORASXDIA
     )
+    
+    @property
+    def hora_fin(self):
+        base = datetime.datetime.combine(datetime.date.today(), self.horaInicio)
+        return (base + datetime.timedelta(hours=int(self.duracion))).time()
     
     def __str__(self):
         return f'{self.profesional.first_name} {self.tipoEvento} {self.diaInicio} {self.diaFin}'  

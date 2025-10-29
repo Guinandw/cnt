@@ -34,7 +34,7 @@
 												<br>
 											{% comment %} separador de tablas {% endcomment %}
 											<div class="card-header border-bottom bg-success" >
-											<h3 class="card-title" >Supervision</h3>
+											<h3 class="card-title" >Guardia Supervision</h3>
 										 </div>
 											<div class="table-responsive">
 												{% include 'reportes/ntmda.html' with var=supervision %}
@@ -47,7 +47,7 @@
 												<h3 class='card-title'>Supervisor: Leonardo Moya</h3>
 											 </div>
 											<div class="table-responsive">
-												{% include 'reportes/ntmd.html' with dias=dias var=acceso %}
+												{% include 'reportes/ntmd.html' with dias=dias var=acceso tellabs=tellabs %}
 											</div>
 											
 											{% comment %} separador de tablas {% endcomment %}
@@ -75,12 +75,11 @@
 											<div class="card-header border-bottom bg-info justify-content-between">
 												<h3 class='card-title' >TELLABS</h3>
 												<h4 class='card-title'>0800-333-6737 Opc 1 Opc 4 o 4333-6350</h4>
-												<h4 class='card-title'>Disponibilidad: {{dispTellabs.profesional.first_name}} {{dispTellabs.profesional.last_name}} {{dispTellabs.profesional.movil}}</h4>
-												<h4 class='card-title'>Supervision: Leonardo Moya</h4>
+												<h4 class='card-title'>Disponibilidad: 1143336370 </h4>
 											</div>
-											<div class="table-responsive">
+											{% comment %} <div class="table-responsive">
 												{% include 'reportes/ntmd.html' with dias=dias var=tellabs %}
-											</div>
+											</div> {% endcomment %}
 											{% comment %} separador de tablas {% endcomment %}
 											<div class="card-header border-bottom bg-info justify-content-between">
 												<h3 class='card-title' >RADIO</h3>

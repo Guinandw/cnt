@@ -9,6 +9,7 @@ import datetime
 from .forms import EventoForm, FeriadosForm
 from cuentas.models import Usuarios, equiposDeTrabajos
 from .models import Evento, Feriados
+from cuentas import constantes as c
 
 
 
@@ -96,15 +97,15 @@ def eventoId(request, userId):
 @login_required
 def listaCargarEvento(request):
     equipos = equiposDeTrabajos.objects.all()
-    acceso = equipos.filter(cnt__nombre=1)
-    urbano = equipos.filter(cnt__nombre=2)
-    interurbano = equipos.filter(cnt__nombre=3)
-    tellabs = equipos.filter(cnt__nombre=4)
-    radio = equipos.filter(cnt__nombre=5)
-    sincro = equipos.filter(cnt__nombre=6)
+    acceso = equipos.filter(cnt__nombre=c.ACCESO).order_by('usuarios__first_name')
+    urbano = equipos.filter(cnt__nombre=c.URBANO).order_by('usuarios__first_name')
+    interurbano = equipos.filter(cnt__nombre=c.INTERURBANO).order_by('usuarios__first_name')
+    tellabs = equipos.filter(cnt__nombre=c.TELLABS).order_by('usuarios__first_name')
+    radio = equipos.filter(cnt__nombre=c.RADIO).order_by('usuarios__first_name')
+    sincro = equipos.filter(cnt__nombre=c.SINCRONISMO).order_by('usuarios__first_name')
+    jefe = equipos.filter(cnt__nombre=c.JEFE).order_by('usuarios__first_name')
     
-    
-    contexto= {'acceso':acceso,'urbano':urbano, 'interu': interurbano, 'tellabs':tellabs, 'radio':radio, 'sincro':sincro}
+    contexto= {'acceso':acceso,'urbano':urbano, 'interu': interurbano, 'tellabs':tellabs, 'radio':radio, 'sincro':sincro, 'jefe':jefe}
     
     return render(request, 'semana/listaCargarEvento.html', context=contexto)
 

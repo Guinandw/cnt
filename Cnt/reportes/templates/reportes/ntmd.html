@@ -19,6 +19,14 @@
         </tr>
         {% endfor %}
         
+        {% for key,value in tellabs.items  %}
+        <tr>
+            {% for key,v in value.items%}
+            <td class="text-default">{{v}}</td>
+            {% endfor %}
+            
+        </tr>
+        {% endfor %}
         
         
     </tbody>

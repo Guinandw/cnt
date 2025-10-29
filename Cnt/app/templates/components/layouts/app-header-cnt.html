@@ -7,13 +7,13 @@
                         <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="{% url 'inicio' %}"></a>
                         <!-- sidebar-toggle-->
                         <a class="logo-horizontal " href="{% url 'inicio' %}">
-                            <img src="{% static 'assets/images/brand/Telefonica_U.png' %}" class="header-brand-img desktop-logo" alt="logo">
-                            <img src="{% static 'assets/images/brand/Telefonica_U.png' %}" class="header-brand-img light-logo1" alt="logo">
+                       {% comment %}      <img src="{% static 'assets/images/brand/Telefonica_U.png' %}" class="header-brand-img desktop-logo" alt="logo">
+                            <img src="{% static 'assets/images/brand/Telefonica_U.png' %}" class="header-brand-img light-logo1" alt="logo"> {% endcomment %}
                         </a>
                         <!-- LOGO -->
-                        <div class="main-header-center ms-3 d-none d-xl-block">
+                     {% comment %}    <div class="main-header-center ms-3 d-none d-xl-block">
                             <img class='header-icons' src="{% static "Telefonica_U.png" %}" alt="">	
-                        </div>
+                        </div> {% endcomment %}
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
                             <div class="dropdown d-xl-none d-md-block d-none">
                                 
