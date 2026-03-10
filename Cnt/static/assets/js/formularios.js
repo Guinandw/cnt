@@ -12,20 +12,23 @@
             if (tipoEvento === "GUARDIA MAÑANA") {
                 // Cambiar la lógica según tus requisitos
                 horaInicioInput.value = "07:00";
-                duracionSelect.value = "8";
+                duracionSelect.value = "9";
             } else if (tipoEvento === "GUARDIA TARDE") {
                 horaInicioInput.value = "15:00";
-                duracionSelect.value = "8";
+                duracionSelect.value = "9";
             } else if (tipoEvento === "GUARDIA NOCHE") {
                 horaInicioInput.value = "23:00";
-                duracionSelect.value = "8";
+                duracionSelect.value = "9";
             } else if (tipoEvento === "GUARDIA INTERMEDIA") {
                 horaInicioInput.value = "09:00";
-                duracionSelect.value = "8";
+                duracionSelect.value = "9";
+            } else if (tipoEvento === "CAMBIO HORARIO") {
+                horaInicioInput.value = "09:00";
+                duracionSelect.value = "9";
                 // Otras opciones...
             } else if (tipoEvento === "DISPONIBILIDAD") {
                 horaInicioInput.value = "12:00";
-                duracionSelect.value = "7";
+                duracionSelect.value = "9";
             } else if (tipoEvento === "VACACIONES") {
                 horaInicioInput.value = "00:00";
                 duracionSelect.value = "23";

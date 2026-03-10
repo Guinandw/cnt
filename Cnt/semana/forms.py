@@ -25,7 +25,7 @@ class EventoForm(forms.ModelForm):
     
     duracion=forms.CharField(
         label='Duración',
-        initial='8',
+        initial='9',
         widget=forms.Select(choices=D, attrs={'class':'form-control'}),
         
     )
